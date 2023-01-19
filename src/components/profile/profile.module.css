@@ -1,0 +1,33 @@
+.profileWrappedDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 80%;
+    margin: 40px 10%;
+    align-items: center;
+}
+
+.avaImg {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* .profile_info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+} */
+.line_div {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+.line_div h2 {
+    font-size: 25px;
+}
+.line_div label {
+    font-size: 21px;
+}

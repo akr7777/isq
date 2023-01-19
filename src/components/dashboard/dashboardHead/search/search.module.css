@@ -1,0 +1,66 @@
+.searchMainDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 10px 5px;
+}
+
+.searchDateComplitedDiv {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.riskMainDiv {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    /* justify-content: center; */
+    align-items: center;
+    /* margin: 10px 10px; */
+}
+.riskOption {
+    width: 100px;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.riskUndefined {
+    /* color: white; */
+    border: 2px black solid;
+}
+.riskUndefinedChecked {
+    background-color: white;
+    color: black;
+}
+
+.riskLow {
+    /* color: green; */
+    border: 2px green solid;
+}
+.riskLowChecked {
+    background-color: green;
+    color: white;
+}
+
+.riskMedium {
+    /* color: yellow; */
+    border: 2px yellow solid;
+}
+.riskMediumChecked {
+    background-color: yellow;
+    color: black;
+}
+
+.riskHigh {
+    /* color: red; */
+    border: 2px red solid;
+}
+.riskHighChecked {
+    background-color: red;
+    color: white;
+}

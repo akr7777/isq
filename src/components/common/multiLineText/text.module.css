@@ -1,0 +1,9 @@
+.textArea {
+    resize: none;
+    width: 100%;
+    border-radius: 15px;
+    padding: 10px;
+    font-size: 18px;
+    color: var(--input_text_color);
+    background-color: var(--input_bg_color);
+}

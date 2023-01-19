@@ -1,0 +1,51 @@
+.dataBricksWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+.brickHead {
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr 1fr;
+}
+.brickHeadPeice {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.oneBrick {
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr 1fr;
+
+    border: 2px black solid;
+    border-radius: 10px;
+    padding: 10px;
+
+    cursor: pointer;
+
+    height: 35px;
+
+    background-color: var(--brick_bgColor);
+
+    /* background-color: rgb(239, 181, 142); */
+    
+}
+.oneBrick:hover {
+    height: 42px;
+    background-color: grey;
+}
+/* .oneBrickLightTheme {
+    background-color: rgb(178, 175, 175);
+}
+.oneBrickDarkTheme {
+    background-color: rgb(92, 86, 86);
+} */
+
+.oneBrickPiece {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;    
+}

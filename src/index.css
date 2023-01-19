@@ -1,13 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;700&display=swap');
+
+
+/* dark theme */
+html[data-theme='dark'] {
+    --main_bg_color: rgb(57, 55, 55);
+    --font_color: white;
+
+    --theme_toogler_bgColor: rgb(215, 203, 203);
+
+    --header_footer_bgColor: rgba(255, 0, 0, 0.3);
+    --header_height: 120px;
+    --footer_height: 50px;
+
+    --input_bg_color: rgb(227, 236, 235);
+    --input_text_color: black;
+
+    --brick_bgColor: rgb(92, 86, 86);
+
+    --border_color: white;
+}
+
+/* light theme */
+html[data-theme='light'] {
+    --main_bg_color: rgb(215, 203, 203);
+    --font_color: black; 
+
+    --theme_toogler_bgColor: rgb(57, 55, 55);
+
+    --header_footer_bgColor: rgba(255, 100, 0, 0.3);
+    --header_height: 120px;
+    --footer_height: 50px;
+
+    --input_bg_color: rgb(97, 97, 97);
+    --input_text_color: rgb(235, 227, 227);
+
+    --brick_bgColor: rgb(178, 175, 175);
+
+    --border_color: black;
+
+}
+
 body {
+  background-color: var(--main_bg_color);
+  transition: background-color 500ms linear;
+
+  color: var(--font_color);
+  font-size: 20px;
+
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'EB Garamond', serif;;
+  /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+    sans-serif; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+#root {
+  min-height: 100vh;
 }

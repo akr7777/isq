@@ -1,24 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import Header from './components/header/header';
+import Footer from './components/footer/footer';
+import Outlet from './components/outlet/outlet';
+import { useAppDispatch } from './store/store';
+import { DARK, LIGHT } from './hooks/useTheme';
+import { changeThemeAC } from './store/features/authSlice';
+import indexCss from './App.module.css';
 function App() {
+
+  // Intializing App ->
+  const dispatch = useAppDispatch();
+  const theme = localStorage.getItem('app-theme');
+  if (theme === DARK || theme === LIGHT) {
+    dispatch(changeThemeAC(theme));
+  }
+  // <- Intializing App
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={indexCss.wrap}>
+      <Header />
+      <Outlet />
+      <Footer />
     </div>
   );
 }

@@ -1,0 +1,50 @@
+{
+    "header_text": "Dashboard",
+    "footer_text": "This is footer",
+
+    "profile_text_1": "This is PROFILE Page",
+
+    "main_page_text_1": "This is main page",
+
+    "404page_text_0": "Opss...",
+    "404page_text_1": "This page does not exist",
+    "404page_text_2": "Go to the main page",
+
+    "login_login": "Login:",
+    "login_password": "Password:",
+    "login_button": "LogIn",
+    "login_login_placeholder": "Enter your login",
+    "login_password_placeholder": "Enter your password",
+    "required_field": "Required",
+
+    "search": "Search",
+    "search_field_placeholder": "Input something to filter",
+    "search_search_by_date": "Filter by date:",
+    "search_search_by_complited": "Filter by complited:",
+    "search_search_by_complited_all": "All",
+    "search_search_by_complited_complited": "Complited",
+    "search_search_by_complited_not_complited": "Not complited",
+    "search_risks": "Risks:",
+
+    "supplierCard_creation_date": "Creation date:",
+    "supplierCard_complited_date": "Complited date:",
+    "supplierCard_checked_date": "Checked date:",
+
+    "supplierCard_comment": "Comments:",
+    "supplierCard_risk": "Risks:",
+
+    "newCompany": "New Company",
+
+    "table_name": "Company",
+    "table_creation_date": "Creation date",
+    "table_risk": "Risk",
+    "table_is_complite": "Is Complite",
+
+    "save": "Save",
+    "profile_name": "Name",
+    "profile_role": "User role",
+    "profile_view_legend": "Choose convenient view for Dashboard",
+    "profile_view_table": "Table view",
+    "profile_view_brick": "Brick view"
+
+}

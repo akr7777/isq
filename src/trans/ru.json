@@ -1,0 +1,50 @@
+{
+    "header_text": "Анкеты",
+    "footer_text": "Это футер",
+
+    "profile_text_1": "Это страница ПРОФИЛЯ",
+
+    "main_page_text_1": "Это главная страница",
+
+    "404page_text_0": "Упс...",
+    "404page_text_1": "Такой страницы не существует",
+    "404page_text_2": "Проследуйте на главную страницу",
+    
+    "login_login": "Логин:",
+    "login_password": "Пароль:",
+    "login_button": "Войти",
+    "login_login_placeholder": "Введите имя Вашей учетной записи",
+    "login_password_placeholder": "Введите пароль от Вашей учетной записи",
+    "required_field": "Обязательное поле",
+
+    "search": "Поиск",
+    "search_field_placeholder": "Введите для фильрации",
+    "search_search_by_date": "Поиск по дате:",
+    "search_search_by_complited": "Фильтрация по завершенности:",
+    "search_search_by_complited_all": "Все",
+    "search_search_by_complited_complited": "Заполненные",
+    "search_search_by_complited_not_complited": "Незавершенные",
+    "search_risks": "Риски:",
+
+    "supplierCard_creation_date": "Дата создания:",
+    "supplierCard_complited_date": "Дата заполнения:",
+    "supplierCard_checked_date": "Дата обработки:",
+
+    "supplierCard_comment": "Комментарии:",
+    "supplierCard_risk": "Риск:",
+
+    "newCompany": "Новая анкета",
+
+    "table_name": "Название компании",
+    "table_creation_date": "Дата создания",
+    "table_risk": "Риск",
+    "table_is_complite": "Заполнена",
+
+    "save": "Сохранить",
+    "profile_name": "Имя",
+    "profile_role": "Роль пользователя",
+    "profile_view_legend": "Выберите удобный вид для просмотра анкет",
+    "profile_view_table": "Табличный вид",
+    "profile_view_brick": "Кирпичный вид"
+
+}

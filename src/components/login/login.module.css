@@ -1,0 +1,22 @@
+.fields {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-top: 50px;
+    /* justify-content: center; */
+    align-items: center;
+
+    min-height: 70vh;
+}
+
+.error_label {
+    color: red;
+}
+
+.inputs_divs {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+}

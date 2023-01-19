@@ -1,0 +1,38 @@
+.questions {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    justify-content: center;
+    align-items: center;
+
+    width: 80%;
+    margin: 30px 10% 30px 10%;
+    /* background-color: red; */
+}
+
+.oneQuestion {
+    display: flex;
+    flex-direction: column;
+    /* background-color: yellow; */
+    gap: 15px;
+}
+
+.oneOption {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(190, 201, 224);
+
+    border: 2px black solid;
+    border-radius: 10px;
+
+    min-width: 150px;
+    min-height: 30px;
+
+    cursor: pointer;
+}
+.oneOptionSelected {
+    background-color: green;
+}

@@ -1,0 +1,68 @@
+.profileDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+
+    padding: 50px 30px;
+}
+
+.profileHeadStyles {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 10px;
+    /* background-color: yellow; */
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.searchDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    /* background-color: red; */
+    /* text-align: center; */
+    width: 100%;
+    justify-content: flex-end;
+    /* align-items: center; */
+}
+.newCreationDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    /* background-color: red; */
+    /* text-align: center; */
+    /* width: 100%; */
+    justify-content: flex-end;
+    /* align-items: center; */
+}
+
+.icon_yes_no {
+    width: 30px;
+    height: 30px;
+}
+.risk {
+    padding: 3px 5px;
+    border-radius: 5px;
+    border: 2px solid;
+    font-weight: bold;
+}
+.risk_low {
+    color: green;
+    border-color: green;
+}
+.risk_medium {
+    color: yellow;
+    border-color: yellow;
+}
+.risk_high {
+    color: red;
+    border-color: red;
+}
+.arrows {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}

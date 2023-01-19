@@ -1,0 +1,18 @@
+.lineTextDecoration {
+    border: 1px solid black;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    min-height: 25px;
+
+    width: 280px;
+    height: 40px;
+
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--input_text_color);
+    background-color: var(--input_bg_color);
+}
+.error {
+    background-color: rgb(219, 95, 95);
+}

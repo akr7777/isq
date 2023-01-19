@@ -1,0 +1,25 @@
+.theTable {
+    width: 100%;
+    /* background-color: yellow; */
+    border-radius: 10px;
+    border: 1px black solid;
+}
+.theTable thead {
+    background-color: grey;
+}
+.theTable td {
+    /* background-color: red; */
+    padding: 10px;
+    text-align: center;
+}
+.theTableTr {
+    /* background-color: rgb(133, 125, 125); */
+    /* border: 3px black solid; */
+
+}
+.theTableTr:hover {
+    background-color: rgb(181, 191, 195);
+    cursor: pointer;
+    /* scale: 1.05; */
+    color: black;
+}
