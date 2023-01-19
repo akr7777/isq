@@ -34,7 +34,12 @@ const SearchByComplited = () => {
                         : s.complitedCheckOptionCircle
                     }
                 />
-                <label className={s.complitedCheckOption} htmlFor="all">{ t("search_search_by_complited_all") }</label>
+                <label 
+                    className={s.complitedCheckOption} 
+                    htmlFor="all"
+                >
+                    { t("search_search_by_complited_all") }
+                </label>
             </div>
 
             <div className={s.oneOptionDiv}>
@@ -47,7 +52,12 @@ const SearchByComplited = () => {
                         : s.complitedCheckOptionCircle
                     }
                 />
-                <label className={s.complitedCheckOption} htmlFor="complited">{ t("search_search_by_complited_complited") }</label>
+                <label 
+                    className={s.complitedCheckOption} 
+                    htmlFor="complited"
+                >
+                    { t("search_search_by_complited_complited") }
+                </label>
             </div>
 
             <div className={s.oneOptionDiv}>

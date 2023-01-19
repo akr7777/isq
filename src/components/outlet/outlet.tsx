@@ -26,9 +26,9 @@ const Outlet = () => {
         <Routes>
 
             <Route path="/" element={
-                <RequireAuth>
+                // <RequireAuth>
                     <Description />
-                </RequireAuth>
+                // </RequireAuth>
             } />
 
             <Route path={PATHS.dashboard} element={

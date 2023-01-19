@@ -45,6 +45,7 @@
     border-radius: 5px;
     cursor: pointer;
     text-align: center;
+    transition: 0.2s all linear;
 }
 
 .riskUndefined { border: 2px black solid; }
@@ -59,6 +60,7 @@
 .riskLowChecked {
     background-color: green;
     color: white;
+    border: 2px green solid;
 }
 
 .riskMedium { border: 2px yellow solid; }
@@ -66,6 +68,7 @@
 .riskMediumChecked {
     background-color: yellow;
     color: black;
+    border: 2px yellow solid;
 }
 
 .riskHigh { border: 2px red solid; }
@@ -73,12 +76,17 @@
 .riskHighChecked {
     background-color: red;
     color: white;
+    border: 2px red solid;
 }
 
 .arrows {
     width: 30px;
     height: 30px;
     cursor: pointer;
+}
+.arrowCircled {
+    border: 3px var(--search_circle_open_icon) solid;
+    border-radius: 50%;
 }
 
 .oneOptionDiv {

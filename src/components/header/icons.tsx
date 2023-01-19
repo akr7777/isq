@@ -14,6 +14,7 @@ import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../store/store';
 
 import exitIcon from './../../public/icons/icon_exit.png';
+import enterIcon from './../../public/icons/icon_enter.png';
 import sunIcon from './../../public/icons/icon_sun.png';
 import moonIcon from './../../public/icons/icon_moon.png';
 import burger from './../../public/icons/burger.png';
@@ -62,6 +63,9 @@ export const Icons = (props: IconsPropsType) => {
     }
     const onLogoutClickHandler = () => {
         dispatch(logoutAC());
+    }
+    const onLoginClickHandler = () => {
+        navigate(PATHS.login);
     }
 
     const closeMobileMenu = () => {
@@ -168,7 +172,8 @@ export const Icons = (props: IconsPropsType) => {
         </div>
     }
     
-    { userId.length > 0 && <div className={s.oneIconOptionDiv} onClick={onLogoutClickHandler}>
+    { 
+        userId.length > 0 && <div className={s.oneIconOptionDiv} onClick={onLogoutClickHandler}>
             <label onClick={onLogoutClickHandler}>
                 {props.logoutText}
             </label>
@@ -178,7 +183,18 @@ export const Icons = (props: IconsPropsType) => {
                 onClick={onLogoutClickHandler}
             /> 
         </div>
-            
+    }
+    { 
+        userId.length === 0 && <div className={s.oneIconOptionDiv} onClick={onLoginClickHandler}>
+            <label onClick={onLoginClickHandler}>
+                {props.loginText}
+            </label>
+            <img 
+                src={enterIcon} 
+                className={s.iconsImg}
+                onClick={onLoginClickHandler}
+            /> 
+        </div>
     }
 </>
 }

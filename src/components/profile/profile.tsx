@@ -4,11 +4,14 @@ import ava from "./../../public/images/ava.jpg";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { RoleType } from "../../store/features/authSlice";
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
+// import { t } from "i18next";
+
 
 const Profile = () => {
     const userRole:RoleType = useSelector((state: RootState) => state.auth.role);
     const userName:string = useSelector((state: RootState) => state.auth.name);
+    const { t } = useTranslation();
 
     return <div className={s.profileWrappedDiv}>
 
