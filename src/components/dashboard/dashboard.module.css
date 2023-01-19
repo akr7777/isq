@@ -8,26 +8,36 @@
     padding: 50px 30px;
 }
 
-.profileHeadStyles {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 10px;
-    /* background-color: yellow; */
-    width: 100%;
-    margin-top: 0;
-    margin-bottom: 20px;
+@media screen and (max-width: 789px) {
+    .dashboardHeadStyles {
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 30px;
+        width: 100%
+    }
+}
+@media screen and (min-width: 790px) {
+    .dashboardHeadStyles {
+        /* display: flex;
+        flex-direction: row; */
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 10px;
+        /* background-color: yellow; */
+        width: 100%;
+        margin-top: 0;
+        margin-bottom: 20px;
+    }
 }
 
-.searchDiv {
+
+/* .searchDiv {
     display: flex;
     flex-direction: column;
     gap: 5px;
-    /* background-color: red; */
-    /* text-align: center; */
     width: 100%;
-    justify-content: flex-end;
-    /* align-items: center; */
-}
+    
+} */
 .newCreationDiv {
     display: flex;
     flex-direction: column;
@@ -35,7 +45,7 @@
     /* background-color: red; */
     /* text-align: center; */
     /* width: 100%; */
-    justify-content: flex-end;
+    justify-content: flex-start;
     /* align-items: center; */
 }
 
@@ -60,9 +70,4 @@
 .risk_high {
     color: red;
     border-color: red;
-}
-.arrows {
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
 }

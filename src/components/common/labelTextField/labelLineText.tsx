@@ -7,6 +7,7 @@ type LineTextFieldPropsType = {
     placeholder?: string | null,
     error?: boolean,
     onChangeFunction: (text: string) => void,
+    className?: string;
 }
 export const LineTextField = (props: LineTextFieldPropsType) => {
 
@@ -21,8 +22,8 @@ export const LineTextField = (props: LineTextFieldPropsType) => {
         placeholder={props.placeholder || ""}
         onChange={(e) => onTextChangeHandler(e)}
         className={ props.error 
-            ? s.lineTextDecoration + " " + s.error
-            : s.lineTextDecoration
+            ? s.lineTextDecoration + " " + s.error + " " + props.className
+            : s.lineTextDecoration + " " + props.className
         }
     />
 }

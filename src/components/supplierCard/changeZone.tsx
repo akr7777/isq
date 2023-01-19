@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { onRiskAndCommentChange, OnRiskAndCommentChangeType } from "../../store/features/complitedSlice";
 import { RISK_HIGH, RISK_LOW, RISK_MEDIUM, RiskType } from "../../store/features/supplierSlice";
 import { RootState, useAppDispatch } from "../../store/store";
-import ButtonOK from "../common/buttonOK/buttonOK";
+import { ButtonOK } from "../common/buttons/buttons";
 import MuliLineText from "../common/multiLineText/multilineText";
 import Options from "../common/Options/options";
 import cardStyle from "./card.module.css";

@@ -1,5 +1,5 @@
 import s from "./login.module.css";
-import ButtonOK from '../common/buttonOK/buttonOK';
+import { ButtonOK } from '../common/buttons/buttons';
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store/store";
 import { onLoginButtonClickAC, onLoginInputAC, onPasswordInputAC, UserIdType } from "../../store/features/authSlice";

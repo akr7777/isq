@@ -45,6 +45,16 @@
     "profile_role": "Роль пользователя",
     "profile_view_legend": "Выберите удобный вид для просмотра анкет",
     "profile_view_table": "Табличный вид",
-    "profile_view_brick": "Кирпичный вид"
+    "profile_view_brick": "Кирпичный вид",
+
+    "newSupplier_name": "Введите название компании:",
+    "newSupplier_name_placeholder": "Название компании",
+    "newSupplier_ticketLink": "Ссылка на тикет, в котором ведётся закупка:",
+    "newSupplier_ticketLink_placeholder": "необязательное поле",
+    "newSupplier_create_new": "Создать",
+    "newSupplier_cancel_new": "Отмена",
+    "newSupplier_link_send_it": "Новый поставщик создан. Отправьте ему эту ссылку для заполнения анкеты:",
+    "newSupplier_title": "Создание нового поставщика",
+    "newSupplier_linkCopied": "Ссылка скопирована в буфер обмена"
 
 }

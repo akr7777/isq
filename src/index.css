@@ -1,5 +1,40 @@
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;700&display=swap');
 
+* {
+  margin: 0;
+  padding: 0;
+  --header_height: 120px;
+  --footer_height: 50px;
+  --margin_top_for_chapter: 50px;
+}
+
+/* light theme */
+html[data-theme='light'] {
+  --main_bg_color: rgb(215, 203, 203);
+  --font_color: black; 
+
+  --theme_toogler_bgColor: rgb(57, 55, 55);
+
+  --header_footer_bgColor: rgba(255, 100, 0, 0.3);
+  /* --header_height: 120px;
+  --footer_height: 50px; */
+
+  --input_bg_color: rgb(97, 97, 97);
+  --input_text_color: rgb(235, 227, 227);
+
+  --brick_bgColor: rgb(178, 175, 175);
+
+  --border_color: black;
+
+  --buttonOK_bgColor: rgb(39, 151, 39);
+  --buttonOK_bgColor_hover: rgb(27, 130, 27);
+  --buttonOK_bgColor_focus: rgb(26, 112, 26);
+  --buttonCancel_bgColor: rgb(200, 23, 23);
+  --buttonCancel_bgColor_hover: rgb(208, 55, 55);
+  --buttonCancel_bgColor_hofocus: rgb(163, 77, 77);
+
+
+}
 
 /* dark theme */
 html[data-theme='dark'] {
@@ -9,8 +44,8 @@ html[data-theme='dark'] {
     --theme_toogler_bgColor: rgb(215, 203, 203);
 
     --header_footer_bgColor: rgba(255, 0, 0, 0.3);
-    --header_height: 120px;
-    --footer_height: 50px;
+    /* --header_height: 120px;
+    --footer_height: 50px; */
 
     --input_bg_color: rgb(227, 236, 235);
     --input_text_color: black;
@@ -18,27 +53,17 @@ html[data-theme='dark'] {
     --brick_bgColor: rgb(92, 86, 86);
 
     --border_color: white;
-}
 
-/* light theme */
-html[data-theme='light'] {
-    --main_bg_color: rgb(215, 203, 203);
-    --font_color: black; 
-
-    --theme_toogler_bgColor: rgb(57, 55, 55);
-
-    --header_footer_bgColor: rgba(255, 100, 0, 0.3);
-    --header_height: 120px;
-    --footer_height: 50px;
-
-    --input_bg_color: rgb(97, 97, 97);
-    --input_text_color: rgb(235, 227, 227);
-
-    --brick_bgColor: rgb(178, 175, 175);
-
-    --border_color: black;
+    --buttonOK_bgColor: rgb(14, 141, 14);
+    --buttonOK_bgColor_hover: rgb(0, 112, 0);
+    --buttonOK_bgColor_focus: rgb(105, 145, 105);
+    --buttonCancel_bgColor: rgb(159, 15, 15);
+    --buttonCancel_bgColor_hover: rgb(167, 46, 46);
+    --buttonCancel_bgColor_hofocus: rgb(130, 61, 61);
 
 }
+
+
 
 body {
   background-color: var(--main_bg_color);

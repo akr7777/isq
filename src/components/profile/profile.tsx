@@ -36,6 +36,8 @@ const Profile = () => {
 
         <Checker />
 
+        <button>Редактировать список поставщиков</button>
+
     </div>
 }
 

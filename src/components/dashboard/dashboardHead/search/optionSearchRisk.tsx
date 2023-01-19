@@ -13,7 +13,7 @@ const SearchRisk = () => {
     }
     return <div className={s.riskMainDiv}>
 
-        <label>{ t("search_risks") }</label>
+        {/* <label>{ t("search_risks") }</label> */}
 
         <div className={
             searchRisk === undefined

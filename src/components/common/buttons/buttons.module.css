@@ -1,0 +1,55 @@
+.buttonOk {
+    min-width: 70px;
+    min-height: 35px;
+    background-color: var(--buttonOK_bgColor);
+
+    font-weight: bold;
+    font-size: 22px;
+    padding: 10px 40px;
+    border-radius: 10px;
+    border: 2px black solid;
+    cursor: pointer;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.buttonOk:hover {
+    background-color: var(--buttonOK_bgColor_hover);
+    box-shadow: 5px 3px gray;
+    color:black
+}
+.buttonOk:focus {
+    background-color: rgb(110, 135, 110);
+    box-shadow: none;
+}
+
+.buttonCancel {
+    min-width: 70px;
+    min-height: 35px;
+    background-color: var(--buttonCancel_bgColor);
+
+    font-weight: bold;
+    font-size: 22px;
+    padding: 10px 40px;
+    border-radius: 10px;
+    border: 2px black solid;
+    cursor: pointer;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.buttonCancel:hover {
+    background-color: var(--buttonCancel_bgColor_hover);
+    box-shadow: 5px 3px gray;
+    color:black
+}
+.buttonCancel:focus {
+    background-color: var(--buttonCancel_bgColor_hofocus);
+    box-shadow: none;
+}

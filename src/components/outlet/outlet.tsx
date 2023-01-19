@@ -8,6 +8,7 @@ import ErrorPage from '../NotFoundPage/error404';
 import SupplierCard from "../supplierCard/supplierCard";
 import Profile from "../profile/profile";
 import s from "./outlet.module.css";
+import NewSupplier from "../newSupplier/newSupplier";
 
 export const PATHS = {
     dashboard: "/dashboard",
@@ -16,6 +17,7 @@ export const PATHS = {
     notFoundPage: "/404",
     supplierCard: '/supplierCard',
     profile: '/profile',
+    newSupplier: '/new'
 }
 
 const Outlet = () => {
@@ -44,6 +46,12 @@ const Outlet = () => {
             <Route path={PATHS.profile} element={
                 <RequireAuth>
                     <Profile />
+                </RequireAuth>
+            } />
+
+            <Route path={PATHS.newSupplier} element={
+                <RequireAuth>
+                    <NewSupplier />
                 </RequireAuth>
             } />
 
