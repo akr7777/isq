@@ -6,6 +6,7 @@ import s from "./buttons.module.css";
 type ButtonPropsType = {
     text: string,
     onClickFunction: () => void,
+    className?: string
 }
 
 export const ButtonOK = (props: ButtonPropsType) => {
@@ -14,7 +15,7 @@ export const ButtonOK = (props: ButtonPropsType) => {
 
     return <div
         onClick={props.onClickFunction}
-        className={s.buttonOk}
+        className={s.buttonOk + " " + props.className}
 
         // className={
         //     theme === LIGHT

@@ -1,60 +1,47 @@
-import s from './header.module.css';
-// import { BsSunFill, BsMoonStarsFill } from 'react-icons/bs';
 
-import { useTheme } from './../../hooks/useTheme';
-import { DARK, LIGHT } from './../../hooks/useTheme';
 
-import { useTranslation } from 'react-i18next';
-import useLocalStorage from './../../hooks/use-localstorage';
-import i18n from './../../i18n';
-
-import flagRu from './../../public/icons/flag_ru.png';
-import flagEn from './../../public/icons/flag_en.png';
-import { changeThemeAC, logoutAC, UserIdType } from '../../store/features/authSlice';
-import { useSelector } from 'react-redux';
-import { RootState, useAppDispatch } from '../../store/store';
-
-import exitIcon from './../../public/icons/icon_exit.png';
-import sunIcon from './../../public/icons/icon_sun.png';
-import moonIcon from './../../public/icons/icon_moon.png';
 import logo from './../../public/images/logo.jpeg';
-import ava from './../../public/images/ava.jpg';
+import s from './header.module.css';
+// import i18n from './../../i18n';
+import { useTranslation } from 'react-i18next';
+import burger from './../../public/icons/burger.png';
+
+// import { useTheme } from './../../hooks/useTheme';
+// import { DARK, LIGHT } from './../../hooks/useTheme';
+
+
+// import i18n from './../../i18n';
+
+// import flagRu from './../../public/icons/flag_ru.png';
+// import flagEn from './../../public/icons/flag_en.png';
+// import { changeThemeAC, logoutAC, UserIdType } from '../../store/features/authSlice';
+// import { useSelector } from 'react-redux';
+// import { RootState, useAppDispatch } from '../../store/store';
+
+// import exitIcon from './../../public/icons/icon_exit.png';
+// import sunIcon from './../../public/icons/icon_sun.png';
+// import moonIcon from './../../public/icons/icon_moon.png';
+// import ava from './../../public/images/ava.jpg';
+
 import { Link } from 'react-router-dom';
 import { PATHS } from '../outlet/outlet';
+import { Icons } from './icons';
+import { useState } from 'react';
 
 
 const Header = () => {
-
     const { t } = useTranslation();
-    const [language, setLanguage] = useLocalStorage('language', 'ru');
 
-    const handleLenguageChange = () => {
-        if (language === 'en') {
-            i18n.changeLanguage('ru');
-            setLanguage('ru');
-        } else if (language === 'ru') {
-            i18n.changeLanguage('en');
-            setLanguage('en');
-        }
-    };
-
-    const dispatch = useAppDispatch();
-
-
-    const {theme, setTheme } = useTheme();
-    const handleLightThemeClick = () => {
-        setTheme(LIGHT);
-        dispatch(changeThemeAC(LIGHT));
-    }
-    const handleDarkThemeClick = () => {
-        setTheme(DARK);
-        dispatch(changeThemeAC(DARK))
-    }
-    const onLogoutClickHandler = () => {
-        dispatch(logoutAC());
+    // constants for mobile menu
+    const mobileText = {
+        langText: t('menu_icon_lang'),
+        themeText: t("menu_icon_theme"),
+        profileText: t("menu_icon_profile"),
+        logoutText: t("menu_icon_logout"),
+        loginText: t("menu_icon_login")
     }
 
-    const userId:UserIdType = useSelector((state: RootState) => state.auth.userId);
+    const [mobileMenuOpened, setMobileMenuOpened] = useState<boolean>(false);
 
     return <div className={s.header}>
 
@@ -70,61 +57,35 @@ const Header = () => {
                 
             </h2>
         </div>
-        
 
-        <div className={s.icons_div}>
-            { 
-                language === 'en' && 
-                    <img 
-                        className={s.iconsImg}
-                        onClick={handleLenguageChange} 
-                        src={flagRu} 
-                    /> 
+        <div className={s.icondiv2}>
+            {/* Icons for Desctop version */}
+            <div className={s.icons_div_desctop + " " + s.desctopSize}> <Icons /> </div>
+
+            {/* Icons for Mobile version */}
+            { !mobileMenuOpened && <img 
+                            src={burger}
+                            className={s.iconsImg + " " + s.mobileSize}
+                            onClick={() => setMobileMenuOpened(true)}
+                        />
             }
-            { 
-                language === 'ru' && 
-                    <img 
-                        className={s.iconsImg}
-                        onClick={handleLenguageChange} 
-                        src={flagEn} 
-                    /> 
+            {
+                mobileMenuOpened && <div className={s.overlay}>
+                    <div className={s.icons_div_mobile + " " + s.mobileSize}> 
+                        <Icons 
+                            langText={mobileText.langText}
+                            themeText={mobileText.themeText}
+                            profileText={mobileText.profileText}
+                            logoutText={mobileText.logoutText}
+                            loginText={mobileText.loginText}
+
+                            isMobileOpened={mobileMenuOpened}
+                            setIsMobileOpened={setMobileMenuOpened}
+                        /> 
+                    </div>
+                </div>
             }
 
-
-            {  
-                theme === DARK && <img 
-                    src={sunIcon} 
-                    className={s.iconsImg} 
-                    onClick={handleLightThemeClick}              
-                />
-            }
-            {  
-                theme === LIGHT && <img 
-                    src={moonIcon} 
-                    className={s.iconsImg} 
-                    onClick={handleDarkThemeClick}              
-                />
-            }
-            <div>
-            { userId.length > 0 && 
-                <Link to={PATHS.profile}>
-                    <img 
-                        src={ava} 
-                        className={s.avaStyle}
-                        // onClick={onLogoutClickHandler}
-                    />
-                </Link>
-
-            }
-            </div>
-            
-            { userId.length > 0 && 
-                    <img 
-                        src={exitIcon} 
-                        className={s.iconsImg}
-                        onClick={onLogoutClickHandler}
-                    /> 
-            }
         </div>
         
     </div>

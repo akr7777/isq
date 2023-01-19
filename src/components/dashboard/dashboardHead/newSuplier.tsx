@@ -15,6 +15,7 @@ const NewSuplier = () => {
         <ButtonOK 
             text={t("newCompany")}
             onClickFunction={onNewSupplierCreationClickHandler}
+            className={s.buttonCreateNew}
         />
     </div>
 }

@@ -1,6 +1,6 @@
 .buttonOk {
-    min-width: 70px;
-    min-height: 35px;
+    /* min-width: 70px; */
+    /* min-height: 35px; */
     background-color: var(--buttonOK_bgColor);
 
     font-weight: bold;
@@ -53,3 +53,4 @@
     background-color: var(--buttonCancel_bgColor_hofocus);
     box-shadow: none;
 }
+

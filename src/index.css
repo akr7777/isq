@@ -19,6 +19,8 @@ html[data-theme='light'] {
   /* --header_height: 120px;
   --footer_height: 50px; */
 
+  --burger_menu_bgColor: darksalmon;
+
   --input_bg_color: rgb(97, 97, 97);
   --input_text_color: rgb(235, 227, 227);
 
@@ -46,6 +48,8 @@ html[data-theme='dark'] {
     --header_footer_bgColor: rgba(255, 0, 0, 0.3);
     /* --header_height: 120px;
     --footer_height: 50px; */
+
+    --burger_menu_bgColor: darkslategrey;
 
     --input_bg_color: rgb(227, 236, 235);
     --input_text_color: black;

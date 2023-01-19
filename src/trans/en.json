@@ -2,6 +2,12 @@
     "header_text": "Dashboard",
     "footer_text": "This is footer",
 
+    "menu_icon_lang": "Русский язык",
+    "menu_icon_theme": "Dark/Light theme",
+    "menu_icon_profile": "Profile",
+    "menu_icon_logout": "Logout",
+    "menu_icon_login": "Login",
+
     "profile_text_1": "This is PROFILE Page",
 
     "main_page_text_1": "This is main page",

@@ -13,41 +13,35 @@
         display: flex;
         flex-direction: column-reverse;
         gap: 30px;
-        width: 100%
+        width: 100%;
+    }
+    .newCreationDiv {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: center;
     }
 }
 @media screen and (min-width: 790px) {
     .dashboardHeadStyles {
-        /* display: flex;
-        flex-direction: row; */
         display: grid;
         grid-template-columns: 2fr 1fr;
         gap: 10px;
-        /* background-color: yellow; */
         width: 100%;
         margin-top: 0;
         margin-bottom: 20px;
     }
+    .newCreationDiv {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: flex-end;
+    }
 }
 
 
-/* .searchDiv {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    width: 100%;
-    
-} */
-.newCreationDiv {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    /* background-color: red; */
-    /* text-align: center; */
-    /* width: 100%; */
-    justify-content: flex-start;
-    /* align-items: center; */
-}
+
+
 
 .icon_yes_no {
     width: 30px;
@@ -70,4 +64,9 @@
 .risk_high {
     color: red;
     border-color: red;
+}
+
+.buttonCreateNew {
+    min-width: 120px;
+    width: 100%;
 }
