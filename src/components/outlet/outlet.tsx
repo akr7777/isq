@@ -11,6 +11,7 @@ import s from "./outlet.module.css";
 import NewSupplier from "../newSupplier/newSupplier";
 
 export const PATHS = {
+    mainPage: '/',
     dashboard: "/dashboard",
     questions: "/questions",
     login: "/login",

@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { BRICK_VIEW, changeViewAC, TABLE_VIEW, ViewOptionsType } from "../../store/features/supplierSlice";
 import { RootState, useAppDispatch } from "../../store/store";
-import { ChangeEvent, MouseEvent } from "react";
+import { MouseEvent } from "react";
 import { t } from "i18next";
 import s from './profile.module.css';
 

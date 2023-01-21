@@ -3,21 +3,27 @@
 * {
   margin: 0;
   padding: 0;
-  --header_height: 120px;
+  --header_height_long: 180px;
+  --header_height_short: 100px;
   --footer_height: 50px;
   --margin_top_for_chapter: 50px;
+
+  --header_width_long: 600px;
+  --header_width_short: 400px;
+
 }
 
 /* light theme */
 html[data-theme='light'] {
   --main_bg_color: rgb(215, 203, 203);
+  /* --main_bg_color: rgb(190, 198, 246); */
   --font_color: black; 
 
   --theme_toogler_bgColor: rgb(57, 55, 55);
 
   --header_footer_bgColor: rgba(255, 100, 0, 0.3);
-  /* --header_height: 120px;
-  --footer_height: 50px; */
+  /* --header_footer_bgColor: rgb(198, 198, 198); */
+  
 
   --burger_menu_bgColor: darksalmon;
 
@@ -46,8 +52,6 @@ html[data-theme='dark'] {
     --theme_toogler_bgColor: rgb(215, 203, 203);
 
     --header_footer_bgColor: rgba(255, 0, 0, 0.3);
-    /* --header_height: 120px;
-    --footer_height: 50px; */
 
     --burger_menu_bgColor: darkslategrey;
 

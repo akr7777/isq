@@ -1,10 +1,11 @@
 import s from "./profile.module.css";
-import Checker from "./checker";
+import TableBrickChecker from "./tableBrickViewChecker";
 import ava from "./../../public/images/ava.jpg";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { RoleType } from "../../store/features/authSlice";
 import { useTranslation } from "react-i18next";
+import ProfileRiskViewChecker from "./riskViewChecker";
 // import { t } from "i18next";
 
 
@@ -37,7 +38,9 @@ const Profile = () => {
             </div>
         </div>
 
-        <Checker />
+        <TableBrickChecker />
+
+        <ProfileRiskViewChecker />
 
         <button>Редактировать список поставщиков</button>
 

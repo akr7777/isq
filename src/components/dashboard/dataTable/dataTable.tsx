@@ -6,12 +6,14 @@ import dashboardStyles from "./../dashboard.module.css";
 
 import yes from './../../../public/icons/var_yes.png';
 import no from './../../../public/icons/var_no.png';
-import { t } from "i18next";
 import { addSearchOptions } from "../dashboardHead/search/functions-for-search";
 import { useNavigate } from "react-router-dom";
 import { PATHS } from "../../outlet/outlet";
+import RiskInLine from "../riskInLine";
+import { useTranslation } from "react-i18next";
 
 const DataTable = () => {
+    const {t} = useTranslation();
     const searchField:string = useSelector((state:RootState) => state.supplier.search);
     
     const searchComplited:SearchByComplitedType = useSelector((state:RootState) => state.supplier.searchByComplited);
@@ -56,7 +58,8 @@ const DataTable = () => {
                                         : <img src={no} className={dashboardStyles.icon_yes_no}/>
                                 }</td>
                                 <td>
-                                    { 
+                                    <RiskInLine risk={c.risk}/>
+                                    {/* { 
                                         c.risk !== undefined && <div
                                             className={
                                                 c.risk === "low"
@@ -67,7 +70,7 @@ const DataTable = () => {
                                             }>
                                             { c.risk }
                                         </div>
-                                    }
+                                    } */}
                                 </td>
                             </tr>
                         )

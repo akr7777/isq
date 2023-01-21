@@ -1,5 +1,3 @@
-
-
 import logo from './../../public/images/logo.jpeg';
 import s from './header.module.css';
 // import i18n from './../../i18n';
@@ -23,7 +21,7 @@ import burger from './../../public/icons/burger.png';
 // import moonIcon from './../../public/icons/icon_moon.png';
 // import ava from './../../public/images/ava.jpg';
 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { PATHS } from '../outlet/outlet';
 import { Icons } from './icons';
 import { useState } from 'react';
@@ -43,10 +41,19 @@ const Header = () => {
 
     const [mobileMenuOpened, setMobileMenuOpened] = useState<boolean>(false);
 
+    const navigate = useNavigate();
+    const toLogoClickHandler = () => {
+        navigate(PATHS.mainPage)
+    }
+
     return <div className={s.header}>
 
         <div className={s.simpleDiv}>
-            <img src={logo} className={s.logoImg} />
+            <img 
+                src={logo} 
+                className={s.logoImg} 
+                onClick={toLogoClickHandler}
+            />
         </div>
 
         <div className={s.simpleDiv}>
@@ -70,7 +77,15 @@ const Header = () => {
                         />
             }
             {
-                mobileMenuOpened && <div className={s.overlay}>
+                mobileMenuOpened && <>
+                    <div 
+                        className={s.overlay} 
+                        onClick={() => setMobileMenuOpened(false)}
+                        // onClick={() => alert('CLICK')}
+                    >
+                        
+                    </div>
+
                     <div className={s.icons_div_mobile + " " + s.mobileSize}> 
                         <Icons 
                             langText={mobileText.langText}
@@ -83,7 +98,8 @@ const Header = () => {
                             setIsMobileOpened={setMobileMenuOpened}
                         /> 
                     </div>
-                </div>
+                </>
+                
             }
 
         </div>

@@ -1,9 +1,10 @@
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import cardStyles from "./card.module.css";
 
 const SupplierHead = () => {
+    const {t} = useTranslation();
 
     const supplierName: string = useSelector((state:RootState) => state.complited.supplierName);
     const creationDate: string = useSelector((state: RootState) => state.complited.creationDate);

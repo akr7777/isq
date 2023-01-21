@@ -1,18 +1,18 @@
 
-@media screen and (min-width: 600px) {
+@media screen and ( min-width: 600px ) {
     .mobileSize { display: none; }
     .desctopSize { display: flex; }
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 599px) {
     .mobileSize { display: flex; }
     .desctopSize { display: none; }
 }
 
 
-@media screen and (min-width: 400px) {
+@media screen and (min-width: 400px ) {
     .header {
         color: var(--font_color);
-        height: var(--header_height);
+        height: var(--header_height_short);
         flex: 0 0 auto;
     
         display: grid;
@@ -24,10 +24,10 @@
         background-color: var(--header_footer_bgColor);
     }
 }
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 399px) {
     .header {
         color: var(--font_color);
-        height: var(--header_height);
+        height: var(--header_height_long);
         flex: 0 0 auto;
     
         display: flex;
@@ -64,6 +64,8 @@
     position: fixed;
     right: 0;
     top: 0;
+
+    min-width: 260px;
 
     /* display: flex; */
     flex-direction: column;

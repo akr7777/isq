@@ -15,7 +15,14 @@
     padding: 30px;
     border: 2px var(--border_color) solid;
     border-radius: 15px;
-    min-width: 400px;
+    /* width: 400px; */
+    /* min-width: 400px; */
+}
+@media screen and (min-width: 550px) {
+    .fields_width { width: 400px; }
+}
+@media screen and (max-width: 550px) {
+    .fields_width { width: 90%; }
 }
 
 .oneField {
@@ -27,16 +34,31 @@
     /* background-color: blue; */
 }
 
-.labelText {
-    width: 100%;
+@media screen and (min-width: 590px) {
+    .labelText { width: 100%; }
 }
+@media screen and (min-width: 419px) and (max-width: 590px) {
+    .labelText { width: 90%; }
+}
+@media screen and (max-width: 419px) {
+    .labelText { width: 210px; }
+}
+
+
 .buttonsDiv {
     display: flex;
-    flex-direction: row;
+    /* flex-direction: row; */
     justify-content: center;
     align-items: center;
     gap: 20px;
 }
+@media screen and (min-width: 400px) {
+    .btn_width { flex-direction: row; }
+}
+@media screen and (max-width: 400px) {
+    .btn_width { flex-direction: column; }
+}
+
 
 .newSupplier_link_div {
     display: flex;
@@ -45,10 +67,34 @@
     justify-content: center;
     align-items: center;
 }
+.newSupplier_link_link {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+}
+@media screen and (min-width: 610px) {
+    .newSupplier_link_link_text {
+        display: block;
+    } 
+}
+@media screen and (max-width: 610px) {
+    .newSupplier_link_link_text {
+        display: none;
+    } 
+}
+
 
 .error {
     /* padding: 10px 15px;
     border-radius: 10px;
     border: 2px red solid; */
     color: red;
+}
+
+.copy_icon {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
 }

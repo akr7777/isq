@@ -1,11 +1,15 @@
+import { useTranslation } from "react-i18next";
 import s from "./preloader.module.css";
 
 const Preloader = () => {
-    return <div>
-        <label className={s.preloader}>
-            Загрузка данных...
-        </label>
-    </div>
+    const { t } = useTranslation();
+    return <>
+        <center>
+            <label className={s.preloader}>
+                { t("isLoadingOn") }
+            </label>
+        </center>
+    </>
 }
 
 export default Preloader;

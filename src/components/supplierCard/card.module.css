@@ -8,12 +8,21 @@
     width: 90%;
     margin: 40px 5%;
 }
-
-.qaDiv {
-    display: grid;
-    grid-template-columns: 1fr 3fr;
-    gap: 20px;
+@media screen and (min-width: 700px) {
+    .qaDiv {
+        display: grid;
+        grid-template-columns: 2fr 3fr;
+        gap: 20px;
+    }
 }
+@media screen and (max-width: 700px) {
+    .qaDiv {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
 .appearance {
     border: 2px var(--border_color) solid;
     border-radius: 10px;
@@ -42,10 +51,20 @@
     align-items: flex-start;
 }
 
-.existedRisk {
-    display: grid;
-    grid-template-columns: 1fr 3fr;
+@media screen and (min-width: 700px) {
+    .existedRisk {
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+        /* padding: 20px 0; */
+    }
 }
+@media screen and (max-width: 700px) {
+    .existedRisk {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
 .qaQuestion {
     display: flex;
     flex-direction: row;
@@ -68,6 +87,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    /* background-color: red; */
 }
 .low {
     border: 2px green solid;
@@ -100,13 +120,20 @@
 
 .changeZone_Risk {
     display: flex;
-    flex-direction: row;
+    /* flex-direction: row; */
     justify-content: flex-start;
     align-items: center;
     padding-left: 20px;
     padding-right: 20px;
-    gap: 20px;
+    /* gap: 20px; */
 }
+@media screen and (min-width: 600px) {
+    .risk_width { flex-direction: row; gap: 20px;}
+}
+@media screen and (max-width: 600px) {
+    .risk_width { flex-direction: column; gap: 5px;}
+}
+
 .changeZone_Commet {
     display: flex;
     flex-direction: column;
@@ -124,5 +151,6 @@
     justify-content: flex-end;
 }
 .btn_padding {
+    margin-top: 15px;
     padding-right: 20px;
 }

@@ -1,12 +1,12 @@
-// import { t } from 'i18next';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ButtonCancel, ButtonOK } from '../common/buttons/buttons';
 import { LineTextField } from '../common/labelTextField/labelLineText';
 import { PATHS } from '../outlet/outlet';
 import s from './newSupplier.module.css';
-import i18n from './../../i18n';
 import { useTranslation } from 'react-i18next';
+import iconCopyGreen from '../../public/icons/icon_copy_green.png';
+import iconCopyBlue from '../../public/icons/icon_copy_blue.png';
 
 
 const NewSupplier = () => {
@@ -52,65 +52,76 @@ const NewSupplier = () => {
             <h1>{ t("newSupplier_title") }</h1>
         </div>
 
-        <div className={s.fields}>
-            <div className={s.oneField}>
-                <label>{ t("newSupplier_name") }</label>
+        {
+            newSupplierLink.length === 0 && <>
+            
+                    <div className={s.fields}>
+                        <div className={s.oneField + " " + s.fields_width}>
+                            <label>{ t("newSupplier_name") }</label>
 
-                <LineTextField 
-                    type='text'
-                    text={supplierName}
-                    placeholder={ t("newSupplier_name_placeholder") }
-                    error={error.length > 0}
-                    onChangeFunction={ (newText:string) => onNewSupplierNameChangeHandler(newText) }
-                    className={s.labelText}
-                />
+                            <LineTextField 
+                                type='text'
+                                text={supplierName}
+                                placeholder={ t("newSupplier_name_placeholder") }
+                                error={error.length > 0}
+                                onChangeFunction={ (newText:string) => onNewSupplierNameChangeHandler(newText) }
+                                className={s.labelText}
+                            />
 
-                {
-                    error.length > 0 && <div className={s.error}>{ t("required_field") }</div>
-                }
-            </div>
+                            {
+                                error.length > 0 && <div className={s.error}>{ t("required_field") }</div>
+                            }
+                        </div>
 
-            <div className={s.oneField}>
-                <label>{ t("newSupplier_ticketLink") }</label>
+                        <div className={s.oneField + " " + s.fields_width}>
+                            <label>{ t("newSupplier_ticketLink") }</label>
 
-                <LineTextField 
-                    type='text'
-                    text={purchaseTicket}
-                    placeholder={ t("newSupplier_ticketLink_placeholder") }
-                    onChangeFunction={ (newText:string) => setPurchaseTicket(newText) }
-                    className={s.labelText}
-                />
-            </div>
+                            <LineTextField 
+                                type='text'
+                                text={purchaseTicket}
+                                placeholder={ t("newSupplier_ticketLink_placeholder") }
+                                onChangeFunction={ (newText:string) => setPurchaseTicket(newText) }
+                                className={s.labelText}
+                            />
+                        </div>
 
-        </div>
+                    </div>
 
-        <div className={s.buttonsDiv}>
-            ЗАДИЗЭЙБЛИТЬ КНОПКИ ПОСЛЕ СОЗДАНИЯ НОВОЙ АНКЕТЫ!!!!
-            ДОБАВИТЬ ССЫЛКУ ПОСЛЕ СОЗДАНИЯ НОВОЙ АНКЕТЫ ДЛЯ ПЕРЕХОДА В DASHBOADR
-            <ButtonOK 
-                text={ t("newSupplier_create_new") }
-                onClickFunction={onNewSupplierCreateClickHandler}
-            />
-            <ButtonCancel 
-                text={ t("newSupplier_cancel_new") }
-                onClickFunction={onNewSupplierCancelClickHandler}
-            />
-        </div>
+                    <div className={s.buttonsDiv + " " + s.btn_width}>
+                        <ButtonOK 
+                            text={ t("newSupplier_create_new") }
+                            onClickFunction={onNewSupplierCreateClickHandler}
+                        />
+                        <ButtonCancel 
+                            text={ t("newSupplier_cancel_new") }
+                            onClickFunction={onNewSupplierCancelClickHandler}
+                        />
+                    </div>
+                </>
+        }
+
+        
         
         {
             newSupplierLink.length > 0 && <div className={s.newSupplier_link_div}>
-                <h4>{ t("newSupplier_link_send_it") }</h4>
-                { newSupplierLink }
+                <h2>{ t("newSupplier_link_send_it") }</h2>
 
-                {
-                    copyLinkSuccess 
-                        ? <label>{ t("newSupplier_linkCopied") }</label>
-                        : <button 
-                                onClick={() => copyToBuffer()}
-                            >
-                                Скопировать ссылку (в виде иконки)
-                            </button>
-                }
+                <div className={s.newSupplier_link_link}>
+                    <h3 className={s.newSupplier_link_link_text}>{ newSupplierLink }</h3>
+
+                    {
+                        copyLinkSuccess 
+                            ? <img src={iconCopyGreen} className={s.copy_icon}/>
+                            : <img src={iconCopyBlue} className={s.copy_icon} onClick={() => copyToBuffer()}/>
+                            // ? <h2>{ t("newSupplier_linkCopied") }</h2>
+                            // : <button 
+                            //         onClick={() => copyToBuffer()}
+                            //     >
+                            //         Скопировать ссылку (в виде иконки)
+                            //     </button>
+                    }
+                </div>
+                
                 
                 {/* name: {supplierName}
                 ticket: {purchaseTicket} */}

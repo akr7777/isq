@@ -1,8 +1,6 @@
-import { t } from 'i18next';
 import { useState } from 'react';
 import { searchByDateFilterAC } from '../../../../store/features/supplierSlice';
 import { useAppDispatch } from '../../../../store/store';
-import { ButtonOK } from '../../../common/buttons/buttons';
 import { LineTextField } from '../../../common/labelTextField/labelLineText';
 import s from './search.module.css';
 
@@ -12,9 +10,7 @@ const SearchByDate = () => {
     const [dateEnd, setDateEnd] = useState<string>('');
 
     const dispatch = useAppDispatch();
-    const onButtonFilterHandler = () => {
-        // dispatch(searchByDateFilterAC({dateStart: dateStart, dateEnd: dateEnd}));
-    }
+    
     const onStartDateFieldChangeHandler = (newDate: string) => {
         setDateStart(newDate);
         dispatch(searchByDateFilterAC({dateStart: dateStart, dateEnd: dateEnd}));

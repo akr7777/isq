@@ -14,6 +14,10 @@ export const RISK_MEDIUM = 'medium';
 export const RISK_HIGH = 'high';
 export type RiskType = typeof RISK_LOW | typeof RISK_MEDIUM | typeof RISK_HIGH | undefined;
 
+export const RiskViewWORD = 'WORD';
+export const RiskViewSTAR = 'STAR'
+export type RiskViewType = typeof RiskViewWORD | typeof RiskViewSTAR;
+
 export type SupplierIdType = string;
 
 export type SupplerDataType = {
@@ -29,6 +33,7 @@ type SupplierSliceType = {
     suppliers: Array<SupplerDataType>,
     search: string,
     view: ViewOptionsType;
+    riskView: RiskViewType
     searchByComplited: SearchByComplitedType,
     searchByRisk: RiskType,
     searchByDateStart: string,
@@ -72,6 +77,7 @@ const initContent:SupplierSliceType = {
         ],
     search: '',
     view: TABLE_VIEW,
+    riskView: RiskViewWORD,
 
     searchByDateStart: '',
     searchByDateEnd: '',
@@ -105,6 +111,9 @@ export const supplierSlice = createSlice({
         },
         searchByRiskAC: (state:SupplierSliceType, action: PayloadAction<RiskType>) => {
             return {...state, searchByRisk: action.payload}
+        },
+        changeRiskInLineAC: (state:SupplierSliceType, action: PayloadAction<RiskViewType>) => {
+            return {...state, riskView: action.payload}
         }
     },
     extraReducers: (builder) => {
@@ -122,6 +131,6 @@ export const supplierSlice = createSlice({
         // })
     }
 })
-export const {changeViewAC, searchFieldChangeAC, searchByComplitedChangeAC, searchByRiskAC, searchByDateFilterAC} = supplierSlice.actions;
+export const {changeViewAC, searchFieldChangeAC, searchByComplitedChangeAC, searchByRiskAC, searchByDateFilterAC, changeRiskInLineAC} = supplierSlice.actions;
 
 export default supplierSlice.reducer;

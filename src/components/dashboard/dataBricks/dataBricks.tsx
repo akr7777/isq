@@ -1,23 +1,30 @@
-import { t } from "i18next";
+// import { t } from "i18next";
 import { useSelector } from "react-redux";
-import { SearchByComplitedType, RiskType, SEARCH_COMPLETED_FINISHED, SEARCH_COMPLETED_UNFINISHED, SupplerDataType, SupplierIdType } from "../../../store/features/supplierSlice";
+import { SearchByComplitedType, RiskType, SupplerDataType, SupplierIdType, RISK_LOW, RISK_MEDIUM, RiskViewType, RiskViewWORD } from "../../../store/features/supplierSlice";
 import { RootState } from "../../../store/store";
 import s from "./dataBricks.module.css";
-import profileStyles from "./../dashboard.module.css";
+import dbStyles from "./../dashboard.module.css";
 
 import yes from './../../../public/icons/var_yes.png';
 import no from './../../../public/icons/var_no.png';
-import { DARK, LIGHT } from "../../../hooks/useTheme";
 import { addSearchOptions } from "../dashboardHead/search/functions-for-search";
 import { PATHS } from "../../outlet/outlet";
 import { useNavigate } from "react-router-dom";
+import RiskInLine from "../riskInLine";
+import { useTranslation } from "react-i18next";
+
+
 
 const DataBricks = () => {
+
+    const {t} = useTranslation();
+    
     const searchField:string = useSelector((state:RootState) => state.supplier.search);
     const searchComplited:SearchByComplitedType = useSelector((state:RootState) => state.supplier.searchByComplited);
     const searchRisk:RiskType = useSelector((state:RootState) => state.supplier.searchByRisk);
     const searchByDateStart: string = useSelector((state: RootState) => state.supplier.searchByDateStart);
     const searchByDateEnd: string = useSelector((state: RootState) => state.supplier.searchByDateEnd);
+
     // let companies:SupplerDataType[] = useSelector((state:RootState) => state.supplier.suppliers)
     //     .filter( el => el.supplierName.toLowerCase().includes(searchField.toLowerCase()))
     // if (searchComplited === SEARCH_COMPLETED_FINISHED)
@@ -75,23 +82,58 @@ const DataBricks = () => {
                     <div className={s.oneBrickPiece}>
                         {
                             c.isComplite
-                                ? <img src={yes} className={profileStyles.icon_yes_no}/>
-                                : <img src={no} className={profileStyles.icon_yes_no}/>
+                                ? <img src={yes} className={dbStyles.icon_yes_no}/>
+                                : <img src={no} className={dbStyles.icon_yes_no}/>
                         }
                     </div>
                     <div className={s.oneBrickPiece}>
-                        { 
+                        <RiskInLine risk={c.risk}/>
+                        {/* {
+                            riskView === RiskViewWORD
+                                ? c.risk !== undefined && <div
+                                    className={
+                                        c.risk === RISK_LOW
+                                            ? profileStyles.risk + " " + profileStyles.risk_low
+                                            : c.risk === RISK_MEDIUM
+                                                ? profileStyles.risk + " " + profileStyles.risk_medium
+                                                : profileStyles.risk + " " + profileStyles.risk_high
+                                    }>
+                                    { c.risk }
+                                </div>
+                                : c.risk === undefined
+                                    ? <img src={starBlack} className={s.star}/>
+                                    : c.risk === RISK_LOW
+                                        ? <img src={starGreen} className={s.star}/>
+                                        : c.risk === RISK_MEDIUM
+                                            ? <img src={starYellow} className={s.star}/>
+                                            : <img src={starRed} className={s.star}/>
+                                
+                        } */}
+                        {/* { 
                             c.risk !== undefined && <div
                                 className={
-                                    c.risk === "low"
+                                    c.risk === RISK_LOW
                                         ? profileStyles.risk + " " + profileStyles.risk_low
-                                        : c.risk === "medium"
+                                        : c.risk === RISK_MEDIUM
                                             ? profileStyles.risk + " " + profileStyles.risk_medium
                                             : profileStyles.risk + " " + profileStyles.risk_high
                                 }>
                                 { c.risk }
                             </div>
-                        }
+                        } */}
+
+                        {/* STAR */}
+                        {/* {
+                            c.risk === undefined
+                                ? <img src={starBlack} className={s.star}/>
+                                : c.risk === RISK_LOW
+                                    ? <img src={starGreen} className={s.star}/>
+                                    : c.risk === RISK_MEDIUM
+                                        ? <img src={starYellow} className={s.star}/>
+                                        : <img src={starRed} className={s.star}/>
+                        } */}
+                        {/* / Star */}
+
                     </div>
                 </div>
             })

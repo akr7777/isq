@@ -1,5 +1,5 @@
-import { t } from "i18next";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { onRiskAndCommentChange, OnRiskAndCommentChangeType } from "../../store/features/complitedSlice";
 import { RISK_HIGH, RISK_LOW, RISK_MEDIUM, RiskType } from "../../store/features/supplierSlice";
@@ -11,6 +11,7 @@ import cardStyle from "./card.module.css";
 
 const ChangeZone = () => {
     const dispatch = useAppDispatch();
+    const {t} = useTranslation();
 
     const currentRisk:RiskType = useSelector((state:RootState) => state.complited.risk);
     const comment:string = useSelector((state:RootState) => state.complited.comment);
@@ -49,7 +50,7 @@ const ChangeZone = () => {
 
     return <div className={cardStyle.changeZoneDiv + " " + cardStyle.appearance}>
 
-        <div className={cardStyle.changeZone_Risk}>
+        <div className={cardStyle.changeZone_Risk + " " + cardStyle.risk_width}>
             <label>{ t("supplierCard_risk") }</label> 
             <Options 
                 options={[

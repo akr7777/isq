@@ -48,24 +48,37 @@ export const Icons = (props: IconsPropsType) => {
             i18n.changeLanguage('en');
             setLanguage('en');
         }
+        // closeMobileMenu();
     };
 
     const dispatch = useAppDispatch();
+
+    // const theme1 = useSelector((state:RootState) => state.auth.userSettings.theme);
+    // console.log('theme1=', theme1);
+    
 
     const {theme, setTheme } = useTheme();
     const handleLightThemeClick = () => {
         setTheme(LIGHT);
         dispatch(changeThemeAC(LIGHT));
+        // closeMobileMenu();
     }
     const handleDarkThemeClick = () => {
         setTheme(DARK);
-        dispatch(changeThemeAC(DARK))
+        dispatch(changeThemeAC(DARK));
+        // closeMobileMenu();
+    }
+    const onProfileClickHandler = () => {
+        navigate(PATHS.profile);
+        closeMobileMenu();
     }
     const onLogoutClickHandler = () => {
         dispatch(logoutAC());
+        closeMobileMenu();
     }
     const onLoginClickHandler = () => {
         navigate(PATHS.login);
+        closeMobileMenu();
     }
 
     const closeMobileMenu = () => {
@@ -160,14 +173,14 @@ export const Icons = (props: IconsPropsType) => {
     }
 
     { 
-        userId.length > 0 && <div className={s.oneIconOptionDiv}>
-             <label onClick={() => navigate(PATHS.profile)}>
+        userId.length > 0 && <div className={s.oneIconOptionDiv} onClick={onProfileClickHandler}>
+             <label onClick={onProfileClickHandler}>
                 {props.profileText}
             </label>
             <img 
                     src={ava} 
                     className={s.avaStyle}
-                    onClick={() => navigate(PATHS.profile)}
+                    onClick={onProfileClickHandler}
                 />
         </div>
     }

@@ -1,6 +1,9 @@
+import { useTranslation } from 'react-i18next';
 import cardStyle from './card.module.css';
 
 const QA = () => {
+    const {t} = useTranslation();
+    
     return <div className={cardStyle.qaDiv + " " + cardStyle.appearance}>
         <div className={cardStyle.qaQuestion}>
             <label>Вопрос 1</label>

@@ -1,4 +1,4 @@
-import { t } from "i18next";
+// import { t } from "i18next";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { searchFieldChangeAC } from "../../../../store/features/supplierSlice";
@@ -9,8 +9,10 @@ import IsOpenIcon from "./isOpenIcon";
 import SearchByComplited from "./optionSearchComplited";
 import SearchByDate from "./optionSearchDate";
 import SearchRisk from "./optionSearchRisk";
+import { useTranslation } from "react-i18next";
 
 const SearchField = () => {
+    const {t} = useTranslation();
     const searchField:string = useSelector((state:RootState) => state.supplier.search);
     const dispatch = useAppDispatch();
     const onSearchChangeHandler = (searchText: string) => {
