@@ -13,21 +13,6 @@ const Dashboard = () => {
 
         <DashboardHead />
 
-
-        Dashboard.tsx Фильтрация по звершенности: All
-        <br/>
-        Также сделать возможность сравнения компаний
-        <br/>
-        Урорядочивание таблицы по разным признакам
-        <br />
-        Действующий ли поставщик или новый
-        <br/>
-        Поиск по тикету закупки (номеру закупки)
-        <br/>
-        Сделать красивый Profile
-        <br/>
-        Header: либо уже, либо убрать Логотип
-
         { currentView === TABLE_VIEW &&  <DataTable />}
         
         { currentView === BRICK_VIEW && <DataBricks />}

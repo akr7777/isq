@@ -5,9 +5,11 @@ import { RootState, useAppDispatch } from "../../store/store";
 import { onLoginButtonClickAC, onLoginInputAC, onPasswordInputAC, UserIdType } from "../../store/features/authSlice";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { t } from "i18next";
 import { useTranslation } from "react-i18next";
 import { LineTextField } from "../common/labelTextField/labelLineText";
+
+import iconUserName from "../../public/icons/icon_username.png";
+import iconPassword from "../../public/icons/icon_password.png";
 
 const Login = () => {
     const { t } = useTranslation();
@@ -52,6 +54,7 @@ const Login = () => {
                     placeholder={ t("login_login_placeholder") }
                     onChangeFunction={onLoginChange}
                     error={loginError.length > 0 || loginRequired}
+                    icon={iconUserName}
                 />
                 { loginRequired && <label className={s.error_label}>{t("required_field")}</label>}
                 {/* <input type={'text'} placeholder=""/> */}
@@ -64,6 +67,7 @@ const Login = () => {
                     placeholder={ t("login_password_placeholder") }
                     onChangeFunction={onPasswordChange}
                     error={loginError.length > 0 || passwordRequired}
+                    icon={iconPassword}
                 />
                 { passwordRequired && <label className={s.error_label}>{t("required_field")}</label>}
                 {/* <input type={'password'} placeholder=""/> */}

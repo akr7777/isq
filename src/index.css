@@ -27,8 +27,8 @@ html[data-theme='light'] {
 
   --burger_menu_bgColor: darksalmon;
 
-  --input_bg_color: rgb(97, 97, 97);
-  --input_text_color: rgb(235, 227, 227);
+  --input_bg_color: rgb(163, 192, 242);
+  --input_text_color: rgb(9, 9, 9);
 
   --brick_bgColor: rgb(178, 175, 175);
 
@@ -42,6 +42,9 @@ html[data-theme='light'] {
   --buttonCancel_bgColor_hofocus: rgb(163, 77, 77);
 
   --search_circle_open_icon: purple;
+
+  --calendar_bgColor: rgb(173, 171, 171);
+
 }
 
 /* dark theme */
@@ -70,6 +73,8 @@ html[data-theme='dark'] {
     --buttonCancel_bgColor_hofocus: rgb(130, 61, 61);
 
     --search_circle_open_icon: yellow;
+
+    --calendar_bgColor: rgb(97, 97, 97);
 }
 
 

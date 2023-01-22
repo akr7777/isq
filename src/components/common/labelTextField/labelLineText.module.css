@@ -1,18 +1,47 @@
-.lineTextDecoration {
-    border: 1px solid black;
+.lineTextDiv {
+    border: 1px var(--border_color) solid;
     border-radius: 10px;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+
+    background-color:  var(--input_bg_color);
+}
+
+.lineTextDecoration {
+    /* border: 1px solid black;
+    border-radius: 10px; */
+
     padding-left: 10px;
     padding-right: 10px;
     min-height: 25px;
 
-    width: 280px;
-    height: 40px;
+    /* width: 280px; */
+    height: 35px;
 
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
     color: var(--input_text_color);
     background-color: var(--input_bg_color);
+
+    outline: none;
+    outline-offset: 0;
+    border: none;
+}
+
+.lineTextDecoration:focus {
+    outline: none;
+    /* scale: 1.1; */
 }
 .error {
     background-color: rgb(219, 95, 95);
+}
+.icon {
+    width: 30px;
+    height: 30px;
+    padding: 2px 3px;
 }

@@ -7,7 +7,9 @@ type LineTextFieldPropsType = {
     placeholder?: string | null,
     error?: boolean,
     onChangeFunction: (text: string) => void,
-    className?: string;
+    className?: string,
+    icon?: any,
+    onIconClickFunction?: () => void,
 }
 export const LineTextField = (props: LineTextFieldPropsType) => {
 
@@ -15,15 +17,31 @@ export const LineTextField = (props: LineTextFieldPropsType) => {
         const text = e.currentTarget.value;
         props.onChangeFunction(text)
     }
-
-    return <input 
-        type={props.type} 
-        value={props.text}
-        placeholder={props.placeholder || ""}
-        onChange={(e) => onTextChangeHandler(e)}
-        className={ props.error 
-            ? s.lineTextDecoration + " " + s.error + " " + props.className
-            : s.lineTextDecoration + " " + props.className
+    const onIconClickHandler = () => {
+        if (props.onIconClickFunction) {
+            props.onIconClickFunction();
         }
-    />
+    }
+
+    return <div className={s.lineTextDiv}>
+            <input 
+                type={props.type} 
+                value={props.text}
+                placeholder={props.placeholder || ""}
+                onChange={(e) => onTextChangeHandler(e)}
+                className={ props.error 
+                    ? s.lineTextDecoration + " " + s.error + " " + props.className
+                    : s.lineTextDecoration + " " + props.className
+                }
+            />
+
+            {
+                props.icon && <img 
+                        src={props.icon} 
+                        className={s.icon}
+                        onClick={onIconClickHandler}
+                    />
+            }
+
+    </div>
 }

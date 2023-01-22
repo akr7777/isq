@@ -1,6 +1,6 @@
 // import { t } from "i18next";
 import { useSelector } from "react-redux";
-import { SearchByComplitedType, RiskType, SupplerDataType, SupplierIdType, RISK_LOW, RISK_MEDIUM, RiskViewType, RiskViewWORD } from "../../../store/features/supplierSlice";
+import { SearchByComplitedType, RiskType, SupplerDataType, SupplierIdType, RISK_LOW, RISK_MEDIUM, RiskViewType, RiskViewWORD, FilterDateType } from "../../../store/features/supplierSlice";
 import { RootState } from "../../../store/store";
 import s from "./dataBricks.module.css";
 import dbStyles from "./../dashboard.module.css";
@@ -22,8 +22,8 @@ const DataBricks = () => {
     const searchField:string = useSelector((state:RootState) => state.supplier.search);
     const searchComplited:SearchByComplitedType = useSelector((state:RootState) => state.supplier.searchByComplited);
     const searchRisk:RiskType = useSelector((state:RootState) => state.supplier.searchByRisk);
-    const searchByDateStart: string = useSelector((state: RootState) => state.supplier.searchByDateStart);
-    const searchByDateEnd: string = useSelector((state: RootState) => state.supplier.searchByDateEnd);
+    const searchByDateStart: FilterDateType = useSelector((state: RootState) => state.supplier.searchByDateStart);
+    const searchByDateEnd: FilterDateType = useSelector((state: RootState) => state.supplier.searchByDateEnd);
 
     // let companies:SupplerDataType[] = useSelector((state:RootState) => state.supplier.suppliers)
     //     .filter( el => el.supplierName.toLowerCase().includes(searchField.toLowerCase()))

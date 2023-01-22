@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { SearchByComplitedType, RiskType, 
     SEARCH_COMPLETED_FINISHED, SEARCH_COMPLETED_UNFINISHED, 
-    RISK_LOW, SupplerDataType, RISK_HIGH, RISK_MEDIUM } 
+    RISK_LOW, SupplerDataType, RISK_HIGH, RISK_MEDIUM, FilterDateType } 
     from "../../../../store/features/supplierSlice";
 
 type AddSearchOptionsPropsType = {
@@ -9,8 +9,8 @@ type AddSearchOptionsPropsType = {
     searchField: string,
     searchComplited: SearchByComplitedType,
     searchRisk: RiskType,
-    searchByDateStart: string,
-    searchByDateEnd: string,
+    searchByDateStart: FilterDateType,
+    searchByDateEnd: FilterDateType,
 }
 export function addSearchOptions(props: AddSearchOptionsPropsType) {
     let newArr = props.array
@@ -28,10 +28,10 @@ export function addSearchOptions(props: AddSearchOptionsPropsType) {
     if (props.searchRisk === RISK_HIGH)
         newArr = newArr.filter( el => el.risk === RISK_HIGH);
 
-    if (props.searchByDateStart.length > 0)
-        newArr = newArr.filter( el => el.creationDate > props.searchByDateStart);
-    if (props.searchByDateEnd.length > 0)
-        newArr = newArr.filter( el => el.creationDate > props.searchByDateEnd);
+    // if (props.searchByDateStart.length > 0)
+    //     newArr = newArr.filter( el => el.creationDate > props.searchByDateStart);
+    // if (props.searchByDateEnd.length > 0)
+    //     newArr = newArr.filter( el => el.creationDate > props.searchByDateEnd);
 
     return newArr;
 }

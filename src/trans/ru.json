@@ -47,14 +47,18 @@
     "table_is_complite": "Заполнена",
 
     "save": "Сохранить",
+
     "profile_name": "Имя",
     "profile_role": "Роль пользователя",
-    "profile_view_legend": "Выберите удобный вид для просмотра анкет",
+    "profile_view_legend": "Выберите удобный вид для просмотра анкет:",
     "profile_view_table": "Табличный вид",
     "profile_view_brick": "Кирпичный вид",
-    "profile_risk_view_title": "Представление риска в строке",
+    "profile_risk_view_title": "Представление риска в строке:",
     "profile_risk_view_word": "Слово",
     "profile_risk_view_star": "Звезда",
+    "profile_user_interface_settings": "Настройки интерфейса:",
+    "profile_date_format_title": "Формат даты:",
+    "profile_page_size_title": "Количество компаний на одной странице:",
 
     "newSupplier_name": "Введите название компании:",
     "newSupplier_name_placeholder": "Название компании",
@@ -66,6 +70,18 @@
     "newSupplier_title": "Создание нового поставщика",
     "newSupplier_linkCopied": "Ссылка скопирована в буфер обмена",
 
-    "isLoadingOn": "Загрузка данных..."
+    "isLoadingOn": "Загрузка данных...",
 
+    "MONTHS_01": "Январь",
+    "MONTHS_02": "Февраль",
+    "MONTHS_03": "Март",
+    "MONTHS_04": "Апрель",
+    "MONTHS_05": "Май",
+    "MONTHS_06": "Июнь",
+    "MONTHS_07": "Июль",
+    "MONTHS_08": "Август",
+    "MONTHS_09": "Сентябрь",
+    "MONTHS_10": "Октябрь",
+    "MONTHS_11": "Ноябрь",
+    "MONTHS_12": "Декабрь"
 }

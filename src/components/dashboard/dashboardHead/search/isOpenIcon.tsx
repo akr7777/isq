@@ -8,7 +8,7 @@ import darkThemeArrowDown from './../../../../public/icons/down_arrow_yellow.png
 import lightThemeArrowDown from './../../../../public/icons/down_arrow_black.png';
 import darkThemeArrowUp from './../../../../public/icons/up_arrow_yellow.png';
 import lightThemeArrowUp from './../../../../public/icons/up_arrow_black.png';
-import { RiskType, SearchByComplitedType, SEARCH_COMPLETED_ALL } from "../../../../store/features/supplierSlice";
+import { FilterDateType, RiskType, SearchByComplitedType, SEARCH_COMPLETED_ALL } from "../../../../store/features/supplierSlice";
 
 type IsOpenIconPropsType = {
     isOpen: boolean,
@@ -20,10 +20,10 @@ const IsOpenIcon = ({isOpen, setIsOpen}: IsOpenIconPropsType) => {
 
     const searchByComplited: SearchByComplitedType = useSelector((state:RootState) => state.supplier.searchByComplited);
     const searchByRisk: RiskType = useSelector((state:RootState) => state.supplier.searchByRisk);
-    const searchByDateStart: string = useSelector((state:RootState) => state.supplier.searchByDateStart);
-    const searchByDateEnd: string = useSelector((state:RootState) => state.supplier.searchByDateEnd);
-    const isCircled: boolean = (searchByComplited !== SEARCH_COMPLETED_ALL) || (searchByRisk !== undefined) ||
-                        (searchByDateStart.length > 0) || (searchByDateEnd.length > 0)
+    const searchByDateStart: FilterDateType = useSelector((state:RootState) => state.supplier.searchByDateStart);
+    const searchByDateEnd: FilterDateType = useSelector((state:RootState) => state.supplier.searchByDateEnd);
+    const isCircled: boolean = searchByComplited !== SEARCH_COMPLETED_ALL || (searchByRisk !== undefined) ||
+                        (searchByDateStart !== undefined) || (searchByDateEnd !== undefined)
 
     return <>
         { 

@@ -1,12 +1,13 @@
 import s from "./profile.module.css";
-import TableBrickChecker from "./tableBrickViewChecker";
+import TableBrickChecker from "./interfaceTableView";
 import ava from "./../../public/images/ava.jpg";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { RoleType } from "../../store/features/authSlice";
 import { useTranslation } from "react-i18next";
-import ProfileRiskViewChecker from "./riskViewChecker";
-// import { t } from "i18next";
+import ProfileRiskViewChecker from "./interfaceRiskView";
+import InterfaceDateFormat from "./interfaceDataFormat";
+import InterfacePageSizing from "./interfacePageSizing";
 
 
 const Profile = () => {
@@ -14,17 +15,10 @@ const Profile = () => {
     const userName:string = useSelector((state: RootState) => state.auth.name);
     const { t } = useTranslation();
 
+
     return <div className={s.profileWrappedDiv}>
 
         <img src={ava} className={s.avaImg} alt="Заменить аватар" />
-
-        {/* <div className={s.profile_info}>
-            <label>Имя:</label>
-            <h2>{userName}</h2>
-
-            <label>Роль:</label>
-            <h2>{userRole}</h2>
-        </div> */}
 
         <div>
             <div className={s.line_div}>
@@ -38,10 +32,19 @@ const Profile = () => {
             </div>
         </div>
 
-        <TableBrickChecker />
 
-        <ProfileRiskViewChecker />
+        <h2>{ t("profile_user_interface_settings") }</h2>
+        <div className={s.user_interface_settings}>
+            <TableBrickChecker />
+            <ProfileRiskViewChecker />
+            <InterfaceDateFormat />
+            <InterfacePageSizing />
+        </div>
 
+        
+
+        
+        
         <button>Редактировать список поставщиков</button>
 
     </div>

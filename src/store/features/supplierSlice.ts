@@ -19,6 +19,7 @@ export const RiskViewSTAR = 'STAR'
 export type RiskViewType = typeof RiskViewWORD | typeof RiskViewSTAR;
 
 export type SupplierIdType = string;
+export type FilterDateType = Date | undefined;
 
 export type SupplerDataType = {
     supplierId: SupplierIdType,
@@ -36,8 +37,8 @@ type SupplierSliceType = {
     riskView: RiskViewType
     searchByComplited: SearchByComplitedType,
     searchByRisk: RiskType,
-    searchByDateStart: string,
-    searchByDateEnd: string,
+    searchByDateStart: FilterDateType,
+    searchByDateEnd: FilterDateType,
     
 }
 const initContent:SupplierSliceType = {
@@ -79,8 +80,8 @@ const initContent:SupplierSliceType = {
     view: TABLE_VIEW,
     riskView: RiskViewWORD,
 
-    searchByDateStart: '',
-    searchByDateEnd: '',
+    searchByDateStart: undefined,
+    searchByDateEnd: undefined,
     searchByComplited: SEARCH_COMPLETED_ALL,
     searchByRisk: undefined,
 }
@@ -99,7 +100,7 @@ export const supplierSlice = createSlice({
         searchFieldChangeAC: (state:SupplierSliceType, action: PayloadAction<string>) => {
             return {...state, search: action.payload }
         },
-        searchByDateFilterAC: (state:SupplierSliceType, action: PayloadAction<{dateStart: string, dateEnd: string}>) => {
+        searchByDateFilterAC: (state:SupplierSliceType, action: PayloadAction<{dateStart: FilterDateType, dateEnd: FilterDateType}>) => {
             return {
                 ...state, 
                 searchByDateStart: action.payload.dateStart, 
