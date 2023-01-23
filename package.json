@@ -5,6 +5,7 @@
   "homepage": "https://akr7777.github.io/isq",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.1",
+    "@tailwindcss/forms": "^0.5.3",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
@@ -12,6 +13,7 @@
     "@types/node": "^16.7.13",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
+    "dayjs": "^1.11.7",
     "gh-pages": "^4.0.0",
     "i18next": "^22.4.9",
     "i18next-browser-languagedetector": "^7.0.1",
@@ -25,6 +27,7 @@
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.6.2",
     "react-scripts": "5.0.1",
+    "react-tailwindcss-datepicker": "^1.4.0",
     "sort-by": "^1.2.0",
     "typescript": "^4.4.2",
     "web-vitals": "^2.1.0"

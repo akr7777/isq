@@ -25,7 +25,7 @@ export type SupplerDataType = {
     supplierId: SupplierIdType,
     supplierName: string,
     risk: RiskType;
-    creationDate: string,
+    creationDate: Date,
     isComplite: boolean,
     data: string,
 }
@@ -47,7 +47,7 @@ const initContent:SupplierSliceType = {
             supplierId: '00001',
             supplierName: 'ПАО "МТС"',
             risk: 'low',
-            creationDate: '2023-01-01',
+            creationDate: new Date(2022,1,11),
             isComplite: true,
             data: 'ПАО МТС Информация',
         },
@@ -55,7 +55,7 @@ const initContent:SupplierSliceType = {
             supplierId: '00002',
             supplierName: 'ПАО "Пятерочка"',
             risk: 'medium',
-            creationDate: '2022-02-02',
+            creationDate: new Date(2022,3,15),
             isComplite: true,
             data: 'Пятерочка Информация',
         },
@@ -63,7 +63,7 @@ const initContent:SupplierSliceType = {
             supplierId: '00003',
             supplierName: 'ООО "Ромашка"',
             risk: 'high',
-            creationDate: '2022-05-05',
+            creationDate: new Date(2022,5,19),
             isComplite: true,
             data: 'Ромашка Информация',
         },
@@ -71,7 +71,7 @@ const initContent:SupplierSliceType = {
             supplierId: '00004',
             supplierName: 'ООО "Рога и копыта"',
             risk: undefined,
-            creationDate: '2022-04-04',
+            creationDate: new Date(2022,7,29),
             isComplite: false,
             data: 'Рога и копыта INFO',
         }
@@ -88,7 +88,7 @@ const initContent:SupplierSliceType = {
 
 
 export const supplierSlice = createSlice({
-    name: 'auth',
+    name: 'supplier',
     initialState: initContent,
     reducers: {
         changeViewAC: (state:SupplierSliceType, action: PayloadAction<ViewOptionsType>) => {

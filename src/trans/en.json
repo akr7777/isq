@@ -71,6 +71,10 @@
     "newSupplier_title": "New supplier creation",
     "newSupplier_linkCopied": "Link was copied",
 
-    "isLoadingOn": "Loading data..."
+    "isLoadingOn": "Loading data...",
+
+
+    "yyyymmdd": "YYYY-mm-DD"
+
 
 }

@@ -1,12 +1,19 @@
 .calendar {
-    /* background-color: yellow; */
+    /* display: flex;
+    flex-direction: column; */
 }
+
 .textDiv {
     /* background-color: red; */
     position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap:5px;
 }
 .textWidth {
-    width: 100px;
+    width: 120px;
 }
 .calendar_desctop {
     z-index: 101;
@@ -83,4 +90,9 @@
 .arrows {
     width: 25px;
     height: 25px;
+}
+
+.clearIcon {
+    width: 20px;
+    height: 20px;
 }

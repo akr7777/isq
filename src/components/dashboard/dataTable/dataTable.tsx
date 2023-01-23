@@ -36,6 +36,8 @@ const DataTable = () => {
         navigate(PATHS.supplierCard + "/" + String(supplierId));
     }
     
+    // console.log('DataTable.tsx companies=',companies);
+    
     return <>
             <table className={s.theTable}>
                 <thead>
@@ -51,7 +53,7 @@ const DataTable = () => {
                         companies.map( c => 
                             <tr className={s.theTableTr} key={c.supplierId} onClick={() => onSupplierClickHandler(c.supplierId)}>
                                 <td>{c.supplierName}</td>
-                                <td>{c.creationDate}</td>
+                                <td>{c.creationDate.toLocaleDateString()}</td>
                                 <td>{
                                     c.isComplite
                                         ? <img src={yes} className={dashboardStyles.icon_yes_no}/>

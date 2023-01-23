@@ -15,37 +15,37 @@ const SearchByDate = () => {
     const [dateStart, setDateStart] = useState<FilterDateType>(reduxStartDate);
     const [dateEnd, setDateEnd] = useState<FilterDateType>(reduxEndDate);
 
-    const [dateStartText, setDateStartText] = useState<string>('');
-    const [dateEndText, setDateEndText] = useState<string>(''); 
+    // const [dateStartText, setDateStartText] = useState<string>('');
+    // const [dateEndText, setDateEndText] = useState<string>(''); 
 
     const dispatch = useAppDispatch();
     
-    const onStartDateFieldChangeHandler = (newDate: Date) => {
+    const onStartDateFieldChangeHandler = (newDate: FilterDateType) => {
         setDateStart(newDate);
-        dispatch(searchByDateFilterAC({dateStart: dateStart, dateEnd: dateEnd}));
+        dispatch(searchByDateFilterAC({dateStart: newDate, dateEnd: dateEnd}));
     }
-    const onEndDateFieldChangeHandler = (newDate: Date) => {
+    const onEndDateFieldChangeHandler = (newDate: FilterDateType) => {
         setDateEnd(newDate);
-        dispatch(searchByDateFilterAC({dateStart: dateStart, dateEnd: dateEnd}));
+        dispatch(searchByDateFilterAC({dateStart: dateStart, dateEnd: newDate}));
     }
-    const onStartDateClear = () => {
-        setDateStart(undefined);
+    // const onStartDateClear = () => {
+    //     setDateStart(undefined);
         
-    }
-    const onEndDateClear = () => {
-        setDateEnd(undefined);
-    }
+    // }
+    // const onEndDateClear = () => {
+    //     setDateEnd(undefined);
+    // }
 
     return <div>
         {/* { t("search_search_by_date") } */}
         <div className={s.searchDateComplitedDiv}>
             <Calendar
                 choosenDate={dateStart}
-                onDateChange={(newValue: Date) => onStartDateFieldChangeHandler(newValue)}
+                onDateChange={(newValue: FilterDateType) => onStartDateFieldChangeHandler(newValue)}
             />
-            {
+            {/* {
                 dateStart !== undefined && <img src={clearIcon} className={s.clearIcon} onClick={onStartDateClear}/>
-            }
+            } */}
             
             {/* <LineTextField 
                 type="text"
@@ -57,11 +57,11 @@ const SearchByDate = () => {
             -
             <Calendar
                 choosenDate={dateEnd}
-                onDateChange={(newValue: Date) => onEndDateFieldChangeHandler(newValue)}
+                onDateChange={(newValue: FilterDateType) => onEndDateFieldChangeHandler(newValue)}
             />
-            {
+            {/* {
                 dateEnd !== undefined && <img src={clearIcon} className={s.clearIcon} onClick={onEndDateClear}/>
-            }
+            } */}
             
             {/* <LineTextField 
                 type="text"

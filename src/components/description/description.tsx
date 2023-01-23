@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { UserIdType } from "../../store/features/authSlice";
 import { RootState } from "../../store/store";
 import Calendar from "../common/calendar/calendar";
+import Cal from "../common/calendar2/cal";
 import s from './description.module.css';
 
 const Description = () => {
@@ -28,6 +29,7 @@ const Description = () => {
         dsjflh
         <br />dsjflh
         <br />
+        {/* 111<Cal/>222 */}
         <ul>
             <li>Dashboard.tsx Фильтрация по звершенности: All</li>
             <li>Также сделать возможность сравнения компаний</li>
