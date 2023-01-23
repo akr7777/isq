@@ -75,3 +75,15 @@
     width: 30px;
     height: 30px;
 }
+
+.sortingIcons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+.sortingIcons img {
+    width: 20px;
+    height: 20px;
+}

@@ -25,6 +25,15 @@ export const DATE_EU = 'DATE_EU';
 export const DATE_US = 'DATE_US';
 export type FormatDataType = typeof DATE_EU | typeof DATE_US;
 
+export const SORT_ACS = "acsending";
+export const SORT_DSC = "descending";
+export const NAME_COLUMN_SORT = 'NAME_COLUMN_SORT';
+export const CREATION_DATE_COLUMN_SORT = 'CREATION_DATE_COLUMN_SORT';
+export const COMPLITED_COLUMN_SORT = 'COMPLITED_COLUMN_SORT';
+export const RISK_COLUMN_SORT = 'RISK_COLUMN_SORT';
+export type ColumnSortNameType = null | typeof NAME_COLUMN_SORT | typeof CREATION_DATE_COLUMN_SORT | typeof COMPLITED_COLUMN_SORT | typeof RISK_COLUMN_SORT;
+export type ColumnSortDirectionType = typeof SORT_ACS | typeof SORT_DSC;
+
 export const localStoragePageSizingVariable = 'page-size';
 export const pageSizeOptions = [20, 50, 100];
 
@@ -50,6 +59,10 @@ type SupplierSliceType = {
         riskView: RiskViewType,
         pageSizing: number,
         userDateFormat: FormatDataType,
+    }
+    sortingOptions: {
+        columnNameSorting: ColumnSortNameType,
+        columnSortDirection: ColumnSortDirectionType,
     }
 
     searchByComplited: SearchByComplitedType,
@@ -102,6 +115,11 @@ const initContent:SupplierSliceType = {
         riskView: RiskViewWORD,
         pageSizing: pageSizeOptions[0],
         userDateFormat: DATE_EU,
+    },
+
+    sortingOptions: {
+        columnNameSorting: null,
+        columnSortDirection: SORT_ACS,
     },
     
     search: '',
@@ -170,6 +188,12 @@ export const supplierSlice = createSlice({
                 searchByPurchaseTicket: action.payload
             }
         },
+        changeColumnNameSortingAC: (state: SupplierSliceType, action: PayloadAction<ColumnSortNameType>) => {
+            return {...state, sortingOptions: {...state.sortingOptions, columnNameSorting: action.payload}}
+        },
+        changeColumnDirectionSortingAC: (state: SupplierSliceType, action: PayloadAction<ColumnSortDirectionType>) => {
+            return {...state, sortingOptions: {...state.sortingOptions, columnSortDirection: action.payload}}
+        }
     },
     extraReducers: (builder) => {
         // builder.addCase(getDescriptionThunk.pending, (state: InitAuthorContentType) => {
@@ -186,7 +210,10 @@ export const supplierSlice = createSlice({
         // })
     }
 })
-export const {changeViewAC, searchFieldChangeAC, searchByComplitedChangeAC, searchByRiskAC, 
-    searchByDateFilterAC, changeRiskInLineAC, changePageSizingAC, userDateFormatChangeAC, changePurchaseTicketSearchAC} = supplierSlice.actions;
+export const {
+    changeViewAC, searchFieldChangeAC, searchByComplitedChangeAC, searchByRiskAC, 
+    searchByDateFilterAC, changeRiskInLineAC, changePageSizingAC, userDateFormatChangeAC, 
+    changePurchaseTicketSearchAC, changeColumnNameSortingAC, changeColumnDirectionSortingAC
+} = supplierSlice.actions;
 
 export default supplierSlice.reducer;

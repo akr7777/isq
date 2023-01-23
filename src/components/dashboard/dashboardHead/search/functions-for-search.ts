@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { SearchByComplitedType, RiskType, 
     SEARCH_COMPLETED_FINISHED, SEARCH_COMPLETED_UNFINISHED, 
-    RISK_LOW, SupplerDataType, RISK_HIGH, RISK_MEDIUM, FilterDateType, SEARCH_COMPLETED_ALL } 
+    RISK_LOW, RISK_HIGH, RISK_MEDIUM, FilterDateType, SEARCH_COMPLETED_ALL, ColumnSortNameType, ColumnSortDirectionType, SORT_ACS, SORT_DSC, NAME_COLUMN_SORT, CREATION_DATE_COLUMN_SORT } 
     from "../../../../store/features/supplierSlice";
 import { RootState } from "../../../../store/store";
 
@@ -45,6 +45,37 @@ export function AddSearchOptions() {
 
     newArr = newArr.filter( el => el.creationDate > dateStartSearchDefault);
     newArr = newArr.filter( el => el.creationDate < dateEndSearchDefault);
+
+    // SORTING
+    const columnNameSorting:ColumnSortNameType = useSelector((state:RootState) => state.supplier.sortingOptions.columnNameSorting);
+    const columnSortDirection:ColumnSortDirectionType = useSelector((state:RootState) => state.supplier.sortingOptions.columnSortDirection);
+    if (columnNameSorting) {
+        if (columnSortDirection === SORT_ACS) {
+            if (columnNameSorting === NAME_COLUMN_SORT)
+                newArr = newArr.sort( (a,b) => {
+                    if (a.supplierName < b.supplierName) 
+                        return -1;
+                    else if (a.supplierName > b.supplierName)
+                        return 1;
+                    else 
+                        return 0;
+                });
+            if (columnNameSorting === CREATION_DATE_COLUMN_SORT) {
+                newArr = newArr.sort( (a,b) => {
+                    if (a.creationDate < b.creationDate) 
+                        return -1;
+                    else if (a.creationDate > b.creationDate)
+                        return 1;
+                    else 
+                        return 0;
+                });
+            }
+            // if ()
+        }
+        if (columnSortDirection === SORT_DSC) {
+
+        }
+    }
 
     return newArr;
 }
