@@ -20,7 +20,7 @@ const SearchByComplited = () => {
         }
     }
 
-    return <div>
+    return <>
         {/* <label>{ t("search_search_by_complited") }</label> */}
         <div className={s.searchDateComplitedDiv}>
 
@@ -72,6 +72,6 @@ const SearchByComplited = () => {
                 <label className={s.complitedCheckOption} htmlFor="notComplited">{ t("search_search_by_complited_not_complited") }</label>
             </div>
         </div>
-    </div>
+    </>
 }
 export default SearchByComplited;

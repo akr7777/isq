@@ -1,4 +1,5 @@
 import { useEffect, useLayoutEffect, useState } from "react"
+import { localStorageAppThemeVariable } from "../store/features/authSlice";
 
 export const DARK = 'dark';
 export const LIGHT = 'light'
@@ -9,7 +10,7 @@ const defaultTheme = isDark ? DARK : LIGHT;
 
 
 export const useTheme = () => {
-    const localStorageTheme = localStorage.getItem('app-theme') || defaultTheme;
+    const localStorageTheme = localStorage.getItem(localStorageAppThemeVariable) || defaultTheme;
     const [theme, setTheme] = useState(localStorageTheme);
 
     
@@ -17,7 +18,7 @@ export const useTheme = () => {
     // useLayoutEffect(() => {
 
         document.documentElement.setAttribute('data-theme', theme)
-        localStorage.setItem('app-theme', theme)
+        localStorage.setItem(localStorageAppThemeVariable, theme)
     }, [theme])
 
     return { theme, setTheme }

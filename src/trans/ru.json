@@ -59,6 +59,10 @@
     "profile_user_interface_settings": "Настройки интерфейса:",
     "profile_date_format_title": "Формат даты:",
     "profile_page_size_title": "Количество компаний на одной странице:",
+    "profile_date_format_EU": "Европейский (31.12.1999)",
+    "profile_date_format_US": "Американский (12/31/1999)",
+    "search_purchase_ticket_title": "Поиск по номеру закупки:",
+    "search_ticket_placeholder": "Номер закупки",
 
     "newSupplier_name": "Введите название компании:",
     "newSupplier_name_placeholder": "Название компании",

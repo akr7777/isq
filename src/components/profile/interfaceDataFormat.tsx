@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { changeRiskInLineAC, RiskViewSTAR, RiskViewType, RiskViewWORD } from "../../store/features/supplierSlice";
+import { DATE_EU, DATE_US, FormatDataType, userDateFormatChangeAC } from "../../store/features/supplierSlice";
 import { RootState, useAppDispatch } from "../../store/store";
 import { useTranslation } from "react-i18next";
 import { RadioLabelOptionType, RadioLabels } from "../common/radioLabels/radioLabels";
@@ -7,24 +7,24 @@ import s from './profile.module.css';
 
 const InterfaceDateFormat = () => {
 
-    const riskView:RiskViewType = useSelector((state:RootState) => state.supplier.riskView);
+    const dateFormat:FormatDataType = useSelector((state:RootState) => state.supplier.settings.userDateFormat);
     const {t} = useTranslation();
     const dispatch = useAppDispatch();
 
     const onViewChangeClickHandler = (val: string) => {
-        if (val === RiskViewSTAR || val === RiskViewWORD) {
-            dispatch(changeRiskInLineAC(val));
+        if (val === DATE_EU || val === DATE_US) {
+            dispatch(userDateFormatChangeAC(val));
         }
     }
 
     const options:Array<RadioLabelOptionType> = [
         {
-            text: t("profile_risk_view_word"),
-            value: RiskViewWORD,
+            text: t("profile_date_format_EU"),
+            value: DATE_EU,
         },
         {
-            text: t("profile_risk_view_star"),
-            value: RiskViewSTAR,
+            text: t("profile_date_format_US"),
+            value: DATE_US,
         }
     ]
     
@@ -32,7 +32,7 @@ const InterfaceDateFormat = () => {
          <h3>{ t("profile_date_format_title") }</h3>
         <RadioLabels 
             options={options}
-            defaultOption={riskView}
+            defaultOption={dateFormat}
             onClickFunction={(newValue: string) => onViewChangeClickHandler(newValue)}
         />
     </div>

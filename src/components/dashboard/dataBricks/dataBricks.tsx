@@ -7,7 +7,7 @@ import dbStyles from "./../dashboard.module.css";
 
 import yes from './../../../public/icons/var_yes.png';
 import no from './../../../public/icons/var_no.png';
-import { addSearchOptions } from "../dashboardHead/search/functions-for-search";
+import { AddSearchOptions } from "../dashboardHead/search/functions-for-search";
 import { PATHS } from "../../outlet/outlet";
 import { useNavigate } from "react-router-dom";
 import RiskInLine from "../riskInLine";
@@ -24,6 +24,7 @@ const DataBricks = () => {
     const searchRisk:RiskType = useSelector((state:RootState) => state.supplier.searchByRisk);
     const searchByDateStart: FilterDateType = useSelector((state: RootState) => state.supplier.searchByDateStart);
     const searchByDateEnd: FilterDateType = useSelector((state: RootState) => state.supplier.searchByDateEnd);
+    const searchByPurchaseTicket:string = useSelector((state:RootState) => state.supplier.searchByPurchaseTicket) || "";
 
     // let companies:SupplerDataType[] = useSelector((state:RootState) => state.supplier.suppliers)
     //     .filter( el => el.supplierName.toLowerCase().includes(searchField.toLowerCase()))
@@ -33,14 +34,7 @@ const DataBricks = () => {
     //     companies = companies.filter( el => el.isComplite === false );
     // if (searchRisk === )
 
-    const companies:SupplerDataType[] = addSearchOptions({
-            array: useSelector((state:RootState) => state.supplier.suppliers), 
-            searchField: searchField, 
-            searchComplited: searchComplited, 
-            searchRisk: searchRisk,
-            searchByDateStart: searchByDateStart,
-            searchByDateEnd: searchByDateEnd
-        });
+    const companies:SupplerDataType[] = AddSearchOptions();
     
     // const theme: typeof DARK | typeof LIGHT = useSelector((state:RootState) => state.auth.userSettings.theme);
 

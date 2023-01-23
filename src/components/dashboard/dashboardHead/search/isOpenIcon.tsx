@@ -2,13 +2,11 @@ import { useSelector } from "react-redux";
 import { DARK, LIGHT } from "../../../../hooks/useTheme";
 import { RootState } from "../../../../store/store";
 import s from './search.module.css';
-
-
 import darkThemeArrowDown from './../../../../public/icons/down_arrow_yellow.png';
 import lightThemeArrowDown from './../../../../public/icons/down_arrow_black.png';
 import darkThemeArrowUp from './../../../../public/icons/up_arrow_yellow.png';
 import lightThemeArrowUp from './../../../../public/icons/up_arrow_black.png';
-import { FilterDateType, RiskType, SearchByComplitedType, SEARCH_COMPLETED_ALL } from "../../../../store/features/supplierSlice";
+import { IsSomeSearchOptionFilled } from "./functions-for-search";
 
 type IsOpenIconPropsType = {
     isOpen: boolean,
@@ -18,12 +16,13 @@ type IsOpenIconPropsType = {
 const IsOpenIcon = ({isOpen, setIsOpen}: IsOpenIconPropsType) => {
     const theme: typeof DARK | typeof LIGHT = useSelector((state:RootState) => state.auth.userSettings.theme);
 
-    const searchByComplited: SearchByComplitedType = useSelector((state:RootState) => state.supplier.searchByComplited);
-    const searchByRisk: RiskType = useSelector((state:RootState) => state.supplier.searchByRisk);
-    const searchByDateStart: FilterDateType = useSelector((state:RootState) => state.supplier.searchByDateStart);
-    const searchByDateEnd: FilterDateType = useSelector((state:RootState) => state.supplier.searchByDateEnd);
-    const isCircled: boolean = searchByComplited !== SEARCH_COMPLETED_ALL || (searchByRisk !== undefined) ||
-                        (searchByDateStart !== undefined) || (searchByDateEnd !== undefined)
+    // const searchByComplited: SearchByComplitedType = useSelector((state:RootState) => state.supplier.searchByComplited);
+    // const searchByRisk: RiskType = useSelector((state:RootState) => state.supplier.searchByRisk);
+    // const searchByDateStart: FilterDateType = useSelector((state:RootState) => state.supplier.searchByDateStart);
+    // const searchByDateEnd: FilterDateType = useSelector((state:RootState) => state.supplier.searchByDateEnd);
+    // const isCircled: boolean = searchByComplited !== SEARCH_COMPLETED_ALL || (searchByRisk !== undefined) ||
+    //                     (searchByDateStart !== undefined) || (searchByDateEnd !== undefined)
+    const isCircled: boolean = IsSomeSearchOptionFilled();
 
     return <>
         { 

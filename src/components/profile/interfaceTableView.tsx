@@ -6,7 +6,7 @@ import { RadioLabelOptionType, RadioLabels } from "../common/radioLabels/radioLa
 import s from './profile.module.css';
 
 const Checker = () => {
-    const currentView:ViewOptionsType = useSelector((state:RootState) => state.supplier.view);
+    const currentView:ViewOptionsType = useSelector((state:RootState) => state.supplier.settings.view);
     const dispatch = useAppDispatch();
     const onViewChangeClickHandler = (newValue: string) => {
         if (newValue===TABLE_VIEW || newValue===BRICK_VIEW) {

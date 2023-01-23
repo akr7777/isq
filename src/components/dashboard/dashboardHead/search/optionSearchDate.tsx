@@ -36,7 +36,7 @@ const SearchByDate = () => {
     //     setDateEnd(undefined);
     // }
 
-    return <div>
+    return <>
         {/* { t("search_search_by_date") } */}
         <div className={s.searchDateComplitedDiv}>
             <Calendar
@@ -76,6 +76,6 @@ const SearchByDate = () => {
                 onClickFunction={onButtonFilterHandler}
             /> */}
         </div>
-    </div>
+    </>
 }
 export default SearchByDate;

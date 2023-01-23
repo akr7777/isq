@@ -7,7 +7,7 @@ import DataBricks from "./dataBricks/dataBricks";
 import { BRICK_VIEW, TABLE_VIEW, ViewOptionsType } from "../../store/features/supplierSlice";
 
 const Dashboard = () => {
-    const currentView:ViewOptionsType = useSelector((state: RootState) => state.supplier.view);
+    const currentView:ViewOptionsType = useSelector((state: RootState) => state.supplier.settings.view);
 
     return <div className={s.profileDiv}>
 

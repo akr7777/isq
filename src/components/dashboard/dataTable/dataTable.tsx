@@ -6,7 +6,7 @@ import dashboardStyles from "./../dashboard.module.css";
 
 import yes from './../../../public/icons/var_yes.png';
 import no from './../../../public/icons/var_no.png';
-import { addSearchOptions } from "../dashboardHead/search/functions-for-search";
+import { AddSearchOptions } from "../dashboardHead/search/functions-for-search";
 import { useNavigate } from "react-router-dom";
 import { PATHS } from "../../outlet/outlet";
 import RiskInLine from "../riskInLine";
@@ -21,14 +21,7 @@ const DataTable = () => {
     const searchByDateStart: FilterDateType = useSelector((state: RootState) => state.supplier.searchByDateStart);
     const searchByDateEnd: FilterDateType = useSelector((state: RootState) => state.supplier.searchByDateEnd);
     
-    const companies:SupplerDataType[] = addSearchOptions({
-        array: useSelector((state:RootState) => state.supplier.suppliers), 
-        searchField: searchField, 
-        searchComplited: searchComplited, 
-        searchRisk: searchRisk,
-        searchByDateStart: searchByDateStart,
-        searchByDateEnd: searchByDateEnd
-    });
+    const companies:SupplerDataType[] = AddSearchOptions();
 
     const navigate = useNavigate();
 

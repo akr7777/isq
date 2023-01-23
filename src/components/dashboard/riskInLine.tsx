@@ -12,7 +12,7 @@ import dbStyles from './dashboard.module.css';
 
 type RiskInLinePropsType = { risk: RiskType }
 const RiskInLine = ({risk}: RiskInLinePropsType) => {
-    const riskView:RiskViewType = useSelector((state: RootState) => state.supplier.riskView);
+    const riskView:RiskViewType = useSelector((state: RootState) => state.supplier.settings.riskView);
 
     return <>
          {

@@ -7,7 +7,7 @@ import s from './profile.module.css';
 
 const ProfileRiskViewChecker = () => {
 
-    const riskView:RiskViewType = useSelector((state:RootState) => state.supplier.riskView);
+    const riskView:RiskViewType = useSelector((state:RootState) => state.supplier.settings.riskView);
     const {t} = useTranslation();
     const dispatch = useAppDispatch();
 

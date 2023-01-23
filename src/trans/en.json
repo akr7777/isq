@@ -59,6 +59,11 @@
     "profile_user_interface_settings": "User interface settings:",
     "profile_date_format_title": "Date format:",
     "profile_page_size_title": "Suppliers count on one page:",
+    "profile_date_format_EU": "European (31.12.1999)",
+    "profile_date_format_US": "American (12/31/1999)",
+    "search_purchase_ticket_title": "Purchase ticket search:",
+    "search_ticket_placeholder": "Purchase ticket",
+
 
 
     "newSupplier_name": "Input new supplier name:",

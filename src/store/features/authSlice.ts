@@ -2,10 +2,17 @@ import {createSlice} from '@reduxjs/toolkit';
 import type {PayloadAction} from '@reduxjs/toolkit';
 import { DARK, LIGHT } from '../../hooks/useTheme';
 
+export const localStorageAppThemeVariable = 'app-theme';
+export const localStorageLanguageVariable = 'language';
+
 export type RoleType = 'admin' | 'manager' | 'security' | 'none';
 export type UserIdType = string;
 export type UserThemeType = typeof DARK | typeof LIGHT;
-export type UserLangType = 'ru' | 'en';
+
+export const RU_LANG = 'ru';
+export const EN_LANG = 'en';
+export type UserLangType = typeof RU_LANG | typeof EN_LANG;
+
 export type UserSettingsType = {
     lang: UserLangType,
     theme: UserThemeType,
@@ -31,7 +38,7 @@ const initContent: UserType = {
     name: '1111',
     role: 'none',
     userSettings: {
-        lang: 'ru',
+        lang: EN_LANG,
         theme: LIGHT
     },
     vars: {

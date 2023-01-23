@@ -9,7 +9,7 @@ import i18n from './../../i18n';
 
 import flagRu from './../../public/icons/flag_ru.png';
 import flagEn from './../../public/icons/flag_en.png';
-import { changeThemeAC, logoutAC, UserIdType } from '../../store/features/authSlice';
+import { changeThemeAC, localStorageLanguageVariable, logoutAC, UserIdType } from '../../store/features/authSlice';
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../store/store';
 
@@ -38,7 +38,7 @@ type IconsPropsType = {
 export const Icons = (props: IconsPropsType) => {
     const navigate = useNavigate();
     // const { t } = useTranslation();
-    const [language, setLanguage] = useLocalStorage('language', 'ru');
+    const [language, setLanguage] = useLocalStorage(localStorageLanguageVariable, 'ru');
 
     const handleLenguageChange = () => {
         if (language === 'en') {
