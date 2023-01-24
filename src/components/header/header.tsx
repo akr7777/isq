@@ -1,26 +1,7 @@
 import logo from './../../public/images/logo.jpeg';
 import s from './header.module.css';
-// import i18n from './../../i18n';
 import { useTranslation } from 'react-i18next';
 import burger from './../../public/icons/burger.png';
-
-// import { useTheme } from './../../hooks/useTheme';
-// import { DARK, LIGHT } from './../../hooks/useTheme';
-
-
-// import i18n from './../../i18n';
-
-// import flagRu from './../../public/icons/flag_ru.png';
-// import flagEn from './../../public/icons/flag_en.png';
-// import { changeThemeAC, logoutAC, UserIdType } from '../../store/features/authSlice';
-// import { useSelector } from 'react-redux';
-// import { RootState, useAppDispatch } from '../../store/store';
-
-// import exitIcon from './../../public/icons/icon_exit.png';
-// import sunIcon from './../../public/icons/icon_sun.png';
-// import moonIcon from './../../public/icons/icon_moon.png';
-// import ava from './../../public/images/ava.jpg';
-
 import { Link, useNavigate } from 'react-router-dom';
 import { PATHS } from '../outlet/outlet';
 import { Icons } from './icons';
@@ -48,7 +29,7 @@ const Header = () => {
 
     return <div className={s.header}>
 
-        <div className={s.simpleDiv}>
+        <div className={s.simpleDiv + " " + s.logotipeDiv}>
             <img 
                 src={logo} 
                 className={s.logoImg} 
@@ -81,7 +62,6 @@ const Header = () => {
                     <div 
                         className={s.overlay} 
                         onClick={() => setMobileMenuOpened(false)}
-                        // onClick={() => alert('CLICK')}
                     >
                         
                     </div>

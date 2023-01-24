@@ -35,6 +35,7 @@ const SearchField = () => {
                     placeholder={t('search_field_placeholder')}
                     onChangeFunction={onSearchChangeHandler}
                     icon={isCircled ? circleIcon : undefined}
+                    className={s.searchFieldWidth}
                 />
 
                 <IsOpenIcon 

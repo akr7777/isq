@@ -3,7 +3,8 @@
 * {
   margin: 0;
   padding: 0;
-  --header_height_long: 180px;
+  --header_height_long: 100px;
+  /* --header_height_long: 180px; */
   --header_height_short: 100px;
   --footer_height: 50px;
   --margin_top_for_chapter: 50px;
@@ -103,4 +104,6 @@ code {
 
 #root {
   min-height: 100vh;
+  /* min-width: 100vw; */
+  min-width: 450px;
 }

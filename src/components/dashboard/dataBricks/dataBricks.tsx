@@ -1,13 +1,13 @@
 // import { t } from "i18next";
 import { useSelector } from "react-redux";
-import { SearchByComplitedType, RiskType, SupplerDataType, SupplierIdType, RISK_LOW, RISK_MEDIUM, RiskViewType, RiskViewWORD, FilterDateType } from "../../../store/features/supplierSlice";
+import { SearchByComplitedType, RiskType, SupplerDataType, SupplierIdType, RISK_LOW, RISK_MEDIUM, RiskViewType, RiskViewWORD, FilterDateType, ColumnSortNameType, ColumnSortDirectionType } from "../../../store/features/supplierSlice";
 import { RootState } from "../../../store/store";
 import s from "./dataBricks.module.css";
 import dbStyles from "./../dashboard.module.css";
 
 import yes from './../../../public/icons/var_yes.png';
 import no from './../../../public/icons/var_no.png';
-import { AddSearchOptions } from "../dashboardHead/search/functions-for-search";
+import { AddSearchOptions, AddSearchOptionsPropsType } from "../dashboardHead/search/functions-for-search";
 import { PATHS } from "../../outlet/outlet";
 import { useNavigate } from "react-router-dom";
 import RiskInLine from "../riskInLine";
@@ -19,12 +19,12 @@ const DataBricks = () => {
 
     const {t} = useTranslation();
     
-    const searchField:string = useSelector((state:RootState) => state.supplier.search);
-    const searchComplited:SearchByComplitedType = useSelector((state:RootState) => state.supplier.searchByComplited);
-    const searchRisk:RiskType = useSelector((state:RootState) => state.supplier.searchByRisk);
-    const searchByDateStart: FilterDateType = useSelector((state: RootState) => state.supplier.searchByDateStart);
-    const searchByDateEnd: FilterDateType = useSelector((state: RootState) => state.supplier.searchByDateEnd);
-    const searchByPurchaseTicket:string = useSelector((state:RootState) => state.supplier.searchByPurchaseTicket) || "";
+    // const searchField:string = useSelector((state:RootState) => state.supplier.search);
+    // const searchComplited:SearchByComplitedType = useSelector((state:RootState) => state.supplier.searchByComplited);
+    // const searchRisk:RiskType = useSelector((state:RootState) => state.supplier.searchByRisk);
+    // const searchByDateStart: FilterDateType = useSelector((state: RootState) => state.supplier.searchByDateStart);
+    // const searchByDateEnd: FilterDateType = useSelector((state: RootState) => state.supplier.searchByDateEnd);
+    // const searchByPurchaseTicket:string = useSelector((state:RootState) => state.supplier.searchByPurchaseTicket) || "";
 
     // let companies:SupplerDataType[] = useSelector((state:RootState) => state.supplier.suppliers)
     //     .filter( el => el.supplierName.toLowerCase().includes(searchField.toLowerCase()))
@@ -34,7 +34,29 @@ const DataBricks = () => {
     //     companies = companies.filter( el => el.isComplite === false );
     // if (searchRisk === )
 
+    // const searchField:string = useSelector((state:RootState) => state.supplier.search);
+    // const searchComplited:SearchByComplitedType = useSelector((state:RootState) => state.supplier.searchByComplited);
+    // const searchRisk:RiskType = useSelector((state:RootState) => state.supplier.searchByRisk);
+    // const searchByDateStart: FilterDateType = useSelector((state: RootState) => state.supplier.searchByDateStart);
+    // const searchByDateEnd: FilterDateType = useSelector((state: RootState) => state.supplier.searchByDateEnd);
+    // const searchByPurchaseTicket:string = useSelector((state:RootState) => state.supplier.searchByPurchaseTicket) || "";
+    // const columnNameSorting:ColumnSortNameType = useSelector((state:RootState) => state.supplier.sortingOptions.columnNameSorting);
+    // const columnSortDirection:ColumnSortDirectionType = useSelector((state:RootState) => state.supplier.sortingOptions.columnSortDirection);
+    // const initCompaniesArray:Array<SupplerDataType> = useSelector((state:RootState) => state.supplier.suppliers);
+    // const searchOptions:AddSearchOptionsPropsType = {
+    //     initArray: initCompaniesArray,
+    //     searchField:searchField,
+    //     searchComplited:searchComplited,
+    //     searchRisk:searchRisk,
+    //     searchByDateStart: searchByDateStart,
+    //     searchByDateEnd:searchByDateEnd,
+    //     searchByPurchaseTicket:searchByPurchaseTicket,
+    //     columnNameSorting:columnNameSorting,
+    //     columnSortDirection:columnSortDirection,
+    // }
+
     const companies:SupplerDataType[] = AddSearchOptions();
+    // const companies:SupplerDataType[] = AddSearchOptions();
     
     // const theme: typeof DARK | typeof LIGHT = useSelector((state:RootState) => state.auth.userSettings.theme);
 

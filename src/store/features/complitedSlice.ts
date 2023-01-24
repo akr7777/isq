@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { InitQuestionType } from "./questionsSlice";
-import { RiskType, SupplierIdType } from "./supplierSlice";
+import { RiskType, RISK_LOW, SupplierIdType } from "./supplierSlice";
 
 export type OnRiskAndCommentChangeType = {
     risk: RiskType,
@@ -22,7 +22,7 @@ export type ComplitedSliceType = {
 const initData:ComplitedSliceType = {
     supplierId: '00001',
     supplierName: 'ПАО "МТС"',
-    risk: 'low',
+    risk: RISK_LOW,
     creationDate: '2023-01-01',
     complitedDate: '2023-01-02',
     checkedDate: '2023-01-03',

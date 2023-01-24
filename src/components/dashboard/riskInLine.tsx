@@ -5,7 +5,7 @@ import starGreen from "../../public/icons/icon_star_green.png";
 import starRed from "../../public/icons/icon_star_red.png";
 import starYellow from "../../public/icons/icon_star_yellow.png";
 
-import { RiskType, RiskViewType, RiskViewWORD, RISK_LOW, RISK_MEDIUM } from "../../store/features/supplierSlice";
+import { RiskType, RiskViewType, RiskViewWORD, RISK_HIGH, RISK_LOW, RISK_MEDIUM } from "../../store/features/supplierSlice";
 import { RootState } from "../../store/store";
 
 import dbStyles from './dashboard.module.css';
@@ -13,6 +13,13 @@ import dbStyles from './dashboard.module.css';
 type RiskInLinePropsType = { risk: RiskType }
 const RiskInLine = ({risk}: RiskInLinePropsType) => {
     const riskView:RiskViewType = useSelector((state: RootState) => state.supplier.settings.riskView);
+    let riskWord: string = "";
+    if (risk === RISK_LOW)
+        riskWord = "Low";
+    if (risk === RISK_MEDIUM)
+        riskWord = "Medium";
+    if (risk === RISK_HIGH)
+        riskWord = "High";
 
     return <>
          {
@@ -25,7 +32,7 @@ const RiskInLine = ({risk}: RiskInLinePropsType) => {
                                 ? dbStyles.risk + " " + dbStyles.risk_medium
                                 : dbStyles.risk + " " + dbStyles.risk_high
                     }>
-                    { risk }
+                    { riskWord }
                 </div>
                 : risk === undefined
                     ? <img src={starBlack} className={dbStyles.star}/>

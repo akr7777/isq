@@ -1,12 +1,12 @@
 import { useSelector } from "react-redux";
-import { SearchByComplitedType, RiskType, SupplerDataType, SupplierIdType, changeColumnNameSortingAC, changeColumnDirectionSortingAC, NAME_COLUMN_SORT, CREATION_DATE_COLUMN_SORT, COMPLITED_COLUMN_SORT, RISK_COLUMN_SORT } from "../../../store/features/supplierSlice";
+import { SearchByComplitedType, RiskType, SupplerDataType, SupplierIdType, changeColumnNameSortingAC, changeColumnDirectionSortingAC, NAME_COLUMN_SORT, CREATION_DATE_COLUMN_SORT, COMPLITED_COLUMN_SORT, RISK_COLUMN_SORT, FilterDateType, ColumnSortNameType, ColumnSortDirectionType } from "../../../store/features/supplierSlice";
 import { RootState } from "../../../store/store";
 import s from './dataTable.module.css';
 import dashboardStyles from "./../dashboard.module.css";
 
 import yes from './../../../public/icons/var_yes.png';
 import no from './../../../public/icons/var_no.png';
-import { AddSearchOptions } from "../dashboardHead/search/functions-for-search";
+import { AddSearchOptions, AddSearchOptionsPropsType } from "../dashboardHead/search/functions-for-search";
 import { useNavigate } from "react-router-dom";
 import { PATHS } from "../../outlet/outlet";
 import RiskInLine from "../riskInLine";
@@ -16,6 +16,29 @@ import SortingIcons from "../sortIcons";
 const DataTable = () => {
     const {t} = useTranslation();
     const navigate = useNavigate();
+
+
+    // const searchField:string = useSelector((state:RootState) => state.supplier.search);
+    // const searchComplited:SearchByComplitedType = useSelector((state:RootState) => state.supplier.searchByComplited);
+    // const searchRisk:RiskType = useSelector((state:RootState) => state.supplier.searchByRisk);
+    // const searchByDateStart: FilterDateType = useSelector((state: RootState) => state.supplier.searchByDateStart);
+    // const searchByDateEnd: FilterDateType = useSelector((state: RootState) => state.supplier.searchByDateEnd);
+    // const searchByPurchaseTicket:string = useSelector((state:RootState) => state.supplier.searchByPurchaseTicket) || "";
+    // const columnNameSorting:ColumnSortNameType = useSelector((state:RootState) => state.supplier.sortingOptions.columnNameSorting);
+    // const columnSortDirection:ColumnSortDirectionType = useSelector((state:RootState) => state.supplier.sortingOptions.columnSortDirection);
+    // const initCompaniesArray:Array<SupplerDataType> = useSelector((state:RootState) => state.supplier.suppliers);
+    // const searchOptions:AddSearchOptionsPropsType = {
+    //     initArray: initCompaniesArray,
+    //     searchField:searchField,
+    //     searchComplited:searchComplited,
+    //     searchRisk:searchRisk,
+    //     searchByDateStart: searchByDateStart,
+    //     searchByDateEnd:searchByDateEnd,
+    //     searchByPurchaseTicket:searchByPurchaseTicket,
+    //     columnNameSorting:columnNameSorting,
+    //     columnSortDirection:columnSortDirection,
+    // }
+
     const companies:SupplerDataType[] = AddSearchOptions();
 
     const onSupplierClickHandler = (supplierId: SupplierIdType) => {

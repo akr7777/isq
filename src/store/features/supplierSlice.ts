@@ -10,9 +10,9 @@ export const SEARCH_COMPLETED_FINISHED = "complited";
 export const SEARCH_COMPLETED_UNFINISHED = "unfinished";
 export type SearchByComplitedType = typeof SEARCH_COMPLETED_ALL | typeof SEARCH_COMPLETED_FINISHED | typeof SEARCH_COMPLETED_UNFINISHED;
 
-export const RISK_LOW = 'low';
-export const RISK_MEDIUM = 'medium';
-export const RISK_HIGH = 'high';
+export const RISK_LOW = '1low';
+export const RISK_MEDIUM = '2medium';
+export const RISK_HIGH = '3high';
 export type RiskType = typeof RISK_LOW | typeof RISK_MEDIUM | typeof RISK_HIGH | undefined;
 
 export const localStorageRiskViewVariable = 'riskViewInTable';
@@ -78,7 +78,7 @@ const initContent:SupplierSliceType = {
         {
             supplierId: '00001',
             supplierName: 'ПАО "МТС"',
-            risk: 'low',
+            risk: RISK_LOW,
             creationDate: new Date(2022,1,11),
             isComplite: true,
             data: 'ПАО МТС Информация',
@@ -87,7 +87,7 @@ const initContent:SupplierSliceType = {
         {
             supplierId: '00002',
             supplierName: 'ПАО "Пятерочка"',
-            risk: 'medium',
+            risk: RISK_MEDIUM,
             creationDate: new Date(2022,3,15),
             isComplite: true,
             data: 'Пятерочка Информация',
@@ -95,7 +95,7 @@ const initContent:SupplierSliceType = {
         {
             supplierId: '00003',
             supplierName: 'ООО "Ромашка"',
-            risk: 'high',
+            risk: RISK_HIGH,
             creationDate: new Date(2022,5,19),
             isComplite: true,
             data: 'Ромашка Информация',
@@ -107,6 +107,14 @@ const initContent:SupplierSliceType = {
             creationDate: new Date(2022,7,29),
             isComplite: false,
             data: 'Рога и копыта INFO',
+        },
+        {
+            supplierId: '00005',
+            supplierName: 'ООО "Simple company"',
+            risk: undefined,
+            creationDate: new Date(2022,2,17),
+            isComplite: false,
+            data: 'Simple company INFO',
         }
         ],
     

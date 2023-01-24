@@ -16,26 +16,32 @@ const SortingIcons = (props: SortingIconsPropsType) => {
     const columnSortDirection:ColumnSortDirectionType = useSelector((state:RootState) => state.supplier.sortingOptions.columnSortDirection);
 
     const onSortClickHandler = (sortDirection: ColumnSortDirectionType) => {
+        // alert('sortDirection=' + props.columnName + " " + sortDirection)
         dispatch(changeColumnNameSortingAC(props.columnName));
-        dispatch(changeColumnDirectionSortingAC(columnSortDirection));
+        dispatch(changeColumnDirectionSortingAC(sortDirection));
     }
 
     return <>
         <div className={s.sortingIcons}>
             {
                 props.columnName === columnNameSorting
-                    ? columnSortDirection === SORT_ACS
-                        ? <>
-                            <img src={iconSortBlack1} onClick={() => onSortClickHandler(SORT_ACS)}/>
-                            <img src={iconSortGrey2} onClick={() => onSortClickHandler(SORT_DSC)}/>
-                        </>
-                        : <>
-                            <img src={iconSortGrey1} onClick={() => onSortClickHandler(SORT_ACS)}/>
-                            <img src={iconSortBlack2} onClick={() => onSortClickHandler(SORT_DSC)}/>
-                        </>
+                    ? <>
+                        {
+                            columnSortDirection === SORT_ACS && <>
+                                <img src={iconSortBlack2} onClick={() => onSortClickHandler(SORT_ACS)}/>
+                                <img src={iconSortGrey1} onClick={() => onSortClickHandler(SORT_DSC)}/>
+                            </>
+                        }
+                        {
+                            columnSortDirection === SORT_DSC && <>
+                                <img src={iconSortGrey2} onClick={() => onSortClickHandler(SORT_ACS)}/>
+                                <img src={iconSortBlack1} onClick={() => onSortClickHandler(SORT_DSC)}/>
+                            </>
+                        }
+                    </>
                     : <>
-                        <img src={iconSortGrey1} onClick={() => onSortClickHandler(SORT_ACS)}/>
-                        <img src={iconSortGrey2} onClick={() => onSortClickHandler(SORT_DSC)}/>
+                        <img src={iconSortGrey2} onClick={() => onSortClickHandler(SORT_ACS)}/>
+                        <img src={iconSortGrey1} onClick={() => onSortClickHandler(SORT_DSC)}/>
                     </>
             }
         </div>
