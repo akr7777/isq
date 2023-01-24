@@ -208,6 +208,9 @@ export const supplierSlice = createSlice({
         },
         changeColumnDirectionSortingAC: (state: SupplierSliceType, action: PayloadAction<ColumnSortDirectionType>) => {
             return {...state, sortingOptions: {...state.sortingOptions, columnSortDirection: action.payload}}
+        },
+        changeCurrentPageAC: (state: SupplierSliceType, action: PayloadAction<number>) => {
+            return {...state, currentPage: action.payload}
         }
     },
     extraReducers: (builder) => {
@@ -228,7 +231,8 @@ export const supplierSlice = createSlice({
 export const {
     changeViewAC, searchFieldChangeAC, searchByComplitedChangeAC, searchByRiskAC, 
     searchByDateFilterAC, changeRiskInLineAC, changePageSizingAC, userDateFormatChangeAC, 
-    changePurchaseTicketSearchAC, changeColumnNameSortingAC, changeColumnDirectionSortingAC
+    changePurchaseTicketSearchAC, changeColumnNameSortingAC, changeColumnDirectionSortingAC,
+    changeCurrentPageAC
 } = supplierSlice.actions;
 
 export default supplierSlice.reducer;
