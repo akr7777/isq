@@ -35,7 +35,7 @@
 }
 
 @media screen and (min-width: 590px) {
-    .labelText { width: 100%; }
+    .labelText { width: 100%;}
 }
 @media screen and (min-width: 419px) and (max-width: 590px) {
     .labelText { width: 90%; }

@@ -4,6 +4,8 @@ import { changePurchaseTicketSearchAC } from '../../../../store/features/supplie
 import { RootState, useAppDispatch } from '../../../../store/store';
 import { LineTextField } from '../../../common/labelTextField/labelLineText';
 import s from './search.module.css';
+import ticketIcon from '../../../../public/icons/purchase_ticket.png';
+
 
 const SearchByPurchaseTicket = () => {
     const ticket:string = useSelector((state:RootState) => state.supplier.searchByPurchaseTicket);
@@ -21,7 +23,7 @@ const SearchByPurchaseTicket = () => {
             // text={ (date && date !== undefined) ? date.toLocaleDateString() : "" }
             onChangeFunction={(text: string) => onTicketFieldChangeHandler(text)}
             className={s.textWidth}
-            // icon={iconCalendar}
+            icon={ticketIcon}
             // onIconClickFunction={() => setShow(!show)}
             placeholder={ t("search_ticket_placeholder") }
         />

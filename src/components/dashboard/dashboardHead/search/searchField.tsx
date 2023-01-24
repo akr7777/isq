@@ -6,6 +6,7 @@ import { LineTextField } from "../../../common/labelTextField/labelLineText";
 import s from './search.module.css';
 import IsOpenIcon from "./isOpenIcon";
 import circleIcon from '../../../../public/icons/icon_circle.png';
+import searchIcon from '../../../../public/icons/icon_search.png';
 import SearchByComplited from "./optionSearchComplited";
 import SearchByDate from "./optionSearchDate";
 import SearchRisk from "./optionSearchRisk";
@@ -34,8 +35,9 @@ const SearchField = () => {
                     text={searchField}
                     placeholder={t('search_field_placeholder')}
                     onChangeFunction={onSearchChangeHandler}
-                    icon={isCircled ? circleIcon : undefined}
+                    icon={isCircled ? circleIcon : searchIcon}
                     className={s.searchFieldWidth}
+                    autofocus={true}
                 />
 
                 <IsOpenIcon 

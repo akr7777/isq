@@ -10,6 +10,7 @@ type LineTextFieldPropsType = {
     className?: string,
     icon?: any,
     onIconClickFunction?: () => void,
+    autofocus?: boolean
 }
 export const LineTextField = (props: LineTextFieldPropsType) => {
 
@@ -33,6 +34,7 @@ export const LineTextField = (props: LineTextFieldPropsType) => {
                     ? s.lineTextDecoration + " " + s.error + " " + props.className
                     : s.lineTextDecoration + " " + props.className
                 }
+                autoFocus={props.autofocus}
             />
 
             {

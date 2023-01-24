@@ -7,6 +7,7 @@ type MuliLineTextPropsType = {
     onChangeFunction: (newText: string) => void,
     cols?: number,
     rows?: number,
+    autofocus?: boolean,
 }
 
 const MuliLineText = (props: MuliLineTextPropsType) => {
@@ -20,6 +21,7 @@ const MuliLineText = (props: MuliLineTextPropsType) => {
         rows={props.rows ? props.rows : 9}
         onChange={(e) => onChangeText(e)}
         value={props.text}
+        autoFocus={props.autofocus}
     />
 }
 

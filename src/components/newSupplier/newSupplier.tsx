@@ -7,6 +7,8 @@ import s from './newSupplier.module.css';
 import { useTranslation } from 'react-i18next';
 import iconCopyGreen from '../../public/icons/icon_copy_green.png';
 import iconCopyBlue from '../../public/icons/icon_copy_blue.png';
+import iconTicket from "../../public/icons/purchase_ticket.png";
+import iconCompany from "../../public/icons/icon_company.png";
 
 
 const NewSupplier = () => {
@@ -65,7 +67,9 @@ const NewSupplier = () => {
                                 placeholder={ t("newSupplier_name_placeholder") }
                                 error={error.length > 0}
                                 onChangeFunction={ (newText:string) => onNewSupplierNameChangeHandler(newText) }
-                                className={s.labelText}
+                                className={s.labelText + " " + s.company_label_width}
+                                autofocus={true}
+                                icon={iconCompany}
                             />
 
                             {
@@ -82,6 +86,7 @@ const NewSupplier = () => {
                                 placeholder={ t("newSupplier_ticketLink_placeholder") }
                                 onChangeFunction={ (newText:string) => setPurchaseTicket(newText) }
                                 className={s.labelText}
+                                icon={iconTicket}
                             />
                         </div>
 

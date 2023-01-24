@@ -50,6 +50,7 @@ export type SupplerDataType = {
     purchaseTicket?: string
 }
 export type ViewOptionsType = typeof TABLE_VIEW | typeof BRICK_VIEW;
+
 type SupplierSliceType = {
     suppliers: Array<SupplerDataType>,
     search: string,
@@ -70,6 +71,9 @@ type SupplierSliceType = {
     searchByDateStart: FilterDateType,
     searchByDateEnd: FilterDateType,
     searchByPurchaseTicket: string,
+
+    pageCount: number,
+    currentPage: number,
     
 }
 
@@ -135,7 +139,10 @@ const initContent:SupplierSliceType = {
     searchByDateEnd: undefined,
     searchByComplited: SEARCH_COMPLETED_ALL,
     searchByRisk: undefined,
-    searchByPurchaseTicket: ''
+    searchByPurchaseTicket: '',
+
+    pageCount: 10653,
+    currentPage: 105,
 }
 
 

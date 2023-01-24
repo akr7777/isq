@@ -73,6 +73,7 @@ const ChangeZone = () => {
             <MuliLineText
                 text={newComment}
                 onChangeFunction={(text) => onNewCommitChangeHandler(text)}
+                autofocus={true}
             />
         </div>
         <div className={cardStyle.changeZone_SaveButton}>
