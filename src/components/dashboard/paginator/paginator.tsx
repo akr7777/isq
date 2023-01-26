@@ -39,6 +39,7 @@ const Paginator = () => {
         {
             pagesArr.map(n => {
                 return <div 
+                            key={n}
                             className={n === currentPage ? s.pageDiv + " " + s.pageDivChecked : s.pageDiv}
                             onClick={ n === currentPage 
                                         ? () => {}

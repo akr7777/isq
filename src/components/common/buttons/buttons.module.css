@@ -50,7 +50,9 @@
     color:black
 }
 .buttonCancel:focus {
-    background-color: var(--buttonCancel_bgColor_hofocus);
+    /* background-color: var(--buttonCancel_bgColor_hofocus); */
+    background-color: var(--buttonCancel_bgColor);
+
     box-shadow: none;
 }
 

@@ -2,7 +2,7 @@ import { ChangeEvent } from "react";
 import s from "./labelLineText.module.css";
 
 type LineTextFieldPropsType = {
-    type: 'text' | 'password',
+    type: 'text' | 'password' | 'date',
     text: string,
     placeholder?: string | null,
     error?: boolean,
@@ -11,10 +11,12 @@ type LineTextFieldPropsType = {
     icon?: any,
     onIconClickFunction?: () => void,
     autofocus?: boolean
+    onClickFunction?: ()=> void
 }
 export const LineTextField = (props: LineTextFieldPropsType) => {
 
     const onTextChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        e.preventDefault();
         const text = e.currentTarget.value;
         props.onChangeFunction(text)
     }
@@ -35,6 +37,8 @@ export const LineTextField = (props: LineTextFieldPropsType) => {
                     : s.lineTextDecoration + " " + props.className
                 }
                 autoFocus={props.autofocus}
+                onClick={props.onClickFunction}
+                
             />
 
             {

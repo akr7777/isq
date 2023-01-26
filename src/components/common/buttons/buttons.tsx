@@ -13,6 +13,7 @@ export const ButtonOK = (props: ButtonPropsType) => {
     return <button
         onClick={props.onClickFunction}
         className={s.buttonOk + " " + props.className}
+        // autoFocus={true}
     >
         {props.text}
     </button>
