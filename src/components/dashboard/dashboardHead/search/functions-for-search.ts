@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { useSelector } from "react-redux";
 import { SearchByComplitedType, RiskType, 
     SEARCH_COMPLETED_FINISHED, SEARCH_COMPLETED_UNFINISHED, 
@@ -104,8 +105,8 @@ export function AddSearchOptions() {
     // const dateStartSearchDefault = searchByDateStart || new Date(1800, 1, 1);
     // const dateEndSearchDefault = searchByDateEnd || new Date(2500, 12, 31);
 
-    newArr = newArr.filter( el => (el.creationDate && searchByDateStart) ? el.creationDate > searchByDateStart : el);
-    newArr = newArr.filter( el => (el.creationDate && searchByDateEnd) ? el.creationDate < searchByDateEnd : el);
+    newArr = newArr.filter( el => (el.creationDate && searchByDateStart) ? el.creationDate > dayjs(searchByDateStart).format("YYYY-MM-DD") : el);
+    newArr = newArr.filter( el => (el.creationDate && searchByDateEnd) ? el.creationDate < dayjs(searchByDateEnd).format("YYYY-MM-DD") : el);
 
     // SORTING
     newArr = SortArray({
