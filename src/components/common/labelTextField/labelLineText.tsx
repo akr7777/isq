@@ -11,7 +11,8 @@ type LineTextFieldPropsType = {
     icon?: any,
     onIconClickFunction?: () => void,
     autofocus?: boolean
-    onClickFunction?: ()=> void
+    onClickFunction?: ()=> void,
+    cursorPosition?: number;
 }
 export const LineTextField = (props: LineTextFieldPropsType) => {
 
@@ -38,7 +39,6 @@ export const LineTextField = (props: LineTextFieldPropsType) => {
                 }
                 autoFocus={props.autofocus}
                 onClick={props.onClickFunction}
-                
             />
 
             {

@@ -23,7 +23,7 @@ export type RiskViewType = typeof RiskViewWORD | typeof RiskViewSTAR;
 export const localStorageUserDateFormat = 'dateFormat';
 export const DATE_EU = 'DATE_EU';
 export const DATE_US = 'DATE_US';
-export type FormatDataType = typeof DATE_EU | typeof DATE_US;
+export type FormatDateType = typeof DATE_EU | typeof DATE_US;
 
 export const SORT_ACS = "acsending";
 export const SORT_DSC = "descending";
@@ -44,7 +44,7 @@ export type SupplerDataType = {
     supplierId: SupplierIdType,
     supplierName: string,
     risk: RiskType;
-    creationDate: Date,
+    creationDate: Date | undefined,
     isComplite: boolean,
     data: string,
     purchaseTicket?: string
@@ -59,7 +59,7 @@ type SupplierSliceType = {
         view: ViewOptionsType,
         riskView: RiskViewType,
         pageSizing: number,
-        userDateFormat: FormatDataType,
+        userDateFormat: FormatDateType,
     }
     sortingOptions: {
         columnNameSorting: ColumnSortNameType,
@@ -83,7 +83,7 @@ const initContent:SupplierSliceType = {
             supplierId: '00001',
             supplierName: 'ПАО "МТС"',
             risk: RISK_LOW,
-            creationDate: new Date(2022,1,11),
+            creationDate: undefined,//new Date(2022,1,11),
             isComplite: true,
             data: 'ПАО МТС Информация',
             purchaseTicket: '1234566789'
@@ -92,7 +92,7 @@ const initContent:SupplierSliceType = {
             supplierId: '00002',
             supplierName: 'ПАО "Пятерочка"',
             risk: RISK_MEDIUM,
-            creationDate: new Date(2022,3,15),
+            creationDate: undefined,//new Date(2022,3,15),
             isComplite: true,
             data: 'Пятерочка Информация',
         },
@@ -100,7 +100,7 @@ const initContent:SupplierSliceType = {
             supplierId: '00003',
             supplierName: 'ООО "Ромашка"',
             risk: RISK_HIGH,
-            creationDate: new Date(2022,5,19),
+            creationDate: undefined,// new Date(2022,5,19),
             isComplite: true,
             data: 'Ромашка Информация',
         },
@@ -108,7 +108,7 @@ const initContent:SupplierSliceType = {
             supplierId: '00004',
             supplierName: 'ООО "Рога и копыта"',
             risk: undefined,
-            creationDate: new Date(2022,7,29),
+            creationDate: undefined,//new Date(2022,7,29),
             isComplite: false,
             data: 'Рога и копыта INFO',
         },
@@ -116,7 +116,7 @@ const initContent:SupplierSliceType = {
             supplierId: '00005',
             supplierName: 'ООО "Simple company"',
             risk: undefined,
-            creationDate: new Date(2022,2,17),
+            creationDate: undefined,//new Date(2022,2,17),
             isComplite: false,
             data: 'Simple company INFO',
         }
@@ -187,7 +187,7 @@ export const supplierSlice = createSlice({
                 }
             }
         },
-        userDateFormatChangeAC: (state:SupplierSliceType, action: PayloadAction<FormatDataType>) => {
+        userDateFormatChangeAC: (state:SupplierSliceType, action: PayloadAction<FormatDateType>) => {
             localStorage.setItem(localStorageUserDateFormat, action.payload);
             return {
                 ...state,

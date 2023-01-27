@@ -28,9 +28,9 @@ export function SortArray(props: SortArrayPropsType):Array<SupplerDataType> {
                 });
             if (columnNameSorting === CREATION_DATE_COLUMN_SORT) {
                 newArr = newArr.sort( (a,b) => {
-                    if (a.creationDate < b.creationDate) 
+                    if (a.creationDate && b.creationDate && a.creationDate < b.creationDate) 
                         return columnSortDirection === SORT_ACS ? -1 : 1;
-                    else if (a.creationDate > b.creationDate)
+                    else if (a.creationDate && b.creationDate && a.creationDate > b.creationDate)
                         return columnSortDirection === SORT_ACS ? 1 : -1;
                     else 
                         return 0;
@@ -101,11 +101,11 @@ export function AddSearchOptions() {
     if (searchByPurchaseTicket.length > 0)
         newArr = newArr.filter( el => el.purchaseTicket?.includes(searchByPurchaseTicket))
 
-    const dateStartSearchDefault = searchByDateStart || new Date(1900, 1, 1);
-    const dateEndSearchDefault = searchByDateEnd || new Date(2500, 12, 31);
+    // const dateStartSearchDefault = searchByDateStart || new Date(1800, 1, 1);
+    // const dateEndSearchDefault = searchByDateEnd || new Date(2500, 12, 31);
 
-    newArr = newArr.filter( el => el.creationDate > dateStartSearchDefault);
-    newArr = newArr.filter( el => el.creationDate < dateEndSearchDefault);
+    newArr = newArr.filter( el => (el.creationDate && searchByDateStart) ? el.creationDate > searchByDateStart : el);
+    newArr = newArr.filter( el => (el.creationDate && searchByDateEnd) ? el.creationDate < searchByDateEnd : el);
 
     // SORTING
     newArr = SortArray({

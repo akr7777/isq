@@ -1,5 +1,6 @@
+import dayjs from "dayjs";
 import { t } from "i18next";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -11,24 +12,30 @@ import s from './description.module.css';
 
 const Description = () => {
     const { t } = useTranslation();
-    const userId:UserIdType = useSelector((state:RootState) => state.auth.userId);
+    // const userId:UserIdType = useSelector((state:RootState) => state.auth.userId);
 
+    // console.log('dayjs()=', dayjs().format("YYYY-MM-DD"));
+    // console.log('DESCRIPTION day=', dayjs('1985-12-23'), typeof dayjs('1985-12-23'));
+    // console.log('DESCRIPTION day=', dayjs('1985-12-23'), typeof dayjs('1985-12-23'));
+    // console.log(dayjs('1985-12-23').year(), typeof dayjs('1985-12-23').year());
+    // console.log(dayjs('1985-12-23').month(), typeof dayjs('1985-12-23').month());
+    // console.log(dayjs('1985-12-23').day(), typeof dayjs('1985-12-23').day());
+    
+    
     return <div className={s.description}>
 
         { t("main_page_text_1")}
 
-        ЭТО ГЛАВНАЯ СТРАНИЦА. ДЛЯ ВХОДА СЮДА НЕ НЕЖНА АУТЕНТИФИКАЦИЯ. ЗДЕСЬ МОЖЕТ БЫТЬ ОПИСАНИЕ ПРИЛОЖЕНИЯ
+        ЭТО ГЛАВНАЯ СТРАНИЦА.
 
-        <br />
-        userId: {userId} 
-        <br/><br/>
-        dksfjgsdf
+       
         <Calendar onDateChange={()=> {}}/>
-        dsjflh
-        <br />
-        dsjflh
-        <br />dsjflh
-        <br />
+        ккк
+        <input autoFocus type="text" maxLength={2} size={2}/>
+        <input  type="text" maxLength={2} size={2}/>
+        <input  type="text" maxLength={4} size={4}/>
+       
+        
         {/* 111<Cal/>222 */}
         <ul>
             <li>Pagination</li>

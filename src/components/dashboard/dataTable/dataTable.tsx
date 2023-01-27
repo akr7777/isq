@@ -76,7 +76,7 @@ const DataTable = () => {
                                     {c.supplierName}
                                 </td>
                                 <td>
-                                    {c.creationDate.toLocaleDateString()}
+                                    {c.creationDate?.toLocaleDateString()}
                                 </td>
                                 <td>{
                                         c.isComplite

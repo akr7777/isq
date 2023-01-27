@@ -93,7 +93,7 @@ const DataBricks = () => {
                         {c.supplierName}
                     </div>
                     <div className={s.oneBrickPiece}>
-                        {c.creationDate.toLocaleDateString()}
+                        {c.creationDate?.toLocaleDateString()}
                     </div>
                     <div className={s.oneBrickPiece}>
                         {

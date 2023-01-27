@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { DATE_EU, DATE_US, FormatDataType, userDateFormatChangeAC } from "../../store/features/supplierSlice";
+import { DATE_EU, DATE_US, FormatDateType, userDateFormatChangeAC } from "../../store/features/supplierSlice";
 import { RootState, useAppDispatch } from "../../store/store";
 import { useTranslation } from "react-i18next";
 import { RadioLabelOptionType, RadioLabels } from "../common/radioLabels/radioLabels";
@@ -7,7 +7,7 @@ import s from './profile.module.css';
 
 const InterfaceDateFormat = () => {
 
-    const dateFormat:FormatDataType = useSelector((state:RootState) => state.supplier.settings.userDateFormat);
+    const dateFormat:FormatDateType = useSelector((state:RootState) => state.supplier.settings.userDateFormat);
     const {t} = useTranslation();
     const dispatch = useAppDispatch();
 

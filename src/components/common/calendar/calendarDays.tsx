@@ -1,6 +1,7 @@
 import s from './calendar.module.css';
 
 const weekRu = ['П', 'В', 'C', 'Ч', 'П', 'C', 'В'];
+const weekEn = ['M', "T", "W", "T", "F", "S", "S"];
 
 export type CalendarDaysPropsType = {
     chosenDate: Date,
@@ -12,7 +13,10 @@ function daysCountinMonth(date: Date) {
 }
 function numberCountArray(n: number):Array<number> {
     const arr:Array<number> = [];
-    for (let i=1; i<=n; i++)
+    let count:number = n;
+    if (count === -1)
+        count = 6;
+    for (let i=1; i<=count; i++)
         arr.push(i);
     return arr;
 }
@@ -36,7 +40,7 @@ const CalendarDays = (props: CalendarDaysPropsType) => {
     // const options = { weekday: 'long' as const };
     const daysCountArr:Array<number> = numberCountArray(daysCountinMonth(props.newDate));
 
-    const currentDayOfWeekArr:Array<number> = numberCountArray(new Date(props.newDate.getFullYear(), props.newDate.getMonth(), 1).getDay());
+    const currentDayOfWeekArr:Array<number> = numberCountArray(new Date(props.newDate.getFullYear(), props.newDate.getMonth(), 1).getDay() - 1);
 
     const onDayClickHandler = (chosenDay: number) => {
         const newDate:Date = new Date(props.newDate.getFullYear(), props.newDate.getMonth(), chosenDay);
