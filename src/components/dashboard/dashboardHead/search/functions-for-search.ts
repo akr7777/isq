@@ -1,9 +1,10 @@
 import dayjs from "dayjs";
 import { useSelector } from "react-redux";
-import { SearchByComplitedType, RiskType, 
-    SEARCH_COMPLETED_FINISHED, SEARCH_COMPLETED_UNFINISHED, 
-    RISK_LOW, RISK_HIGH, RISK_MEDIUM, FilterDateType, SEARCH_COMPLETED_ALL, ColumnSortNameType, ColumnSortDirectionType, SORT_ACS, SORT_DSC, NAME_COLUMN_SORT, CREATION_DATE_COLUMN_SORT, COMPLITED_COLUMN_SORT, RISK_COLUMN_SORT, SupplerDataType } 
-    from "../../../../store/features/supplierSlice";
+import { 
+    SearchByComplitedType, RiskType, SEARCH_COMPLETED_FINISHED, SEARCH_COMPLETED_UNFINISHED, 
+    RISK_LOW, RISK_HIGH, RISK_MEDIUM, SEARCH_COMPLETED_ALL, ColumnSortNameType, ColumnSortDirectionType, 
+    SORT_ACS, SORT_DSC, NAME_COLUMN_SORT, CREATION_DATE_COLUMN_SORT, COMPLITED_COLUMN_SORT, RISK_COLUMN_SORT, SupplerDataType, COMMON_DATE_FORMAT 
+} from "../../../../store/features/supplierSlice";
 import { RootState } from "../../../../store/store";
 
 
@@ -67,8 +68,8 @@ export type AddSearchOptionsPropsType = {
     searchField: string,
     searchComplited: SearchByComplitedType,
     searchRisk: RiskType,
-    searchByDateStart: FilterDateType,
-    searchByDateEnd: FilterDateType,
+    searchByDateStart: string,
+    searchByDateEnd: string,
     searchByPurchaseTicket: string,
     columnNameSorting: ColumnSortNameType,
     columnSortDirection: ColumnSortDirectionType
@@ -78,8 +79,8 @@ export function AddSearchOptions() {
     const searchField:string = useSelector((state:RootState) => state.supplier.search);
     const searchComplited:SearchByComplitedType = useSelector((state:RootState) => state.supplier.searchByComplited);
     const searchRisk:RiskType = useSelector((state:RootState) => state.supplier.searchByRisk);
-    const searchByDateStart: FilterDateType = useSelector((state: RootState) => state.supplier.searchByDateStart);
-    const searchByDateEnd: FilterDateType = useSelector((state: RootState) => state.supplier.searchByDateEnd);
+    const searchByDateStart: string = useSelector((state: RootState) => state.supplier.searchByDateStart);
+    const searchByDateEnd: string = useSelector((state: RootState) => state.supplier.searchByDateEnd);
     const searchByPurchaseTicket:string = useSelector((state:RootState) => state.supplier.searchByPurchaseTicket) || "";
     // const columnNameSorting:ColumnSortNameType = useSelector((state:RootState) => state.supplier.sortingOptions.columnNameSorting);
     // const columnSortDirection:ColumnSortDirectionType = useSelector((state:RootState) => state.supplier.sortingOptions.columnSortDirection);
@@ -105,28 +106,35 @@ export function AddSearchOptions() {
     // const dateStartSearchDefault = searchByDateStart || new Date(1800, 1, 1);
     // const dateEndSearchDefault = searchByDateEnd || new Date(2500, 12, 31);
 
-    newArr = newArr.filter( el => (el.creationDate && searchByDateStart) ? el.creationDate > dayjs(searchByDateStart).format("YYYY-MM-DD") : el);
-    newArr = newArr.filter( el => (el.creationDate && searchByDateEnd) ? el.creationDate < dayjs(searchByDateEnd).format("YYYY-MM-DD") : el);
+    // console.log('functions - for - search / searchByDateStart=', searchByDateStart);
+    // console.log('functions - for - search / searchByDateEnd=', searchByDateEnd);
+    
+    if (searchByDateStart) {
+        newArr = newArr.filter( el => (el.creationDate && searchByDateStart) 
+            ? el.creationDate > dayjs(searchByDateStart).format(COMMON_DATE_FORMAT) : el);
+    }
+    if (searchByDateEnd) {
+        newArr = newArr.filter( el => (el.creationDate && searchByDateEnd) 
+            ? el.creationDate < dayjs(searchByDateEnd).format(COMMON_DATE_FORMAT) : el);
+    }
+    
 
     // SORTING
-    newArr = SortArray({
-        arr: newArr
-        // columnNameSorting: props.columnNameSorting,
-        // columnSortDirection: props.columnSortDirection
-    });
+    newArr = SortArray({arr: newArr});
 
     return newArr;
 }
 
 export function IsSomeSearchOptionFilled():boolean {
+    const searchFieldText:string = useSelector((state:RootState) => state.supplier.search);
     const searchByComplited: SearchByComplitedType = useSelector((state:RootState) => state.supplier.searchByComplited);
     const searchByRisk: RiskType = useSelector((state:RootState) => state.supplier.searchByRisk);
-    const searchByDateStart: FilterDateType = useSelector((state:RootState) => state.supplier.searchByDateStart);
-    const searchByDateEnd: FilterDateType = useSelector((state:RootState) => state.supplier.searchByDateEnd);
+    const searchByDateStart: string = useSelector((state:RootState) => state.supplier.searchByDateStart);
+    const searchByDateEnd: string = useSelector((state:RootState) => state.supplier.searchByDateEnd);
     const searchByPurchaseTicket: string = useSelector((state: RootState) => state.supplier.searchByPurchaseTicket);
 
-    const isCircled: boolean = searchByComplited !== SEARCH_COMPLETED_ALL || (searchByRisk !== undefined) ||
-                        (searchByDateStart !== undefined) || (searchByDateEnd !== undefined) ||
+    const isCircled: boolean = searchFieldText.length > 0 || searchByComplited !== SEARCH_COMPLETED_ALL || (searchByRisk !== undefined) ||
+                        (searchByDateStart.length > 0) || (searchByDateEnd.length > 0) ||
                         searchByPurchaseTicket.length > 0;
 
     return isCircled;

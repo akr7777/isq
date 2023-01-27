@@ -2,14 +2,13 @@ import s from './header.module.css';
 
 import { useTheme } from './../../hooks/useTheme';
 import { DARK, LIGHT } from './../../hooks/useTheme';
-// import { useTranslation } from 'react-i18next';
 import useLocalStorage from './../../hooks/use-localstorage';
 
 import i18n from './../../i18n';
 
 import flagRu from './../../public/icons/flag_ru.png';
 import flagEn from './../../public/icons/flag_en.png';
-import { changeThemeAC, localStorageLanguageVariable, logoutAC, UserIdType } from '../../store/features/authSlice';
+import { changeLanguageAC, changeThemeAC, EN_LANG, localStorageLanguageVariable, logoutAC, RU_LANG, UserIdType } from '../../store/features/authSlice';
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../store/store';
 
@@ -20,9 +19,8 @@ import moonIcon from './../../public/icons/icon_moon.png';
 import burger from './../../public/icons/burger.png';
 import ava from './../../public/images/ava.jpg';
 
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { PATHS } from '../outlet/outlet';
-import { t } from 'i18next';
 
 type IconsPropsType = {
     langText?: string,
@@ -37,24 +35,22 @@ type IconsPropsType = {
 
 export const Icons = (props: IconsPropsType) => {
     const navigate = useNavigate();
-    // const { t } = useTranslation();
+    const dispatch = useAppDispatch();
     const [language, setLanguage] = useLocalStorage(localStorageLanguageVariable, 'ru');
 
     const handleLenguageChange = () => {
-        if (language === 'en') {
-            i18n.changeLanguage('ru');
-            setLanguage('ru');
-        } else if (language === 'ru') {
-            i18n.changeLanguage('en');
-            setLanguage('en');
+
+        if (language === EN_LANG) {
+            i18n.changeLanguage(RU_LANG);
+            setLanguage(RU_LANG);
+            dispatch(changeLanguageAC(RU_LANG))
+        } else if (language === RU_LANG) {
+            i18n.changeLanguage(EN_LANG);
+            setLanguage(EN_LANG);
+            dispatch(changeLanguageAC(EN_LANG))
         }
-        // closeMobileMenu();
     };
 
-    const dispatch = useAppDispatch();
-
-    // const theme1 = useSelector((state:RootState) => state.auth.userSettings.theme);
-    // console.log('theme1=', theme1);
     
 
     const {theme, setTheme } = useTheme();
@@ -118,34 +114,6 @@ export const Icons = (props: IconsPropsType) => {
         /> 
         
     </div>
-    
-    {/* { 
-        language === 'en' && <div className={s.oneIconOptionDiv} onClick={handleLenguageChange}>
-            <label onClick={handleLenguageChange}>
-                {props.langText}
-            </label>
-            <img 
-                className={s.iconsImg}
-                onClick={handleLenguageChange} 
-                src={flagRu} 
-            /> 
-            
-        </div>
-    }
-    { 
-        language === 'ru' && <div className={s.oneIconOptionDiv} onClick={handleLenguageChange}>
-                <label onClick={handleLenguageChange}>
-                    {props.langText}
-                </label>
-                <img 
-                    className={s.iconsImg}
-                    onClick={handleLenguageChange} 
-                    src={flagEn} 
-                /> 
-            </div>
-    } */}
-
-
 
     {  
         theme === DARK && <div className={s.oneIconOptionDiv} onClick={handleLightThemeClick}>

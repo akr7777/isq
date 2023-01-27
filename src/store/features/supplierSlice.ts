@@ -21,9 +21,10 @@ export const RiskViewSTAR = 'STAR'
 export type RiskViewType = typeof RiskViewWORD | typeof RiskViewSTAR;
 
 export const localStorageUserDateFormat = 'dateFormat';
-export const DATE_EU = 'DD/MM/YYYY';
+export const DATE_EU = 'DD.MM.YYYY';
 export const DATE_US = 'MM/DD/YYYY';
 export type FormatDateType = typeof DATE_EU | typeof DATE_US;
+export const COMMON_DATE_FORMAT = "YYYY-MM-DD";
 
 export const SORT_ACS = "acsending";
 export const SORT_DSC = "descending";
@@ -38,7 +39,7 @@ export const localStoragePageSizingVariable = 'page-size';
 export const pageSizeOptions = [20, 50, 100];
 
 export type SupplierIdType = string;
-export type FilterDateType = Date | undefined;
+// export type FilterDateType = Date | undefined;
 
 export type SupplerDataType = {
     supplierId: SupplierIdType,
@@ -68,8 +69,8 @@ type SupplierSliceType = {
 
     searchByComplited: SearchByComplitedType,
     searchByRisk: RiskType,
-    searchByDateStart: FilterDateType,
-    searchByDateEnd: FilterDateType,
+    searchByDateStart: string,//FilterDateType,
+    searchByDateEnd: string,//FilterDateType,
     searchByPurchaseTicket: string,
 
     pageCount: number,
@@ -135,8 +136,8 @@ const initContent:SupplierSliceType = {
     },
     
     search: '',
-    searchByDateStart: undefined,
-    searchByDateEnd: undefined,
+    searchByDateStart: '',
+    searchByDateEnd: '',
     searchByComplited: SEARCH_COMPLETED_ALL,
     searchByRisk: undefined,
     searchByPurchaseTicket: '',
@@ -154,7 +155,7 @@ export const supplierSlice = createSlice({
             return {...state, search: action.payload }
         },
         searchByDateFilterAC: (state:SupplierSliceType, 
-                        action: PayloadAction<{dateStart: FilterDateType, dateEnd: FilterDateType}>):SupplierSliceType => {
+                        action: PayloadAction<{dateStart: string, dateEnd: string}>):SupplierSliceType => {
             return {
                 ...state, 
                 searchByDateStart: action.payload.dateStart, 

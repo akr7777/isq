@@ -1,3 +1,6 @@
+import { useSelector } from 'react-redux';
+import { EN_LANG, RU_LANG, UserLangType } from '../../../store/features/authSlice';
+import { RootState } from '../../../store/store';
 import s from './calendar.module.css';
 
 const weekRu = ['П', 'В', 'C', 'Ч', 'П', 'C', 'В'];
@@ -23,21 +26,6 @@ function numberCountArray(n: number):Array<number> {
 
 
 const CalendarDays = (props: CalendarDaysPropsType) => {
-    
-    // const currentMonth = props.date.getMonth();
-    // const fullMonth = props.date.toLocaleString('ru', {month: 'long'});
-
-    // const onMonthMinusClickHandler = () => {
-    //     newDate.setFullYear(currentMonth - 1);
-    //     props.onDateChange( newDate )
-    // }
-    // const onMonthPlusClickHandler = () => {
-    //     newDate.setMonth(currentMonth + 1);
-    //     props.onDateChange( newDate )
-    // }
-
-    // const options = { weekday: 'long' as const, year: 'numeric'  as const, month: 'long'  as const, day: 'numeric'  as const };
-    // const options = { weekday: 'long' as const };
     const daysCountArr:Array<number> = numberCountArray(daysCountinMonth(props.newDate));
 
     const currentDayOfWeekArr:Array<number> = numberCountArray(new Date(props.newDate.getFullYear(), props.newDate.getMonth(), 1).getDay() - 1);
@@ -53,18 +41,20 @@ const CalendarDays = (props: CalendarDaysPropsType) => {
             ?  true : false
     } 
 
-    // console.log('CalendarDays / props.newDate=', props.newDate, '\n choosenDate=', props.chosenDate);
+    const lang:UserLangType = useSelector((state: RootState) => state.auth.userSettings.lang);
     
+    const daysOfWeek = (lang === EN_LANG) 
+                            ? weekEn 
+                            : (lang === RU_LANG) 
+                                ? weekRu
+                                : []
 
     return <>
         <div className={s.calendar_head_days_div + " " + s.days_width}>
-            {/* <label>{props.date.getFullYear()}/{props.date.getMonth()}/{props.date.getDate()} === {props.date.getDay()}</label> */}
-            {/* {props.date.toLocaleDateString()} */}
-            {/* {props.date.toLocaleString('en-US', options)} */}
-            {/* {daysCountinMonth(props.date)} */}
+           
             <div className={s.calendar_days_fields_div}>
                 {
-                    weekRu.map((el:string, i:number) => <label key={"letter_"+i} className={s.td_tr}>{el}</label>)
+                    daysOfWeek.map((el:string, i:number) => <label key={"letter_"+i} className={s.td_tr}>{el}</label>)
                 }
                 {
                     currentDayOfWeekArr.map((el:number,i:number) => <label key={"empty_"+el} className={s.td_tr}></label>)
@@ -86,9 +76,7 @@ const CalendarDays = (props: CalendarDaysPropsType) => {
                 }
 
             </div>
-            {/* <img src={iconPrev} className={s.arrows} onClick={onMonthMinusClickHandler}/>
-            {fullMonth}
-            <img src={iconNext} className={s.arrows} onClick={onMonthPlusClickHandler}/> */}
+           
         </div>
     </>
 }

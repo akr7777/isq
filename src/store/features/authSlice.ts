@@ -55,17 +55,17 @@ export const authSlice = createSlice({
     name: 'auth',
     initialState: initContent,
     reducers: {
-        changeUserThemeAC: (state: UserType, action: PayloadAction<UserThemeType>) => {
-            state = {
-                ...state, 
-                userSettings: {
-                    ...state.userSettings, 
-                    theme: action.payload
-                }
-            }
-            return state;
-        },
-        onLoginInputAC: (state: UserType, action: PayloadAction<string>) => {
+        // changeUserThemeAC: (state: UserType, action: PayloadAction<UserThemeType>) => {
+        //     state = {
+        //         ...state, 
+        //         userSettings: {
+        //             ...state.userSettings, 
+        //             theme: action.payload
+        //         }
+        //     }
+        //     return state;
+        // },
+        onLoginInputAC: (state: UserType, action: PayloadAction<string>):UserType => {
             return {
                 ...state, 
                 vars: {
@@ -76,7 +76,7 @@ export const authSlice = createSlice({
                 }
             }
         },
-        onPasswordInputAC: (state: UserType, action: PayloadAction<string>) => {
+        onPasswordInputAC: (state: UserType, action: PayloadAction<string>):UserType => {
             return {
                 ...state, 
                 vars: {
@@ -171,12 +171,21 @@ export const authSlice = createSlice({
                 },
             }
         },
-        changeThemeAC: (state: UserType, action: PayloadAction<typeof DARK | typeof LIGHT>) => {
+        changeThemeAC: (state: UserType, action: PayloadAction<typeof DARK | typeof LIGHT>):UserType => {
             return {
                 ...state,
                 userSettings: {
                     ...state.userSettings,
                     theme: action.payload
+                }
+            }
+        },
+        changeLanguageAC: (state: UserType, action: PayloadAction<UserLangType>):UserType => {
+            return {
+                ...state,
+                userSettings: {
+                    ...state.userSettings,
+                    lang: action.payload
                 }
             }
         }
@@ -196,6 +205,6 @@ export const authSlice = createSlice({
         // })
     }
 })
-export const {onLoginInputAC, onPasswordInputAC, onLoginButtonClickAC, logoutAC, changeThemeAC} = authSlice.actions;
+export const {onLoginInputAC, onPasswordInputAC, onLoginButtonClickAC, logoutAC, changeThemeAC, changeLanguageAC} = authSlice.actions;
 
 export default authSlice.reducer;

@@ -29,7 +29,6 @@ const SearchField = () => {
     return <div className={s.searchMainDiv}>
 
             <div className={s.searchByTextDiv}>
-                {/* <label>{t('search')}:</label> */}
                 <LineTextField 
                     type="text"
                     text={searchField}

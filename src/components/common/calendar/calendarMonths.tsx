@@ -1,6 +1,9 @@
 import s from './calendar.module.css';
 import iconNext from '../../../public/icons/icon_next.png';
 import iconPrev from '../../../public/icons/icon_prev.png';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../store/store';
+import { UserLangType } from '../../../store/features/authSlice';
 
 
 export type CalendarMonthsPropsType = {
@@ -8,8 +11,9 @@ export type CalendarMonthsPropsType = {
     onDateChange: (newDate: Date) => void,
 }
 const CalendarMonths = (props: CalendarMonthsPropsType) => {
-    
-    const fullMonth = props.date.toLocaleString('ru', {month: 'long'});
+
+    const currentLang:UserLangType = useSelector((state:RootState) => state.auth.userSettings.lang);
+    const fullMonth = props.date.toLocaleString(currentLang, {month: 'long'});
 
     const onMonthMinusClickHandler = () => {
         const newDate:Date = new Date(props.date.getFullYear(), props.date.getMonth() - 1, props.date.getDate());

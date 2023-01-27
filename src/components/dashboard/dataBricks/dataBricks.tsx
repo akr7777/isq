@@ -1,6 +1,9 @@
 // import { t } from "i18next";
 import { useSelector } from "react-redux";
-import { SearchByComplitedType, RiskType, SupplerDataType, SupplierIdType, RISK_LOW, RISK_MEDIUM, RiskViewType, RiskViewWORD, FilterDateType, ColumnSortNameType, ColumnSortDirectionType, FormatDateType } from "../../../store/features/supplierSlice";
+import { 
+    SearchByComplitedType, RiskType, SupplerDataType, SupplierIdType, RISK_LOW, RISK_MEDIUM, RiskViewType, 
+    RiskViewWORD, ColumnSortNameType, ColumnSortDirectionType, FormatDateType 
+} from "../../../store/features/supplierSlice";
 import { RootState } from "../../../store/store";
 import s from "./dataBricks.module.css";
 import dbStyles from "./../dashboard.module.css";

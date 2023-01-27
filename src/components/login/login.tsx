@@ -4,12 +4,15 @@ import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store/store";
 import { onLoginButtonClickAC, onLoginInputAC, onPasswordInputAC, UserIdType } from "../../store/features/authSlice";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { LineTextField } from "../common/labelTextField/labelLineText";
 
 import iconUserName from "../../public/icons/icon_username.png";
 import iconPassword from "../../public/icons/icon_password.png";
+import iconEyeOpened from "../../public/icons/icon_eye_opened.png";
+import iconEyeClosed from "../../public/icons/icon_eye_closed.png";
+import { PATHS } from "../outlet/outlet";
 
 const Login = () => {
     const { t } = useTranslation();
@@ -20,7 +23,7 @@ const Login = () => {
     const isAuth:boolean = userId ? true : false;
     useEffect(() => {
         if (isAuth){
-            return navigate("/profile");
+            return navigate(PATHS.dashboard);
         }
         
     },[isAuth]);
@@ -33,6 +36,8 @@ const Login = () => {
     const loginError:string = useSelector((state: RootState) => state.auth.vars.loginError);
     const loginRequired:boolean = useSelector((state: RootState) => state.auth.vars.emptyLogin);
     const passwordRequired:boolean = useSelector((state: RootState) => state.auth.vars.emptyPassword);
+    
+    const [showPassword, setShowPassword] = useState<boolean>(false);
 
     const onLoginClickHandler = () => {
         dispatch(onLoginButtonClickAC());
@@ -47,7 +52,7 @@ const Login = () => {
     return <>
         <div className={s.fields}>
             <div className={s.inputs_divs}>
-                <label>{ t("login_login") }</label>
+                <h2>{ t("login_login") }</h2>
                 <LineTextField 
                     type="text"
                     text={loginInput}
@@ -61,14 +66,21 @@ const Login = () => {
                 {/* <input type={'text'} placeholder=""/> */}
             </div>
             <div className={s.inputs_divs}>
-                <label>{ t("login_password") }</label>
+                <h2>{ t("login_password") }</h2>
                 <LineTextField 
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     text={passwordInput}
                     placeholder={ t("login_password_placeholder") }
                     onChangeFunction={onPasswordChange}
                     error={loginError.length > 0 || passwordRequired}
-                    icon={iconPassword}
+                    icon={
+                        passwordInput.length > 0 
+                            ? showPassword
+                                ? iconEyeClosed
+                                : iconEyeOpened
+                            : iconPassword
+                    }
+                    onIconClickFunction={() => setShowPassword(!showPassword)}
                 />
                 { passwordRequired && <label className={s.error_label}>{t("required_field")}</label>}
                 {/* <input type={'password'} placeholder=""/> */}

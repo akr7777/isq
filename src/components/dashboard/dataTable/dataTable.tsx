@@ -1,5 +1,9 @@
 import { useSelector } from "react-redux";
-import { SearchByComplitedType, RiskType, SupplerDataType, SupplierIdType, changeColumnNameSortingAC, changeColumnDirectionSortingAC, NAME_COLUMN_SORT, CREATION_DATE_COLUMN_SORT, COMPLITED_COLUMN_SORT, RISK_COLUMN_SORT, FilterDateType, ColumnSortNameType, ColumnSortDirectionType, FormatDateType } from "../../../store/features/supplierSlice";
+import { 
+    SearchByComplitedType, RiskType, SupplerDataType, SupplierIdType, 
+    changeColumnNameSortingAC, changeColumnDirectionSortingAC, NAME_COLUMN_SORT, CREATION_DATE_COLUMN_SORT, 
+    COMPLITED_COLUMN_SORT, RISK_COLUMN_SORT, ColumnSortNameType, ColumnSortDirectionType, FormatDateType 
+} from "../../../store/features/supplierSlice";
 import { RootState } from "../../../store/store";
 import s from './dataTable.module.css';
 import dashboardStyles from "./../dashboard.module.css";

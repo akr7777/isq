@@ -1,4 +1,4 @@
-import { createRef, useState } from "react";
+import { useState } from "react";
 import { LineTextField } from "../labelTextField/labelLineText";
 import s from "./calendar.module.css";
 
@@ -6,24 +6,27 @@ import iconCalendar from "../../../public/icons/icon_calendar.png";
 import CalendarYears from "./calendarYears";
 import CalendarMonths from "./calendarMonths";
 import CalendarDays from "./calendarDays";
-import { useTranslation } from "react-i18next";
-
 import clearIcon from '../../../public/icons/var_no.png';
-import { FilterDateType } from "../../../store/features/supplierSlice";
 import dayjs from 'dayjs';
+import { COMMON_DATE_FORMAT } from "../../../store/features/supplierSlice";
 
 export type CalendarPropsType = {
-    choosenDate?: Date,
-    onDateChange: (newValue: FilterDateType) => void,
+    choosenDate?: string,
+    onDateChange: (newValue: string) => void,
 }
 
 const Calendar = (props: CalendarPropsType) => {
-    const {t} = useTranslation();
+    // const {t} = useTranslation();
+
     
     const [show, setShow] = useState<boolean>(false);
     const [date, setDate] = useState<Date>();
-    if (props.choosenDate)
-        setDate(props.choosenDate)
+    if (props.choosenDate && props.choosenDate.length > 0) {
+        const choosenDate:Date = new Date(dayjs(props.choosenDate).year(), dayjs(props.choosenDate).month(), dayjs(props.choosenDate).date())
+        
+        
+        setDate(choosenDate)
+    }
     
         
     const [newDate, setNewDate] = useState<Date>(date || new Date());
@@ -37,24 +40,22 @@ const Calendar = (props: CalendarPropsType) => {
         setShow(!show);
     }
 
-    // console.log("calendar / date=", typeof dayjs(new Date()).format("YYYY-MM-DD"));
     
     const onNewDateHandler = (newDatefromDays: Date) => {
         setDate(newDatefromDays);
         setNewDate(newDatefromDays);
-        // setNewDateText(newDatefromDays.toLocaleDateString())
-        // const newTextDate:string = String(newDatefromDays.getFullYear()) + "-" + String(newDatefromDays.getMonth()) + "-" + String(newDatefromDays.getDate())
-        const newTextDate:string = dayjs(newDatefromDays).format("YYYY-MM-DD");
+        const newTextDate:string = dayjs(newDatefromDays).format(COMMON_DATE_FORMAT);
 
         setNewDateText(newTextDate);
         
-        props.onDateChange(newDatefromDays);
+        // props.onDateChange(newDatefromDays);
+        props.onDateChange(dayjs(newDatefromDays).format(COMMON_DATE_FORMAT));
         setShow(false);
     }
     const onDateClearClickHandler = () => {
         setDate(undefined);
         setNewDateText('');
-        props.onDateChange(undefined);
+        props.onDateChange('');
 
     }
 
@@ -73,7 +74,7 @@ const Calendar = (props: CalendarPropsType) => {
                 type="date"
                 // text={ newDate.toLocaleDateString() }
                 text={newDateText}
-                // text={date ? dayjs(date).format("YYYY-MM-DD") : ""}
+                
                 // text={ (date && date !== undefined) ? date.toLocaleDateString() : "" }
                 onChangeFunction={(text: string) => onTextInputChangeHandler(text)}
                 className={s.textWidth}
