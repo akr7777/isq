@@ -12,8 +12,8 @@
     appearance: none;
     transition: 0.2s all linear;
 
-    width: 23px;
-    height: 23px;
+    min-width: 23px;
+    min-height: 23px;
     background-color: grey;
     border-radius: 50%;
     border: 2px var(--border_color) solid;

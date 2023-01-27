@@ -8,6 +8,8 @@ import s from './profile.module.css';
 const ProfileRiskViewChecker = () => {
 
     const riskView:RiskViewType = useSelector((state:RootState) => state.supplier.settings.riskView);
+    console.log('ProfileRiskViewChecker / riskView=', riskView);
+    
     const {t} = useTranslation();
     const dispatch = useAppDispatch();
 
@@ -27,6 +29,8 @@ const ProfileRiskViewChecker = () => {
             value: RiskViewSTAR,
         }
     ]
+    
+    console.log('ProfileRiskViewChecker riskView=', riskView, 'options=',options);
     
     return <div className={s.user_interface_settings_one_block}>
          <h3>{ t("profile_risk_view_title") }</h3>

@@ -7,9 +7,10 @@ import s from './profile.module.css';
 
 const InterfacePageSizing = () => {
 
-    const riskView:number = useSelector((state:RootState) => state.supplier.settings.pageSizing);
+    // const riskView:number = useSelector((state:RootState) => state.supplier.settings.pageSizing);
     const {t} = useTranslation();
     const dispatch = useAppDispatch();
+    const defaultOption:string = String(useSelector((state:RootState) => state.supplier.settings.pageSizing));
 
     const onViewChangeClickHandler = (val: string) => {
         const intVal = Number(val);
@@ -29,7 +30,7 @@ const InterfacePageSizing = () => {
          <h3>{ t("profile_page_size_title") }</h3>
         <RadioLabels 
             options={options}
-            defaultOption={'20'}
+            defaultOption={defaultOption}
             onClickFunction={(newValue: string) => onViewChangeClickHandler(newValue)}
         />
     </div>

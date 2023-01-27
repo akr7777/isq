@@ -1,8 +1,8 @@
 import {createSlice} from '@reduxjs/toolkit';
 import type {PayloadAction} from '@reduxjs/toolkit';
 
-export const TABLE_VIEW = 'table';
-export const BRICK_VIEW = 'brick';
+export const TABLE_VIEW = 'TABLE';
+export const BRICK_VIEW = 'BRICK';
 export const localStorageSuppliersViewVariable = 'suppliersView';
 
 export const SEARCH_COMPLETED_ALL = "all";
@@ -21,8 +21,8 @@ export const RiskViewSTAR = 'STAR'
 export type RiskViewType = typeof RiskViewWORD | typeof RiskViewSTAR;
 
 export const localStorageUserDateFormat = 'dateFormat';
-export const DATE_EU = 'DATE_EU';
-export const DATE_US = 'DATE_US';
+export const DATE_EU = 'DD/MM/YYYY';
+export const DATE_US = 'MM/DD/YYYY';
 export type FormatDateType = typeof DATE_EU | typeof DATE_US;
 
 export const SORT_ACS = "acsending";
@@ -44,7 +44,7 @@ export type SupplerDataType = {
     supplierId: SupplierIdType,
     supplierName: string,
     risk: RiskType;
-    creationDate: Date | undefined,
+    creationDate: string | undefined,
     isComplite: boolean,
     data: string,
     purchaseTicket?: string
@@ -83,7 +83,7 @@ const initContent:SupplierSliceType = {
             supplierId: '00001',
             supplierName: 'ПАО "МТС"',
             risk: RISK_LOW,
-            creationDate: undefined,//new Date(2022,1,11),
+            creationDate: "2022-01-01",//undefined,//new Date(2022,1,11),
             isComplite: true,
             data: 'ПАО МТС Информация',
             purchaseTicket: '1234566789'
@@ -92,7 +92,7 @@ const initContent:SupplierSliceType = {
             supplierId: '00002',
             supplierName: 'ПАО "Пятерочка"',
             risk: RISK_MEDIUM,
-            creationDate: undefined,//new Date(2022,3,15),
+            creationDate: "2022-03-01",//undefined,//new Date(2022,3,15),
             isComplite: true,
             data: 'Пятерочка Информация',
         },
@@ -100,7 +100,7 @@ const initContent:SupplierSliceType = {
             supplierId: '00003',
             supplierName: 'ООО "Ромашка"',
             risk: RISK_HIGH,
-            creationDate: undefined,// new Date(2022,5,19),
+            creationDate: "2022-05-01",//undefined,// new Date(2022,5,19),
             isComplite: true,
             data: 'Ромашка Информация',
         },
@@ -108,7 +108,7 @@ const initContent:SupplierSliceType = {
             supplierId: '00004',
             supplierName: 'ООО "Рога и копыта"',
             risk: undefined,
-            creationDate: undefined,//new Date(2022,7,29),
+            creationDate: "2022-07-01",//undefined,//new Date(2022,7,29),
             isComplite: false,
             data: 'Рога и копыта INFO',
         },
@@ -116,7 +116,7 @@ const initContent:SupplierSliceType = {
             supplierId: '00005',
             supplierName: 'ООО "Simple company"',
             risk: undefined,
-            creationDate: undefined,//new Date(2022,2,17),
+            creationDate: "2022-09-01",//undefined,//new Date(2022,2,17),
             isComplite: false,
             data: 'Simple company INFO',
         }
@@ -150,34 +150,57 @@ export const supplierSlice = createSlice({
     name: 'supplier',
     initialState: initContent,
     reducers: {
-        changeViewAC: (state:SupplierSliceType, action: PayloadAction<ViewOptionsType>) => {
-            localStorage.setItem(localStorageSuppliersViewVariable, action.payload)
-            return {
-                ...state,
-                view: action.payload
-            }
-        },
-        searchFieldChangeAC: (state:SupplierSliceType, action: PayloadAction<string>) => {
+        searchFieldChangeAC: (state:SupplierSliceType, action: PayloadAction<string>):SupplierSliceType => {
             return {...state, search: action.payload }
         },
-        searchByDateFilterAC: (state:SupplierSliceType, action: PayloadAction<{dateStart: FilterDateType, dateEnd: FilterDateType}>) => {
+        searchByDateFilterAC: (state:SupplierSliceType, 
+                        action: PayloadAction<{dateStart: FilterDateType, dateEnd: FilterDateType}>):SupplierSliceType => {
             return {
                 ...state, 
                 searchByDateStart: action.payload.dateStart, 
                 searchByDateEnd: action.payload.dateEnd
             }
         },
-        searchByComplitedChangeAC: (state:SupplierSliceType, action: PayloadAction<SearchByComplitedType>) => {
+        searchByComplitedChangeAC: (state:SupplierSliceType, action: PayloadAction<SearchByComplitedType>):SupplierSliceType => {
             return {...state, searchByComplited: action.payload}
         },
-        searchByRiskAC: (state:SupplierSliceType, action: PayloadAction<RiskType>) => {
+        searchByRiskAC: (state:SupplierSliceType, action: PayloadAction<RiskType>):SupplierSliceType => {
             return {...state, searchByRisk: action.payload}
         },
-        changeRiskInLineAC: (state:SupplierSliceType, action: PayloadAction<RiskViewType>) => {
-            localStorage.setItem(localStorageRiskViewVariable, action.payload)
-            return {...state, riskView: action.payload}
+        changePurchaseTicketSearchAC: (state:SupplierSliceType, action: PayloadAction<string>):SupplierSliceType => {
+            return {
+                ...state,
+                searchByPurchaseTicket: action.payload
+            }
         },
-        changePageSizingAC: (state:SupplierSliceType, action:PayloadAction<number>) => {
+
+        // TABLE or BRICK
+        changeViewAC: (state:SupplierSliceType, action: PayloadAction<ViewOptionsType>):SupplierSliceType => {
+            // console.log('supplier / changeViewAC / action=', action.payload);
+            localStorage.setItem(localStorageSuppliersViewVariable, action.payload)
+            return {
+                ...state,
+                settings: {
+                    ...state.settings,
+                    view: action.payload
+                }
+            }
+        },
+        // WORD or STAR
+        changeRiskInLineAC: (state:SupplierSliceType, action: PayloadAction<RiskViewType>):SupplierSliceType => {
+            // console.log('supplier / changeRiskInLineAC / action=', action.payload);
+            localStorage.setItem(localStorageRiskViewVariable, action.payload)
+            return {
+                ...state, 
+                settings: {
+                    ...state.settings,
+                    riskView: action.payload
+                }
+            };
+        },
+        // Page SIZE: 20, 50, 100
+        changePageSizingAC: (state:SupplierSliceType, action:PayloadAction<number>):SupplierSliceType => {
+            // console.log('supplier / changePageSizingAC / action=', action.payload);
             localStorage.setItem(localStoragePageSizingVariable, String(action.payload));
             return {
                 ...state,
@@ -187,7 +210,9 @@ export const supplierSlice = createSlice({
                 }
             }
         },
-        userDateFormatChangeAC: (state:SupplierSliceType, action: PayloadAction<FormatDateType>) => {
+        // DD.MM.YYYY or MM/DD/YYYY
+        userDateFormatChangeAC: (state:SupplierSliceType, action: PayloadAction<FormatDateType>):SupplierSliceType => {
+            // console.log('supplier / userDateFormatChangeAC / action=', action.payload);
             localStorage.setItem(localStorageUserDateFormat, action.payload);
             return {
                 ...state,
@@ -197,19 +222,14 @@ export const supplierSlice = createSlice({
                 }
             }
         },
-        changePurchaseTicketSearchAC: (state:SupplierSliceType, action: PayloadAction<string>) => {
-            return {
-                ...state,
-                searchByPurchaseTicket: action.payload
-            }
-        },
-        changeColumnNameSortingAC: (state: SupplierSliceType, action: PayloadAction<ColumnSortNameType>) => {
+        
+        changeColumnNameSortingAC: (state: SupplierSliceType, action: PayloadAction<ColumnSortNameType>):SupplierSliceType => {
             return {...state, sortingOptions: {...state.sortingOptions, columnNameSorting: action.payload}}
         },
-        changeColumnDirectionSortingAC: (state: SupplierSliceType, action: PayloadAction<ColumnSortDirectionType>) => {
+        changeColumnDirectionSortingAC: (state: SupplierSliceType, action: PayloadAction<ColumnSortDirectionType>):SupplierSliceType => {
             return {...state, sortingOptions: {...state.sortingOptions, columnSortDirection: action.payload}}
         },
-        changeCurrentPageAC: (state: SupplierSliceType, action: PayloadAction<number>) => {
+        changeCurrentPageAC: (state: SupplierSliceType, action: PayloadAction<number>):SupplierSliceType => {
             return {...state, currentPage: action.payload}
         }
     },

@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { SearchByComplitedType, RiskType, SupplerDataType, SupplierIdType, changeColumnNameSortingAC, changeColumnDirectionSortingAC, NAME_COLUMN_SORT, CREATION_DATE_COLUMN_SORT, COMPLITED_COLUMN_SORT, RISK_COLUMN_SORT, FilterDateType, ColumnSortNameType, ColumnSortDirectionType } from "../../../store/features/supplierSlice";
+import { SearchByComplitedType, RiskType, SupplerDataType, SupplierIdType, changeColumnNameSortingAC, changeColumnDirectionSortingAC, NAME_COLUMN_SORT, CREATION_DATE_COLUMN_SORT, COMPLITED_COLUMN_SORT, RISK_COLUMN_SORT, FilterDateType, ColumnSortNameType, ColumnSortDirectionType, FormatDateType } from "../../../store/features/supplierSlice";
 import { RootState } from "../../../store/store";
 import s from './dataTable.module.css';
 import dashboardStyles from "./../dashboard.module.css";
@@ -12,6 +12,7 @@ import { PATHS } from "../../outlet/outlet";
 import RiskInLine from "../riskInLine";
 import { useTranslation } from "react-i18next";
 import SortingIcons from "../sortIcons";
+import dayjs from "dayjs";
 
 const DataTable = () => {
     const {t} = useTranslation();
@@ -40,6 +41,7 @@ const DataTable = () => {
     // }
 
     const companies:SupplerDataType[] = AddSearchOptions();
+    const userDateFormat:FormatDateType = useSelector((state: RootState) => state.supplier.settings.userDateFormat);
 
     const onSupplierClickHandler = (supplierId: SupplierIdType) => {
         navigate(PATHS.supplierCard + "/" + String(supplierId));
@@ -76,7 +78,8 @@ const DataTable = () => {
                                     {c.supplierName}
                                 </td>
                                 <td>
-                                    {c.creationDate?.toLocaleDateString()}
+                                    {c.creationDate && dayjs(c.creationDate).format(userDateFormat)}
+                                    {/* {c.creationDate?.toLocaleDateString()} */}
                                 </td>
                                 <td>{
                                         c.isComplite

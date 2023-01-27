@@ -1,6 +1,6 @@
 // import { t } from "i18next";
 import { useSelector } from "react-redux";
-import { SearchByComplitedType, RiskType, SupplerDataType, SupplierIdType, RISK_LOW, RISK_MEDIUM, RiskViewType, RiskViewWORD, FilterDateType, ColumnSortNameType, ColumnSortDirectionType } from "../../../store/features/supplierSlice";
+import { SearchByComplitedType, RiskType, SupplerDataType, SupplierIdType, RISK_LOW, RISK_MEDIUM, RiskViewType, RiskViewWORD, FilterDateType, ColumnSortNameType, ColumnSortDirectionType, FormatDateType } from "../../../store/features/supplierSlice";
 import { RootState } from "../../../store/store";
 import s from "./dataBricks.module.css";
 import dbStyles from "./../dashboard.module.css";
@@ -12,6 +12,7 @@ import { PATHS } from "../../outlet/outlet";
 import { useNavigate } from "react-router-dom";
 import RiskInLine from "../riskInLine";
 import { useTranslation } from "react-i18next";
+import dayjs from "dayjs";
 
 
 
@@ -57,6 +58,8 @@ const DataBricks = () => {
 
     const companies:SupplerDataType[] = AddSearchOptions();
     // const companies:SupplerDataType[] = AddSearchOptions();
+    const userDateFormat:FormatDateType = useSelector((state: RootState) => state.supplier.settings.userDateFormat);
+
     
     // const theme: typeof DARK | typeof LIGHT = useSelector((state:RootState) => state.auth.userSettings.theme);
 
@@ -93,7 +96,8 @@ const DataBricks = () => {
                         {c.supplierName}
                     </div>
                     <div className={s.oneBrickPiece}>
-                        {c.creationDate?.toLocaleDateString()}
+                        {c.creationDate && dayjs(c.creationDate).format(userDateFormat)}
+                        {/* {c.creationDate?.toLocaleDateString()} */}
                     </div>
                     <div className={s.oneBrickPiece}>
                         {
