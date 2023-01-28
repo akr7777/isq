@@ -112,8 +112,13 @@ const NewSupplier = () => {
                 <h2>{ t("newSupplier_link_send_it") }</h2>
 
                 <div className={s.newSupplier_link_link}>
-                    <h3 className={s.newSupplier_link_link_text}>{ newSupplierLink }</h3>
-
+                    {/* <h3 className={s.www}>{ newSupplierLink }</h3> */}
+                    <LineTextField
+                        type='text'
+                        text={ newSupplierLink }
+                        onChangeFunction={() => {}}
+                        className={s.newSupplier_link_link_width1}
+                    />
                     {
                         copyLinkSuccess 
                             ? <img src={iconCopyGreen} className={s.copy_icon}/>
@@ -126,6 +131,11 @@ const NewSupplier = () => {
                             //     </button>
                     }
                 </div>
+
+                <ButtonOK
+                    text={ t("newSupplier_goToMainPage")}
+                    onClickFunction={() => navigate(PATHS.dashboard)}
+                />
                 
                 
                 {/* name: {supplierName}

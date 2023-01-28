@@ -63,9 +63,10 @@
 .newSupplier_link_div {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 30px;
     justify-content: center;
     align-items: center;
+    background-color: red;
 }
 .newSupplier_link_link {
     display: flex;
@@ -73,18 +74,15 @@
     gap: 15px;
     justify-content: center;
     align-items: center;
+    /* background-color: red; */
+    width: 100%;
 }
-@media screen and (min-width: 610px) {
-    .newSupplier_link_link_text {
-        display: block;
-    } 
+@media screen and (min-width: 600px) {
+    .newSupplier_link_link_width1 { width: 500px; }
 }
-@media screen and (max-width: 610px) {
-    .newSupplier_link_link_text {
-        display: none;
-    } 
+@media screen and (max-width: 599px) {
+    .newSupplier_link_link_width1 { width: 350px; }
 }
-
 
 .error {
     /* padding: 10px 15px;

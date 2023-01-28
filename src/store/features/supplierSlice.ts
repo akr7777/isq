@@ -38,6 +38,8 @@ export type ColumnSortDirectionType = typeof SORT_ACS | typeof SORT_DSC;
 export const localStoragePageSizingVariable = 'page-size';
 export const pageSizeOptions = [20, 50, 100];
 
+export const SEARCH_TEXT_DELAY = 1000;
+
 export type SupplierIdType = string;
 // export type FilterDateType = Date | undefined;
 

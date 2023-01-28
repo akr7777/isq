@@ -73,6 +73,7 @@
     "newSupplier_link_send_it": "Новый поставщик создан. Отправьте ему эту ссылку для заполнения анкеты:",
     "newSupplier_title": "Создание нового поставщика",
     "newSupplier_linkCopied": "Ссылка скопирована в буфер обмена",
+    "newSupplier_goToMainPage": "Перейти на главную страницу",
 
     "isLoadingOn": "Загрузка данных...",
 
