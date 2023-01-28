@@ -1,5 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
 import type {PayloadAction} from '@reduxjs/toolkit';
+import { getCompaniesThunk, getCompaniesThunkResponseType } from './supplierThunks';
 
 export const TABLE_VIEW = 'TABLE';
 export const BRICK_VIEW = 'BRICK';
@@ -88,7 +89,7 @@ const initContent:SupplierSliceType = {
             supplierId: '00001',
             supplierName: 'ПАО "МТС"',
             risk: RISK_LOW,
-            creationDate: "2022-01-01",//undefined,//new Date(2022,1,11),
+            creationDate: "2022-01-01",
             isComplite: true,
             data: 'ПАО МТС Информация',
             purchaseTicket: '1234566789'
@@ -97,7 +98,7 @@ const initContent:SupplierSliceType = {
             supplierId: '00002',
             supplierName: 'ПАО "Пятерочка"',
             risk: RISK_MEDIUM,
-            creationDate: "2022-03-01",//undefined,//new Date(2022,3,15),
+            creationDate: "2022-03-01",
             isComplite: true,
             data: 'Пятерочка Информация',
         },
@@ -105,7 +106,7 @@ const initContent:SupplierSliceType = {
             supplierId: '00003',
             supplierName: 'ООО "Ромашка"',
             risk: RISK_HIGH,
-            creationDate: "2022-05-01",//undefined,// new Date(2022,5,19),
+            creationDate: "2022-05-01",
             isComplite: true,
             data: 'Ромашка Информация',
         },
@@ -113,7 +114,7 @@ const initContent:SupplierSliceType = {
             supplierId: '00004',
             supplierName: 'ООО "Рога и копыта"',
             risk: undefined,
-            creationDate: "2022-07-01",//undefined,//new Date(2022,7,29),
+            creationDate: "2022-07-01",
             isComplite: false,
             data: 'Рога и копыта INFO',
         },
@@ -121,7 +122,7 @@ const initContent:SupplierSliceType = {
             supplierId: '00005',
             supplierName: 'ООО "Simple company"',
             risk: undefined,
-            creationDate: "2022-09-01",//undefined,//new Date(2022,2,17),
+            creationDate: "2022-09-01",
             isComplite: false,
             data: 'Simple company INFO',
         }
@@ -273,18 +274,17 @@ export const supplierSlice = createSlice({
         }
     },
     extraReducers: (builder) => {
-        // builder.addCase(getDescriptionThunk.pending, (state: InitAuthorContentType) => {
-        //     state.isLoading = true;
-        // })
-        // builder.addCase(getDescriptionThunk.fulfilled, (state: InitAuthorContentType, action: PayloadAction<Omit<InitAuthorContentType, 'isLoading'>>) => {
-        //     state.title = action.payload.title;
-        //     state.photo = baseDescriptionPhotoUrl;
-        //     state.description = action.payload.description;
-        //     state.isLoading = false;
-        // })
-        // builder.addCase(getDescriptionThunk.rejected, (state: InitAuthorContentType) => {
-        //     state.isLoading = false;
-        // })
+        builder.addCase(getCompaniesThunk.pending, (state: SupplierSliceType) => {
+            // state.isLoading = true;
+        })
+        builder.addCase(getCompaniesThunk.fulfilled, (state: SupplierSliceType, action: PayloadAction<Array<getCompaniesThunkResponseType>>) => {
+            console.log('getCompaniesThunk / fulfilled, action=', action);
+            
+            //state.suppliers = action.payload;
+        })
+        builder.addCase(getCompaniesThunk.rejected, (state: SupplierSliceType) => {
+            // state.isLoading = false;
+        })
     }
 })
 export const {
