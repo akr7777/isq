@@ -12,9 +12,6 @@ import SupplierHead from "./supplierHead";
 const SupplierCard = () => {
     const { supplierId } = useParams();
     const dispatch = useAppDispatch();
-    // const isLoading = true;
-    //dispatch санку на сервер с supplierId и получаем информацию в state
-    // меняем isLoading на false
 
     const [l, setL] = useState(true);
     

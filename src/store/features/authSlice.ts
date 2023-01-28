@@ -5,7 +5,12 @@ import { DARK, LIGHT } from '../../hooks/useTheme';
 export const localStorageAppThemeVariable = 'app-theme';
 export const localStorageLanguageVariable = 'language';
 
-export type RoleType = 'admin' | 'manager' | 'security' | 'none';
+export const ADMIN_USER_ROLE = 'admin';
+export const MANAGER_USER_ROLE = 'manager';
+export const SECURITY_USER_ROLE = 'security';
+export type RoleType = typeof ADMIN_USER_ROLE | typeof MANAGER_USER_ROLE | typeof SECURITY_USER_ROLE | undefined;
+
+
 export type UserIdType = string;
 export type UserThemeType = typeof DARK | typeof LIGHT;
 
@@ -36,7 +41,7 @@ export type UserType = {
 const initContent: UserType = {
     userId: '',
     name: '1111',
-    role: 'none',
+    role: undefined,
     userSettings: {
         lang: EN_LANG,
         theme: LIGHT
@@ -110,7 +115,7 @@ export const authSlice = createSlice({
                     ...state,
                     userId: '1',
                     name: 'Manager',
-                    role: 'manager' as const,
+                    role: MANAGER_USER_ROLE,
                     vars: {
                         ...state.vars,
                         loginInput: '',
@@ -122,7 +127,7 @@ export const authSlice = createSlice({
                     ...state,
                     userId: '1',
                     name: 'Security specialist',
-                    role: 'security' as const,
+                    role: SECURITY_USER_ROLE,
                     vars: {
                         ...state.vars,
                         loginInput: '',
@@ -134,7 +139,7 @@ export const authSlice = createSlice({
                     ...state,
                     userId: '1',
                     name: 'Admin',
-                    role: 'admin' as const,
+                    role: ADMIN_USER_ROLE,
                     vars: {
                         ...state.vars,
                         loginInput: '',
@@ -160,7 +165,7 @@ export const authSlice = createSlice({
                 ...state,
                 userId: '',
                 name: '',
-                role: 'none',
+                role: undefined,
                 vars: {
                     ...state.vars,
                     loginInput: '',

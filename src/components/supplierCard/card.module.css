@@ -6,7 +6,7 @@
     align-items: center;
 
     width: 90%;
-    margin: 40px 5%;
+    margin: var(--margin_top_for_chapter) 5%;
 }
 @media screen and (min-width: 700px) {
     .qaDiv {

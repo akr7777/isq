@@ -9,6 +9,8 @@ import SupplierCard from "../supplierCard/supplierCard";
 import Profile from "../profile/profile";
 import s from "./outlet.module.css";
 import NewSupplier from "../newSupplier/newSupplier";
+import { ADMIN_USER_ROLE, MANAGER_USER_ROLE } from "../../store/features/authSlice";
+import EditSuppliers from "../editSuppliers/edit-suppliers";
 
 export const PATHS = {
     mainPage: '/',
@@ -18,7 +20,8 @@ export const PATHS = {
     notFoundPage: "/404",
     supplierCard: '/supplierCard',
     profile: '/profile',
-    newSupplier: '/new'
+    newSupplier: '/new',
+    editSuppliers: '/editSuppliers'
 }
 
 const Outlet = () => {
@@ -53,6 +56,12 @@ const Outlet = () => {
             <Route path={PATHS.newSupplier} element={
                 <RequireAuth>
                     <NewSupplier />
+                </RequireAuth>
+            } />
+
+            <Route path={PATHS.editSuppliers} element={
+                <RequireAuth requiredUserRoles={[ADMIN_USER_ROLE, MANAGER_USER_ROLE]}>
+                    <EditSuppliers />
                 </RequireAuth>
             } />
 
