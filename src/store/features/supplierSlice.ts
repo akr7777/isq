@@ -56,7 +56,6 @@ export type ViewOptionsType = typeof TABLE_VIEW | typeof BRICK_VIEW;
 
 type SupplierSliceType = {
     suppliers: Array<SupplerDataType>,
-    search: string,
 
     settings: {
         view: ViewOptionsType,
@@ -68,15 +67,18 @@ type SupplierSliceType = {
         columnNameSorting: ColumnSortNameType,
         columnSortDirection: ColumnSortDirectionType,
     }
-
-    searchByComplited: SearchByComplitedType,
-    searchByRisk: RiskType,
-    searchByDateStart: string,//FilterDateType,
-    searchByDateEnd: string,//FilterDateType,
-    searchByPurchaseTicket: string,
-
-    pageCount: number,
-    currentPage: number,
+    searchingOptions: {
+        search: string,
+        searchByComplited: SearchByComplitedType,
+        searchByRisk: RiskType,
+        searchByDateStart: string,//FilterDateType,
+        searchByDateEnd: string,//FilterDateType,
+        searchByPurchaseTicket: string,
+    }
+    pageOptions: {
+        companiesCount: number,
+        currentPage: number,
+    }
     
 }
 
@@ -137,15 +139,19 @@ const initContent:SupplierSliceType = {
         columnSortDirection: SORT_ACS,
     },
     
-    search: '',
-    searchByDateStart: '',
-    searchByDateEnd: '',
-    searchByComplited: SEARCH_COMPLETED_ALL,
-    searchByRisk: undefined,
-    searchByPurchaseTicket: '',
-
-    pageCount: 10653,
-    currentPage: 105,
+    searchingOptions: {
+        search: '',
+        searchByDateStart: '',
+        searchByDateEnd: '',
+        searchByComplited: SEARCH_COMPLETED_ALL,
+        searchByRisk: undefined,
+        searchByPurchaseTicket: '',
+    },
+    
+    pageOptions: {
+        companiesCount: 30653,
+        currentPage: 1,
+    }
 }
 
 
@@ -154,26 +160,50 @@ export const supplierSlice = createSlice({
     initialState: initContent,
     reducers: {
         searchFieldChangeAC: (state:SupplierSliceType, action: PayloadAction<string>):SupplierSliceType => {
-            return {...state, search: action.payload }
+            return {
+                ...state,
+                searchingOptions: {
+                    ...state.searchingOptions,
+                    search: action.payload 
+                }
+            }
         },
         searchByDateFilterAC: (state:SupplierSliceType, 
                         action: PayloadAction<{dateStart: string, dateEnd: string}>):SupplierSliceType => {
             return {
-                ...state, 
-                searchByDateStart: action.payload.dateStart, 
-                searchByDateEnd: action.payload.dateEnd
-            }
+                ...state,
+                searchingOptions: {
+                    ...state.searchingOptions,
+                    searchByDateStart: action.payload.dateStart, 
+                    searchByDateEnd: action.payload.dateEnd
+                }
+            }   
         },
         searchByComplitedChangeAC: (state:SupplierSliceType, action: PayloadAction<SearchByComplitedType>):SupplierSliceType => {
-            return {...state, searchByComplited: action.payload}
+            return {
+                ...state,
+                searchingOptions: {
+                    ...state.searchingOptions,
+                    searchByComplited: action.payload
+                }
+            }
         },
         searchByRiskAC: (state:SupplierSliceType, action: PayloadAction<RiskType>):SupplierSliceType => {
-            return {...state, searchByRisk: action.payload}
+            return {
+                ...state,
+                searchingOptions: {
+                    ...state.searchingOptions,
+                    searchByRisk: action.payload
+                }
+            }
         },
         changePurchaseTicketSearchAC: (state:SupplierSliceType, action: PayloadAction<string>):SupplierSliceType => {
             return {
                 ...state,
-                searchByPurchaseTicket: action.payload
+                searchingOptions: {
+                    ...state.searchingOptions,
+                    searchByPurchaseTicket: action.payload
+                }
             }
         },
 
@@ -233,7 +263,13 @@ export const supplierSlice = createSlice({
             return {...state, sortingOptions: {...state.sortingOptions, columnSortDirection: action.payload}}
         },
         changeCurrentPageAC: (state: SupplierSliceType, action: PayloadAction<number>):SupplierSliceType => {
-            return {...state, currentPage: action.payload}
+            return {
+                ...state, 
+                pageOptions: {
+                    ...state.pageOptions,
+                    currentPage: action.payload
+                }
+            }
         }
     },
     extraReducers: (builder) => {

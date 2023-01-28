@@ -4,8 +4,10 @@ import { RootState, useAppDispatch } from "../../../store/store";
 import s from './paginator.module.css';
 
 const Paginator = () => {
-    const pageCount:number = useSelector((state:RootState) => state.supplier.pageCount);
-    const currentPage:number = useSelector((state:RootState) => state.supplier.currentPage);
+    const companiesCount:number = useSelector((state:RootState) => state.supplier.pageOptions.companiesCount);
+    const pageSize:number = useSelector((state:RootState) => state.supplier.settings.pageSizing)
+    const pageCount: number = Math.ceil( companiesCount / pageSize);
+    const currentPage:number = useSelector((state:RootState) => state.supplier.pageOptions.currentPage);
 
     const startPageNumber:number = currentPage > 6
                                         ? currentPage - 5

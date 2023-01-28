@@ -10,7 +10,7 @@ import { useEffect } from 'react';
 
 
 const SearchByPurchaseTicket = () => {
-    const ticket:string = useSelector((state:RootState) => state.supplier.searchByPurchaseTicket);
+    const ticket:string = useSelector((state:RootState) => state.supplier.searchingOptions.searchByPurchaseTicket);
     const {t} = useTranslation();
     const dispatch = useAppDispatch();
 

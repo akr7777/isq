@@ -76,12 +76,12 @@ export type AddSearchOptionsPropsType = {
 }
 
 export function AddSearchOptions() {
-    const searchField:string = useSelector((state:RootState) => state.supplier.search);
-    const searchComplited:SearchByComplitedType = useSelector((state:RootState) => state.supplier.searchByComplited);
-    const searchRisk:RiskType = useSelector((state:RootState) => state.supplier.searchByRisk);
-    const searchByDateStart: string = useSelector((state: RootState) => state.supplier.searchByDateStart);
-    const searchByDateEnd: string = useSelector((state: RootState) => state.supplier.searchByDateEnd);
-    const searchByPurchaseTicket:string = useSelector((state:RootState) => state.supplier.searchByPurchaseTicket) || "";
+    const searchField:string = useSelector((state:RootState) => state.supplier.searchingOptions.search);
+    const searchComplited:SearchByComplitedType = useSelector((state:RootState) => state.supplier.searchingOptions.searchByComplited);
+    const searchRisk:RiskType = useSelector((state:RootState) => state.supplier.searchingOptions.searchByRisk);
+    const searchByDateStart: string = useSelector((state: RootState) => state.supplier.searchingOptions.searchByDateStart);
+    const searchByDateEnd: string = useSelector((state: RootState) => state.supplier.searchingOptions.searchByDateEnd);
+    const searchByPurchaseTicket:string = useSelector((state:RootState) => state.supplier.searchingOptions.searchByPurchaseTicket) || "";
     // const columnNameSorting:ColumnSortNameType = useSelector((state:RootState) => state.supplier.sortingOptions.columnNameSorting);
     // const columnSortDirection:ColumnSortDirectionType = useSelector((state:RootState) => state.supplier.sortingOptions.columnSortDirection);
     
@@ -126,12 +126,12 @@ export function AddSearchOptions() {
 }
 
 export function IsSomeSearchOptionFilled():boolean {
-    const searchFieldText:string = useSelector((state:RootState) => state.supplier.search);
-    const searchByComplited: SearchByComplitedType = useSelector((state:RootState) => state.supplier.searchByComplited);
-    const searchByRisk: RiskType = useSelector((state:RootState) => state.supplier.searchByRisk);
-    const searchByDateStart: string = useSelector((state:RootState) => state.supplier.searchByDateStart);
-    const searchByDateEnd: string = useSelector((state:RootState) => state.supplier.searchByDateEnd);
-    const searchByPurchaseTicket: string = useSelector((state: RootState) => state.supplier.searchByPurchaseTicket);
+    const searchFieldText:string = useSelector((state:RootState) => state.supplier.searchingOptions.search) || "";
+    const searchByComplited: SearchByComplitedType = useSelector((state:RootState) => state.supplier.searchingOptions.searchByComplited);
+    const searchByRisk: RiskType = useSelector((state:RootState) => state.supplier.searchingOptions.searchByRisk);
+    const searchByDateStart: string = useSelector((state:RootState) => state.supplier.searchingOptions.searchByDateStart) || "";
+    const searchByDateEnd: string = useSelector((state:RootState) => state.supplier.searchingOptions.searchByDateEnd) || "";
+    const searchByPurchaseTicket: string = useSelector((state: RootState) => state.supplier.searchingOptions.searchByPurchaseTicket) || "";
 
     const isCircled: boolean = searchFieldText.length > 0 || searchByComplited !== SEARCH_COMPLETED_ALL || (searchByRisk !== undefined) ||
                         (searchByDateStart.length > 0) || (searchByDateEnd.length > 0) ||

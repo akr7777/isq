@@ -41,7 +41,8 @@ html[data-theme='light'] {
 
   --theme_toogler_bgColor: rgb(57, 55, 55);
 
-  --header_footer_bgColor: rgba(255, 100, 0, 0.3);
+  --header_footer_bgColor: rgb(191, 185, 185);
+  /* --header_footer_bgColor: rgba(255, 100, 0, 0.3); */
   /* --header_footer_bgColor: rgb(198, 198, 198); */
   
 

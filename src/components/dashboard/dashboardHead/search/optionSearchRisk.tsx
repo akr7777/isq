@@ -5,7 +5,7 @@ import { RootState, useAppDispatch } from "../../../../store/store";
 import s from "./search.module.css";
 
 const SearchRisk = () => {
-    const searchRisk:RiskType = useSelector((state:RootState) => state.supplier.searchByRisk);
+    const searchRisk:RiskType = useSelector((state:RootState) => state.supplier.searchingOptions.searchByRisk);
     const dispatch = useAppDispatch();
     
     const onRiskChangeClickHandler = (newRisk:RiskType) => {

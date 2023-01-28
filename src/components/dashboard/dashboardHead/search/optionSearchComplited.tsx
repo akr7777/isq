@@ -7,7 +7,7 @@ import s from "./search.module.css";
 
 const SearchByComplited = () => {
     const dispatch = useAppDispatch();
-    const checkedField:SearchByComplitedType = useSelector((state:RootState) => state.supplier.searchByComplited);
+    const checkedField:SearchByComplitedType = useSelector((state:RootState) => state.supplier.searchingOptions.searchByComplited);
 
     const onCheckedChange = (e: ChangeEvent<HTMLInputElement>) => {
         if  (

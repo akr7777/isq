@@ -19,7 +19,7 @@ import useDebounce from "../../../../hooks/debounced-hook";
 
 const SearchField = () => {
     const {t} = useTranslation();
-    const searchField:string = useSelector((state:RootState) => state.supplier.search);
+    const searchField:string = useSelector((state:RootState) => state.supplier.searchingOptions.search);
     // const [text, setText] = useState<string>('');
     const dispatch = useAppDispatch();
 
