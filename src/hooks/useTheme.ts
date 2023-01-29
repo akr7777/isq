@@ -2,7 +2,7 @@ import { useEffect, useLayoutEffect, useState } from "react"
 import { localStorageAppThemeVariable } from "../store/features/authSlice";
 
 export const DARK = 'dark';
-export const LIGHT = 'light'
+export const LIGHT = 'light';
 // type ThemesOptions = typeof DARK | typeof LIGHT;
 
 const isDark = window?.matchMedia('(prefers-color-scheme: dark)').matches;

@@ -18,7 +18,7 @@ export type RiskType = typeof RISK_LOW | typeof RISK_MEDIUM | typeof RISK_HIGH |
 
 export const localStorageRiskViewVariable = 'riskViewInTable';
 export const RiskViewWORD = 'WORD';
-export const RiskViewSTAR = 'STAR'
+export const RiskViewSTAR = 'STAR';
 export type RiskViewType = typeof RiskViewWORD | typeof RiskViewSTAR;
 
 export const localStorageUserDateFormat = 'dateFormat';

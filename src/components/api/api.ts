@@ -1,9 +1,10 @@
 import axios, {AxiosResponse} from "axios";
+import { loginThunkPropsType } from "../../store/features/authThunks";
 
 
 const instance = axios.create({
     withCredentials: true,
-    baseURL: 'http://95.142.46.27/questionare/api/',
+    baseURL: 'http://toogle.io:5000/api/',
 });
 
 instance.interceptors.request.use((config)=> {
@@ -12,6 +13,11 @@ instance.interceptors.request.use((config)=> {
     return config;
 });
 
+export const authAPI = {
+    login: (credentials: loginThunkPropsType):Promise<AxiosResponse> => {
+        return instance.post('login', credentials)
+    }
+}
 export const supplierAPI = {
     getCompanies: (pageNumber: number):Promise<AxiosResponse> => {
         return instance.get('companies.json');

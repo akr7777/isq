@@ -1,6 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 import type {PayloadAction} from '@reduxjs/toolkit';
 import { DARK, LIGHT } from '../../hooks/useTheme';
+import { AccessTokenPartType, loginThunk } from './authThunks';
 
 export const localStorageAppThemeVariable = 'app-theme';
 export const localStorageLanguageVariable = 'language';
@@ -34,7 +35,7 @@ export type UserType = {
         emptyLogin: boolean,
         emptyPassword: boolean,
     }
-    
+    loginRequestLoadingStatus: boolean,
 }
 
 
@@ -53,23 +54,13 @@ const initContent: UserType = {
         emptyLogin: false,
         emptyPassword: false,
     },
-    
+    loginRequestLoadingStatus: false,
 }
 
 export const authSlice = createSlice({
     name: 'auth',
     initialState: initContent,
     reducers: {
-        // changeUserThemeAC: (state: UserType, action: PayloadAction<UserThemeType>) => {
-        //     state = {
-        //         ...state, 
-        //         userSettings: {
-        //             ...state.userSettings, 
-        //             theme: action.payload
-        //         }
-        //     }
-        //     return state;
-        // },
         onLoginInputAC: (state: UserType, action: PayloadAction<string>):UserType => {
             return {
                 ...state, 
@@ -92,90 +83,23 @@ export const authSlice = createSlice({
                 }
             }
         },
-        onLoginButtonClickAC: (state: UserType):UserType => {
-            
-            if (state.vars.loginInput.length === 0) 
-                return {
-                    ...state,
-                    vars: { 
-                        ...state.vars,
-                        emptyLogin: true
-                    }
-                }
-            if (state.vars.passwordInput.length === 0) 
-                return {
-                    ...state,
-                    vars: { 
-                        ...state.vars,
-                        emptyPassword: true
-                    }
-                } 
-            if (state.vars.loginInput === 'manager' && state.vars.passwordInput === 'manager')
-                return {
-                    ...state,
-                    userId: '1',
-                    name: 'Manager',
-                    role: MANAGER_USER_ROLE,
-                    vars: {
-                        ...state.vars,
-                        loginInput: '',
-                        passwordInput: '',
-                    }
-                }
-            else if (state.vars.loginInput === 'security' && state.vars.passwordInput === 'security')
-                return {
-                    ...state,
-                    userId: '1',
-                    name: 'Security specialist',
-                    role: SECURITY_USER_ROLE,
-                    vars: {
-                        ...state.vars,
-                        loginInput: '',
-                        passwordInput: '',
-                    }
-                }
-            else if (state.vars.loginInput === 'admin' && state.vars.passwordInput === 'admin')
-                return {
-                    ...state,
-                    userId: '1',
-                    name: 'Admin',
-                    role: ADMIN_USER_ROLE,
-                    vars: {
-                        ...state.vars,
-                        loginInput: '',
-                        passwordInput: '',
-                    }
-                }
-            else {
-                state = {
-                    ...state,
-                    vars: {
-                        ...state.vars,
-                        loginError: 'From server: Указана неверная связка логин-пароль'
-                    }
-                }
-                
-                return state;
-                
-            }
-            return state;
-        },
-        logoutAC: (state: UserType):UserType => {
-            return {
-                ...state,
-                userId: '',
-                name: '',
-                role: undefined,
-                vars: {
-                    ...state.vars,
-                    loginInput: '',
-                    passwordInput: '',
-                    loginError: "",
-                    emptyLogin: false,
-                    emptyPassword: false,
-                },
-            }
-        },
+        
+        // logoutAC: (state: UserType):UserType => {
+        //     return {
+        //         ...state,
+        //         userId: '',
+        //         name: '',
+        //         role: undefined,
+        //         vars: {
+        //             ...state.vars,
+        //             loginInput: '',
+        //             passwordInput: '',
+        //             loginError: "",
+        //             emptyLogin: false,
+        //             emptyPassword: false,
+        //         },
+        //     }
+        // },
         changeThemeAC: (state: UserType, action: PayloadAction<typeof DARK | typeof LIGHT>):UserType => {
             return {
                 ...state,
@@ -195,21 +119,25 @@ export const authSlice = createSlice({
             }
         }
     },
+
+
     extraReducers: (builder) => {
-        // builder.addCase(getDescriptionThunk.pending, (state: InitAuthorContentType) => {
-        //     state.isLoading = true;
-        // })
-        // builder.addCase(getDescriptionThunk.fulfilled, (state: InitAuthorContentType, action: PayloadAction<Omit<InitAuthorContentType, 'isLoading'>>) => {
-        //     state.title = action.payload.title;
-        //     state.photo = baseDescriptionPhotoUrl;
-        //     state.description = action.payload.description;
-        //     state.isLoading = false;
-        // })
-        // builder.addCase(getDescriptionThunk.rejected, (state: InitAuthorContentType) => {
-        //     state.isLoading = false;
-        // })
+        builder.addCase(loginThunk.pending, (state: UserType) => {
+            state.loginRequestLoadingStatus = true;
+        })
+        builder.addCase(loginThunk.fulfilled, (state: UserType, action: PayloadAction<string>) => {
+            const decodedTokenPart:AccessTokenPartType = JSON.parse(atob(action.payload.split('.')[1]));
+            const {id, username} = decodedTokenPart;
+            localStorage.setItem("accessToken", action.payload);
+            state.name = username;
+            state.userId = id;
+            state.loginRequestLoadingStatus = false;
+        })
+        builder.addCase(loginThunk.rejected, (state: UserType) => {
+            state.loginRequestLoadingStatus = false;
+        })
     }
 })
-export const {onLoginInputAC, onPasswordInputAC, onLoginButtonClickAC, logoutAC, changeThemeAC, changeLanguageAC} = authSlice.actions;
+export const {onLoginInputAC, onPasswordInputAC, changeThemeAC, changeLanguageAC} = authSlice.actions;
 
 export default authSlice.reducer;

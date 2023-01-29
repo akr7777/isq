@@ -2,7 +2,7 @@ import s from "./login.module.css";
 import { ButtonOK } from '../common/buttons/buttons';
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store/store";
-import { onLoginButtonClickAC, onLoginInputAC, onPasswordInputAC, UserIdType } from "../../store/features/authSlice";
+import { onLoginInputAC, onPasswordInputAC, UserIdType } from "../../store/features/authSlice";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -13,6 +13,7 @@ import iconPassword from "../../public/icons/icon_password.png";
 import iconEyeOpened from "../../public/icons/icon_eye_opened.png";
 import iconEyeClosed from "../../public/icons/icon_eye_closed.png";
 import { PATHS } from "../outlet/outlet";
+import { loginThunk, loginThunkPropsType } from "../../store/features/authThunks";
 
 const Login = () => {
     const { t } = useTranslation();
@@ -40,7 +41,11 @@ const Login = () => {
     const [showPassword, setShowPassword] = useState<boolean>(false);
 
     const onLoginClickHandler = () => {
-        dispatch(onLoginButtonClickAC());
+        const credentials:loginThunkPropsType = {
+            username: loginInput,
+            password: passwordInput
+        }
+        dispatch(loginThunk(credentials));
     }
     const onLoginChange = (newValue: string) => {
         dispatch(onLoginInputAC(newValue));

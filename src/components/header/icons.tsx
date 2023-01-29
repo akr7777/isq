@@ -8,7 +8,7 @@ import i18n from './../../i18n';
 
 import flagRu from './../../public/icons/flag_ru.png';
 import flagEn from './../../public/icons/flag_en.png';
-import { changeLanguageAC, changeThemeAC, EN_LANG, localStorageLanguageVariable, logoutAC, RU_LANG, UserIdType } from '../../store/features/authSlice';
+import { changeLanguageAC, changeThemeAC, EN_LANG, localStorageLanguageVariable, RU_LANG, UserIdType } from '../../store/features/authSlice';
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../store/store';
 
@@ -69,7 +69,7 @@ export const Icons = (props: IconsPropsType) => {
         closeMobileMenu();
     }
     const onLogoutClickHandler = () => {
-        dispatch(logoutAC());
+        //dispatch(logoutAC());
         closeMobileMenu();
     }
     const onLoginClickHandler = () => {
