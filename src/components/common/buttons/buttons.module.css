@@ -18,7 +18,7 @@
 }
 .buttonOk:hover {
     background-color: var(--buttonOK_bgColor_hover);
-    box-shadow: 5px 3px gray;
+    box-shadow: 2px 2px gray;
     color:black
 }
 .buttonOk:focus {
@@ -46,7 +46,7 @@
 }
 .buttonCancel:hover {
     background-color: var(--buttonCancel_bgColor_hover);
-    box-shadow: 5px 3px gray;
+    box-shadow: 2px 2px gray;
     color:black
 }
 .buttonCancel:focus {

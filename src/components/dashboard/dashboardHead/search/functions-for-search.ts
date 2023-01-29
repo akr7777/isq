@@ -10,9 +10,8 @@ import { RootState } from "../../../../store/store";
 
 type SortArrayPropsType = {
     arr: Array<SupplerDataType>,
-    // columnNameSorting:ColumnSortNameType,
-    // columnSortDirection:ColumnSortDirectionType
 }
+
 export function SortArray(props: SortArrayPropsType):Array<SupplerDataType> {
     let newArr:Array<SupplerDataType> = [...props.arr];
     const columnNameSorting:ColumnSortNameType = useSelector((state:RootState) => state.supplier.sortingOptions.columnNameSorting);
@@ -82,8 +81,6 @@ export function AddSearchOptions() {
     const searchByDateStart: string = useSelector((state: RootState) => state.supplier.searchingOptions.searchByDateStart);
     const searchByDateEnd: string = useSelector((state: RootState) => state.supplier.searchingOptions.searchByDateEnd);
     const searchByPurchaseTicket:string = useSelector((state:RootState) => state.supplier.searchingOptions.searchByPurchaseTicket) || "";
-    // const columnNameSorting:ColumnSortNameType = useSelector((state:RootState) => state.supplier.sortingOptions.columnNameSorting);
-    // const columnSortDirection:ColumnSortDirectionType = useSelector((state:RootState) => state.supplier.sortingOptions.columnSortDirection);
     
     let newArr:Array<SupplerDataType> = useSelector((state:RootState) => state.supplier.suppliers)
         .filter( el => el.supplierName.toLowerCase().includes(searchField.toLowerCase()));
@@ -102,12 +99,6 @@ export function AddSearchOptions() {
 
     if (searchByPurchaseTicket.length > 0)
         newArr = newArr.filter( el => el.purchaseTicket?.includes(searchByPurchaseTicket))
-
-    // const dateStartSearchDefault = searchByDateStart || new Date(1800, 1, 1);
-    // const dateEndSearchDefault = searchByDateEnd || new Date(2500, 12, 31);
-
-    // console.log('functions - for - search / searchByDateStart=', searchByDateStart);
-    // console.log('functions - for - search / searchByDateEnd=', searchByDateEnd);
     
     if (searchByDateStart) {
         newArr = newArr.filter( el => (el.creationDate && searchByDateStart) 

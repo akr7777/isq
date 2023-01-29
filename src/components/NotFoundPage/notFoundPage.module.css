@@ -5,6 +5,7 @@
     align-items: center;
     margin-top: 50px;
     text-align: center;
+    gap: 40px;
 }
 .link_div {
     display: inline-block;

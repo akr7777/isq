@@ -23,8 +23,6 @@ const Calendar = (props: CalendarPropsType) => {
     const [date, setDate] = useState<Date>();
     if (props.choosenDate && props.choosenDate.length > 0) {
         const choosenDate:Date = new Date(dayjs(props.choosenDate).year(), dayjs(props.choosenDate).month(), dayjs(props.choosenDate).date())
-        
-        
         setDate(choosenDate)
     }
     
@@ -34,9 +32,10 @@ const Calendar = (props: CalendarPropsType) => {
     // const [error, setError] = useState<boolean>(false);
 
     const showCalendarClickHandler = () => {
-        if (!date) {
-            setDate( new Date() )
-        }
+        // debugger
+        // if (!date) {
+        //     setDate( new Date() )
+        // }
         setShow(!show);
     }
 

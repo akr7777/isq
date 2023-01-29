@@ -18,6 +18,7 @@ export const LineTextField = (props: LineTextFieldPropsType) => {
 
     const onTextChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
+        e.stopPropagation();
         const text = e.currentTarget.value;
         props.onChangeFunction(text)
     }

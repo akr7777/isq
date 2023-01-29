@@ -55,12 +55,15 @@ html[data-theme='light'] {
 
   --border_color: black;
 
-  --buttonOK_bgColor: rgb(39, 151, 39);
+  /* --buttonOK_bgColor: rgb(39, 151, 39); */
+  --buttonOK_bgColor: #4CAF50;
   --buttonOK_bgColor_hover: rgb(27, 130, 27);
-  --buttonOK_bgColor_focus: rgb(26, 112, 26);
-  --buttonCancel_bgColor: rgb(200, 23, 23);
+  --buttonOK_bgColor_focus: #399d3c;
+  /* --buttonOK_bgColor_focus: rgb(26, 112, 26); */
+  --buttonCancel_bgColor: #f44336;
+  /* --buttonCancel_bgColor: rgb(200, 23, 23); */
   --buttonCancel_bgColor_hover: rgb(208, 55, 55);
-  --buttonCancel_bgColor_hofocus: rgb(163, 77, 77);
+  --buttonCancel_bgColor_hofocus: rgb(176, 56, 56);
 
   --search_circle_open_icon: purple;
 

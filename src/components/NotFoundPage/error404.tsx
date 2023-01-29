@@ -10,7 +10,7 @@ const ErrorPage = () => {
   return (
     <div id="error-page" className={s.notFoundPageWrapper}>
       <h1>{ t("404page_text_0") }</h1>
-      <p>{ t("404page_text_1") }</p>
+      <h2>{ t("404page_text_1") }</h2>
       <div className={s.link_div}>
         <Link to='/' className={s.link}>
           { t("404page_text_2") }

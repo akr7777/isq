@@ -28,7 +28,6 @@ const SearchByComplited = () => {
                 <input type="radio" value={SEARCH_COMPLETED_ALL} name="all" 
                     onChange={(e) => onCheckedChange(e)}
                     checked={checkedField === SEARCH_COMPLETED_ALL}
-                    // className={s.complitedCheckOptionCircle}
                     className={checkedField === SEARCH_COMPLETED_ALL 
                         ? s.complitedCheckOptionCircle + " " +s.checkedInputAll
                         : s.complitedCheckOptionCircle
