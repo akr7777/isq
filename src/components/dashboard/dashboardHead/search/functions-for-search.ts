@@ -1,11 +1,13 @@
 import dayjs from "dayjs";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { 
     SearchByComplitedType, RiskType, SEARCH_COMPLETED_FINISHED, SEARCH_COMPLETED_UNFINISHED, 
     RISK_LOW, RISK_HIGH, RISK_MEDIUM, SEARCH_COMPLETED_ALL, ColumnSortNameType, ColumnSortDirectionType, 
     SORT_ACS, SORT_DSC, NAME_COLUMN_SORT, CREATION_DATE_COLUMN_SORT, COMPLITED_COLUMN_SORT, RISK_COLUMN_SORT, SupplerDataType, COMMON_DATE_FORMAT 
 } from "../../../../store/features/supplierSlice";
-import { RootState } from "../../../../store/store";
+import { getCompaniesThunk } from "../../../../store/features/supplierThunks";
+import { RootState, useAppDispatch } from "../../../../store/store";
 
 
 type SortArrayPropsType = {
@@ -39,9 +41,9 @@ export function SortArray(props: SortArrayPropsType):Array<SupplerDataType> {
             }
             if (columnNameSorting === COMPLITED_COLUMN_SORT) {
                 newArr = newArr.sort( (a,b) => {
-                    if (a.isComplite < b.isComplite)
+                    if (a.filledDate && b.filledDate && a.filledDate < b.filledDate)
                         return columnSortDirection === SORT_ACS ? -1 : 1;
-                    else if (a.isComplite > b.isComplite)
+                    else if (a.filledDate && b.filledDate && a.filledDate > b.filledDate)
                         return columnSortDirection === SORT_ACS ? 1 : -1;
                     else 
                         return 0;
@@ -82,13 +84,19 @@ export function AddSearchOptions() {
     const searchByDateEnd: string = useSelector((state: RootState) => state.supplier.searchingOptions.searchByDateEnd);
     const searchByPurchaseTicket:string = useSelector((state:RootState) => state.supplier.searchingOptions.searchByPurchaseTicket) || "";
     
-    let newArr:Array<SupplerDataType> = useSelector((state:RootState) => state.supplier.suppliers)
-        .filter( el => el.supplierName.toLowerCase().includes(searchField.toLowerCase()));
+    const dispatch = useAppDispatch();
+
+    const companies:Array<SupplerDataType> = useSelector((state:RootState) => state.supplier.suppliers);
+    useEffect( () => {
+        dispatch(getCompaniesThunk(1));
+    }, [])
+
+    let newArr:Array<SupplerDataType> = companies.filter( el => el.supplierName.toLowerCase().includes(searchField.toLowerCase()));
 
     if (searchComplited === SEARCH_COMPLETED_FINISHED)
-        newArr = newArr.filter( el => el.isComplite === true );
+        newArr = newArr.filter( el => el.filledDate );
     if (searchComplited === SEARCH_COMPLETED_UNFINISHED)
-        newArr = newArr.filter( el => el.isComplite === false );
+        newArr = newArr.filter( el => el.filledDate );
 
     if (searchRisk === RISK_LOW)
         newArr = newArr.filter( el => el.risk === RISK_LOW);

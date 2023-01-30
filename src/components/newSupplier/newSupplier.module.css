@@ -66,7 +66,7 @@
     gap: 30px;
     justify-content: center;
     align-items: center;
-    background-color: red;
+    /* background-color: red; */
 }
 .newSupplier_link_link {
     display: flex;
@@ -95,4 +95,12 @@
     width: 30px;
     height: 30px;
     cursor: pointer;
+}
+
+.newSupplierButtons {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
 }

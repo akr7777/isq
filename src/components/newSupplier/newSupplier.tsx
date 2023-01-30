@@ -5,10 +5,16 @@ import { LineTextField } from '../common/labelTextField/labelLineText';
 import { PATHS } from '../outlet/outlet';
 import s from './newSupplier.module.css';
 import { useTranslation } from 'react-i18next';
-import iconCopyGreen from '../../public/icons/icon_copy_green.png';
-import iconCopyBlue from '../../public/icons/icon_copy_blue.png';
+// import iconCopyGreen from '../../public/icons/icon_copy_green.png';
+// import iconCopyBlue from '../../public/icons/icon_copy_blue.png';
 import iconTicket from "../../public/icons/purchase_ticket.png";
 import iconCompany from "../../public/icons/icon_company.png";
+import { RootState, useAppDispatch } from '../../store/store';
+import { useSelector } from 'react-redux';
+import { createNewSupplierThunk } from '../../store/features/newSupplierSlice';
+import Preloader from '../common/preloader/preloader';
+import { NewSupplierSecondButtons, NewSupplierFirstButtons } from './newSupplierButtons';
+import NewSuplierLinkCreated from './newSupplierLinkCreated';
 
 
 const NewSupplier = () => {
@@ -17,18 +23,26 @@ const NewSupplier = () => {
     const [supplierName, setSupplierName] = useState<string>('');
     const [purchaseTicket, setPurchaseTicket] = useState<string>('');
     const [error, setError] = useState<string>('');
-    const [newSupplierLink, setNewSupplierLink] = useState<string>('');
-    const [copyLinkSuccess, setCopyLinkSuccess] = useState<boolean>(false);
+    const dispatch = useAppDispatch();
 
-    const delay = (seconds: number) => new Promise(resolve => setTimeout(resolve,seconds*1000)) 
+    const newSupplierId: string = useSelector((state:RootState) => state.newSupplier.id);
+    const newSupplierLink = "https://example.com/" + newSupplierId;
+    const isLoading: boolean = useSelector((state:RootState) => state.newSupplier.isLoading);
 
+    const createdSupplierName:string = useSelector((state:RootState) => state.newSupplier.company);
+    const createdSupplierTicket: string | null = useSelector((state:RootState) => state.newSupplier.ticket);
+
+    // const delay = (seconds: number) => new Promise(resolve => setTimeout(resolve,seconds*1000)) 
+
+    // console.log('NewSupplier / newSupplierId=', newSupplierId);
+    
     const onNewSupplierNameChangeHandler = (newText: string) => {
         setSupplierName(newText);
         setError('');
     }
     const onNewSupplierCreateClickHandler = () => {
         if (supplierName.length > 0) {
-            setNewSupplierLink("https://example.com/kshfgskjfgbsubrevgsbvhbvsjhhsvcs");
+            dispatch(createNewSupplierThunk({company: supplierName, ticket: purchaseTicket}));
         } else {
             const errorMessage:string = t("required_field");
             setError(errorMessage);
@@ -37,17 +51,17 @@ const NewSupplier = () => {
     const onNewSupplierCancelClickHandler = () => {
         navigate(PATHS.dashboard);
     }
-    const copyToBuffer = async () => {
-        navigator.clipboard.writeText(newSupplierLink)
-        .then(async () => {
-            setCopyLinkSuccess(true);
-            await delay(3);
-            setCopyLinkSuccess(false);
-        })
-        .catch(err => {
-            console.log('Something went wrong', err);
-        });
-    }
+    // const copyToBuffer = async () => {
+    //     navigator.clipboard.writeText(newSupplierLink)
+    //     .then(async () => {
+    //         setCopyLinkSuccess(true);
+    //         await delay(3);
+    //         setCopyLinkSuccess(false);
+    //     })
+    //     .catch(err => {
+    //         console.log('Something went wrong', err);
+    //     });
+    // }
 
     return <div className={s.newWrapper}>
         <div>
@@ -55,7 +69,7 @@ const NewSupplier = () => {
         </div>
 
         {
-            newSupplierLink.length === 0 && <>
+            newSupplierId.length === 0 && <>
             
                     <div className={s.fields}>
                         <div className={s.oneField + " " + s.fields_width}>
@@ -92,7 +106,9 @@ const NewSupplier = () => {
 
                     </div>
 
-                    <div className={s.buttonsDiv + " " + s.btn_width}>
+                    <NewSupplierFirstButtons onClick={onNewSupplierCreateClickHandler} />
+
+                    {/* <div className={s.buttonsDiv + " " + s.btn_width}>
                         <ButtonOK 
                             text={ t("newSupplier_create_new") }
                             onClickFunction={onNewSupplierCreateClickHandler}
@@ -101,46 +117,42 @@ const NewSupplier = () => {
                             text={ t("newSupplier_cancel_new") }
                             onClickFunction={onNewSupplierCancelClickHandler}
                         />
-                    </div>
+                    </div> */}
                 </>
         }
 
         
         
         {
-            newSupplierLink.length > 0 && <div className={s.newSupplier_link_div}>
-                <h2>{ t("newSupplier_link_send_it") }</h2>
-
-                <div className={s.newSupplier_link_link}>
-                    {/* <h3 className={s.www}>{ newSupplierLink }</h3> */}
-                    <LineTextField
-                        type='text'
-                        text={ newSupplierLink }
-                        onChangeFunction={() => {}}
-                        className={s.newSupplier_link_link_width1}
-                    />
+            isLoading 
+                ? <Preloader />
+                : <>
                     {
-                        copyLinkSuccess 
-                            ? <img src={iconCopyGreen} className={s.copy_icon}/>
-                            : <img src={iconCopyBlue} className={s.copy_icon} onClick={() => copyToBuffer()}/>
-                            // ? <h2>{ t("newSupplier_linkCopied") }</h2>
-                            // : <button 
-                            //         onClick={() => copyToBuffer()}
-                            //     >
-                            //         Скопировать ссылку (в виде иконки)
-                            //     </button>
-                    }
-                </div>
+                        newSupplierId.length > 0 && <div className={s.newSupplier_link_div}>
+                            <h3>{ t("newSupplier_link_send_it_1") }</h3>
 
-                <ButtonOK
-                    text={ t("newSupplier_goToMainPage")}
-                    onClickFunction={() => navigate(PATHS.dashboard)}
-                />
-                
-                
-                {/* name: {supplierName}
-                ticket: {purchaseTicket} */}
-            </div>
+                            <h3>
+                                { t("newSupplier_company_name") } 
+                                { createdSupplierName }
+                            </h3>
+                            {
+                                createdSupplierTicket && <h3>
+                                    { t("newSupplier_ticket") }
+                                    { createdSupplierTicket }
+                                </h3>
+                            }
+                            
+
+                            <h3>{ t("newSupplier_link_send_it_2") }</h3>
+
+
+                            <NewSuplierLinkCreated newSupplierLink={newSupplierLink}/>
+
+                            <NewSupplierSecondButtons />
+                        </div>
+                    }
+                </>
+            
         }
         
     </div>

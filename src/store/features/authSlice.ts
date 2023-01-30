@@ -1,10 +1,12 @@
 import {createSlice} from '@reduxjs/toolkit';
 import type {PayloadAction} from '@reduxjs/toolkit';
 import { DARK, LIGHT } from '../../hooks/useTheme';
-import { AccessTokenPartType, loginThunk } from './authThunks';
+import { AccessTokenPartType, loginThunk, profileThunk, ProfileThunkResponseType } from './authThunks';
+import { useAppDispatch } from '../store';
 
 export const localStorageAppThemeVariable = 'app-theme';
 export const localStorageLanguageVariable = 'language';
+export const localStorageAccessTokenVariable = "accessToken";
 
 export const ADMIN_USER_ROLE = 'admin';
 export const MANAGER_USER_ROLE = 'manager';
@@ -25,6 +27,7 @@ export type UserSettingsType = {
 }
 export type UserType = {
     userId: UserIdType,
+    username: string,
     name: string,
     role: RoleType,
     userSettings: UserSettingsType,
@@ -35,12 +38,17 @@ export type UserType = {
         emptyLogin: boolean,
         emptyPassword: boolean,
     }
-    loginRequestLoadingStatus: boolean,
+    loadingStatus: {
+        loginRequestLoadingStatus: boolean,
+        profileRequestLoadingStatus: boolean,
+    }
+    
 }
 
 
 const initContent: UserType = {
     userId: '',
+    username: '',
     name: '1111',
     role: undefined,
     userSettings: {
@@ -54,7 +62,11 @@ const initContent: UserType = {
         emptyLogin: false,
         emptyPassword: false,
     },
-    loginRequestLoadingStatus: false,
+    loadingStatus: {
+        loginRequestLoadingStatus: false,
+        profileRequestLoadingStatus: false,
+    }
+    
 }
 
 export const authSlice = createSlice({
@@ -81,6 +93,19 @@ export const authSlice = createSlice({
                     emptyPassword: false,
                     loginError: "",
                 }
+            }
+        },
+
+        loginAC: (state: UserType, action: PayloadAction<string>):UserType => {
+            const decodedTokenPart:AccessTokenPartType = JSON.parse(atob(action.payload.split('.')[1]));
+            const {id, username} = decodedTokenPart;
+            localStorage.setItem(localStorageAccessTokenVariable, action.payload);
+            // state.name = username;
+            // state.userId = id;
+            return {
+                ...state,
+                name: username,
+                userId: id
             }
         },
         
@@ -123,21 +148,39 @@ export const authSlice = createSlice({
 
     extraReducers: (builder) => {
         builder.addCase(loginThunk.pending, (state: UserType) => {
-            state.loginRequestLoadingStatus = true;
+            state.loadingStatus = {...state.loadingStatus, loginRequestLoadingStatus: true } 
         })
         builder.addCase(loginThunk.fulfilled, (state: UserType, action: PayloadAction<string>) => {
-            const decodedTokenPart:AccessTokenPartType = JSON.parse(atob(action.payload.split('.')[1]));
-            const {id, username} = decodedTokenPart;
-            localStorage.setItem("accessToken", action.payload);
-            state.name = username;
-            state.userId = id;
-            state.loginRequestLoadingStatus = false;
+            // const decodedTokenPart:AccessTokenPartType = JSON.parse(new Buffer(action.payload.split('.')[1], 'base64').toString('ascii'));
+            
+            // const decodedTokenPart:AccessTokenPartType = JSON.parse(atob(action.payload.split('.')[1]));
+            // const {id, username} = decodedTokenPart;
+            // localStorage.setItem(localStorageAccessTokenVariable, action.payload);
+            // state.name = username;
+            // state.userId = id;
+            
+            const dispatch = useAppDispatch();
+            dispatch(loginAC(action.payload));
+            state.loadingStatus = {...state.loadingStatus, loginRequestLoadingStatus: false } 
         })
         builder.addCase(loginThunk.rejected, (state: UserType) => {
-            state.loginRequestLoadingStatus = false;
+            state.loadingStatus = {...state.loadingStatus, loginRequestLoadingStatus: false } 
+        })
+
+        builder.addCase(profileThunk.pending, (state: UserType) => {
+            state.loadingStatus = {...state.loadingStatus, profileRequestLoadingStatus: true } 
+        })
+        builder.addCase(profileThunk.fulfilled, (state: UserType, action: PayloadAction<ProfileThunkResponseType>) => {
+            state.name = action.payload.name;
+            state.username = action.payload.username;
+            //...
+            state.loadingStatus = {...state.loadingStatus, profileRequestLoadingStatus: false } 
+        })
+        builder.addCase(profileThunk.rejected, (state: UserType) => {
+            state.loadingStatus = {...state.loadingStatus, profileRequestLoadingStatus: false } 
         })
     }
 })
-export const {onLoginInputAC, onPasswordInputAC, changeThemeAC, changeLanguageAC} = authSlice.actions;
+export const {loginAC, onLoginInputAC, onPasswordInputAC, changeThemeAC, changeLanguageAC} = authSlice.actions;
 
 export default authSlice.reducer;

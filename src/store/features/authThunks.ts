@@ -27,3 +27,20 @@ export const loginThunk = createAsyncThunk(
         }
     }
 );
+
+
+export type ProfileThunkResponseType = {
+    "username": string,
+    "name": string, 
+    "layout": string, 
+    "items_per_page": number
+}
+export const profileThunk = createAsyncThunk(
+    'auth/profileThunk',
+    async (_, {rejectWithValue, dispatch}) => {
+        const res = await authAPI.getProfile();
+        // console.log('profileThunk=', res.data);
+        if (res.data.status === 'success')
+            return res.data.data
+    }
+);

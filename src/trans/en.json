@@ -72,10 +72,13 @@
     "newSupplier_ticketLink_placeholder": "not required",
     "newSupplier_create_new": "Create",
     "newSupplier_cancel_new": "Cancel",
-    "newSupplier_link_send_it": "New supplier was created. Send them this link to answering the questions:",
+    "newSupplier_link_send_it_1": "New supplier was created.",
+    "newSupplier_link_send_it_2": "Send them this link to answering the questions:",
     "newSupplier_title": "New supplier creation",
     "newSupplier_linkCopied": "Link was copied",
-    "newSupplier_goToMainPage": "To the main page",
+    "newSupplier_goToMainPage": "Main page",
+    "newSupplier_company_name":  "Company: ",
+    "newSupplier_ticket": "Ticket: ",
 
     "isLoadingOn": "Loading data...",
 

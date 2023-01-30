@@ -3,15 +3,21 @@ import Footer from './components/footer/footer';
 import Outlet from './components/outlet/outlet';
 import { useAppDispatch } from './store/store';
 import { DARK, LIGHT } from './hooks/useTheme';
-import { changeThemeAC, localStorageAppThemeVariable, localStorageLanguageVariable, RU_LANG } from './store/features/authSlice';
+import { changeThemeAC, localStorageAccessTokenVariable, localStorageAppThemeVariable, localStorageLanguageVariable, loginAC, RU_LANG } from './store/features/authSlice';
 import indexCss from './App.module.css';
 import { BRICK_VIEW, changePageSizingAC, changeRiskInLineAC, changeViewAC, DATE_EU, DATE_US, localStoragePageSizingVariable, localStorageRiskViewVariable, localStorageSuppliersViewVariable, localStorageUserDateFormat, pageSizeOptions, RiskViewSTAR, RiskViewWORD, TABLE_VIEW, userDateFormatChangeAC } from './store/features/supplierSlice';
 function App() {
 
+  const dispatch = useAppDispatch();
   // Intializing App ->
 
+  //if user logged in
+  const accessToken = localStorage.getItem(localStorageAccessTokenVariable);
+  if (accessToken && accessToken.length > 0) {
+    dispatch(loginAC(accessToken));
+  }
+
   // App theme init
-  const dispatch = useAppDispatch();
   const theme = localStorage.getItem(localStorageAppThemeVariable);
   if (theme === DARK || theme === LIGHT) {
     dispatch(changeThemeAC(theme));

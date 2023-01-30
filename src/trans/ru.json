@@ -70,10 +70,13 @@
     "newSupplier_ticketLink_placeholder": "необязательное поле",
     "newSupplier_create_new": "Создать",
     "newSupplier_cancel_new": "Отмена",
-    "newSupplier_link_send_it": "Новый поставщик создан. Отправьте ему эту ссылку для заполнения анкеты:",
+    "newSupplier_link_send_it_1": "Новый поставщик создан.",
+    "newSupplier_link_send_it_2": "Отправьте ему эту ссылку для заполнения анкеты:",
     "newSupplier_title": "Создание нового поставщика",
     "newSupplier_linkCopied": "Ссылка скопирована в буфер обмена",
-    "newSupplier_goToMainPage": "Перейти на главную страницу",
+    "newSupplier_goToMainPage": "Главная страница",
+    "newSupplier_company_name":  "Название компании: ",
+    "newSupplier_ticket": "Тикет: ",
 
     "isLoadingOn": "Загрузка данных...",
 

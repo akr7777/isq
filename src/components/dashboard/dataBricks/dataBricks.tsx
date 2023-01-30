@@ -18,20 +18,22 @@ import { useTranslation } from "react-i18next";
 import dayjs from "dayjs";
 import { useEffect } from "react";
 import { getCompaniesThunk } from "../../../store/features/supplierThunks";
+import Preloader from "../../common/preloader/preloader";
 
 
 
 const DataBricks = () => {
     const navigate = useNavigate();
-    const dispatch = useAppDispatch();
+    // const dispatch = useAppDispatch();
     const {t} = useTranslation();
 
-    useEffect(() => {
-        dispatch(getCompaniesThunk(1));
-    }, [])
+    // useEffect(() => {
+    //     dispatch(getCompaniesThunk(1));
+    // }, [])
 
     const companies:SupplerDataType[] = AddSearchOptions();
     const userDateFormat:FormatDateType = useSelector((state: RootState) => state.supplier.settings.userDateFormat);
+    const isLoading:boolean = useSelector((state:RootState) => state.supplier.loadingVars.suppliersLoading);
     
     const onSupplierClickHandler = (supplierId: SupplierIdType) => {
         navigate(PATHS.supplierCard + "/" + String(supplierId));
@@ -39,47 +41,54 @@ const DataBricks = () => {
 
     return <div className={s.dataBricksWrapper}>
 
-        <div className={s.brickHead}>
-            <div className={s.brickHeadPeice}>
-                <label>{ t("table_name") }</label>
-            </div>
-            <div className={s.brickHeadPeice}>
-                <label>{ t("table_creation_date")}</label>
-            </div>
-            <div className={s.brickHeadPeice}>
-                <label>{ t("table_is_complite") }</label>
-            </div>
-            <div className={s.brickHeadPeice}>
-                <label>{ t("table_risk") }</label>
-            </div>
-        </div>
-
         {
-            companies.map( (c:SupplerDataType, ind: number) => {
-                return <div 
-                            className={s.oneBrick} 
-                            key={c.supplierId}
-                            onClick={() => onSupplierClickHandler(c.supplierId)}
-                        >
-                    <div className={s.oneBrickPiece}>
-                        {c.supplierName}
+            isLoading
+                ? <Preloader />
+                : <>
+                    <div className={s.brickHead}>
+                        <div className={s.brickHeadPeice}>
+                            <label>{ t("table_name") }</label>
+                        </div>
+                        <div className={s.brickHeadPeice}>
+                            <label>{ t("table_creation_date")}</label>
+                        </div>
+                        <div className={s.brickHeadPeice}>
+                            <label>{ t("table_is_complite") }</label>
+                        </div>
+                        <div className={s.brickHeadPeice}>
+                            <label>{ t("table_risk") }</label>
+                        </div>
                     </div>
-                    <div className={s.oneBrickPiece}>
-                        {c.creationDate && dayjs(c.creationDate).format(userDateFormat)}
-                    </div>
-                    <div className={s.oneBrickPiece}>
-                        {
-                            c.isComplite
-                                ? <img src={yes} className={dbStyles.icon_yes_no}/>
-                                : <img src={no} className={dbStyles.icon_yes_no}/>
-                        }
-                    </div>
-                    <div className={s.oneBrickPiece}>
-                        <RiskInLine risk={c.risk}/>
-                    </div>
-                </div>
-            })
+
+                    {
+                        companies.map( (c:SupplerDataType, ind: number) => {
+                            return <div 
+                                        className={s.oneBrick} 
+                                        key={c.supplierId}
+                                        onClick={() => onSupplierClickHandler(c.supplierId)}
+                                    >
+                                <div className={s.oneBrickPiece}>
+                                    {c.supplierName}
+                                </div>
+                                <div className={s.oneBrickPiece}>
+                                    {c.creationDate && dayjs(c.creationDate).format(userDateFormat)}
+                                </div>
+                                <div className={s.oneBrickPiece}>
+                                    {
+                                        c.filledDate
+                                            ? <img src={yes} className={dbStyles.icon_yes_no}/>
+                                            : <img src={no} className={dbStyles.icon_yes_no}/>
+                                    }
+                                </div>
+                                <div className={s.oneBrickPiece}>
+                                    <RiskInLine risk={c.risk}/>
+                                </div>
+                            </div>
+                        })
+                    }
+                </>
         }
+        
 
     </div>
 }

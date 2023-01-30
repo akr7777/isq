@@ -1,6 +1,9 @@
 import {createSlice} from '@reduxjs/toolkit';
 import type {PayloadAction} from '@reduxjs/toolkit';
 import { getCompaniesThunk, getCompaniesThunkResponseType } from './supplierThunks';
+// import { suppliersInitContent12 } from './supplierInitData';
+
+
 
 export const TABLE_VIEW = 'TABLE';
 export const BRICK_VIEW = 'BRICK';
@@ -49,8 +52,8 @@ export type SupplerDataType = {
     supplierName: string,
     risk: RiskType;
     creationDate: string | undefined,
-    isComplite: boolean,
-    data: string,
+    filledDate: string | undefined,
+    // data?: string,
     purchaseTicket?: string
 }
 export type ViewOptionsType = typeof TABLE_VIEW | typeof BRICK_VIEW;
@@ -80,53 +83,15 @@ type SupplierSliceType = {
         companiesCount: number,
         currentPage: number,
     }
+    loadingVars: {
+        suppliersLoading: boolean,
+        newSupplierCreationLoading: boolean,
+    }
     
 }
 
 const initContent:SupplierSliceType = {
-    suppliers: [
-        {
-            supplierId: '00001',
-            supplierName: 'ПАО "МТС"',
-            risk: RISK_LOW,
-            creationDate: "2022-01-01",
-            isComplite: true,
-            data: 'ПАО МТС Информация',
-            purchaseTicket: '1234566789'
-        },
-        {
-            supplierId: '00002',
-            supplierName: 'ПАО "Пятерочка"',
-            risk: RISK_MEDIUM,
-            creationDate: "2022-03-01",
-            isComplite: true,
-            data: 'Пятерочка Информация',
-        },
-        {
-            supplierId: '00003',
-            supplierName: 'ООО "Ромашка"',
-            risk: RISK_HIGH,
-            creationDate: "2022-05-01",
-            isComplite: true,
-            data: 'Ромашка Информация',
-        },
-        {
-            supplierId: '00004',
-            supplierName: 'ООО "Рога и копыта"',
-            risk: undefined,
-            creationDate: "2022-07-01",
-            isComplite: false,
-            data: 'Рога и копыта INFO',
-        },
-        {
-            supplierId: '00005',
-            supplierName: 'ООО "Simple company"',
-            risk: undefined,
-            creationDate: "2022-09-01",
-            isComplite: false,
-            data: 'Simple company INFO',
-        }
-        ],
+    suppliers: [],
     
     settings: {
         view: TABLE_VIEW,
@@ -152,6 +117,10 @@ const initContent:SupplierSliceType = {
     pageOptions: {
         companiesCount: 30653,
         currentPage: 1,
+    },
+    loadingVars: {
+        suppliersLoading: false,
+        newSupplierCreationLoading: false,
     }
 }
 
@@ -276,14 +245,39 @@ export const supplierSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(getCompaniesThunk.pending, (state: SupplierSliceType) => {
             // state.isLoading = true;
+            state.loadingVars.suppliersLoading = true;
         })
         builder.addCase(getCompaniesThunk.fulfilled, (state: SupplierSliceType, action: PayloadAction<Array<getCompaniesThunkResponseType>>) => {
-            console.log('getCompaniesThunk / fulfilled, action=', action);
-            
+            // console.log('getCompaniesThunk / fulfilled, action=', action.payload);
+            state.suppliers = action.payload.map( (el:getCompaniesThunkResponseType) => {
+                const riskLevel:RiskType = el.risk_level === 'low'
+                                            ? RISK_LOW
+                                            : el.risk_level === 'medium'
+                                                ? RISK_MEDIUM
+                                                : el.risk_level === 'high'
+                                                    ? RISK_HIGH
+                                                    : undefined
+
+                let response:SupplerDataType = {
+                    supplierId: el.id,
+                    supplierName: el.company,
+                    risk: riskLevel,
+                    creationDate: el.created_at,
+                    filledDate: el.filled_at,
+                    purchaseTicket: el.ticket || undefined,
+                    // data: string,
+                }
+                if (el.ticket) {
+                    return {...response, purchaseTicket: el.ticket}
+                } else {
+                    return response
+                }
+            });
             //state.suppliers = action.payload;
+            state.loadingVars.suppliersLoading = false;
         })
         builder.addCase(getCompaniesThunk.rejected, (state: SupplierSliceType) => {
-            // state.isLoading = false;
+            state.loadingVars.suppliersLoading = false;
         })
     }
 })

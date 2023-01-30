@@ -17,35 +17,16 @@ import RiskInLine from "../riskInLine";
 import { useTranslation } from "react-i18next";
 import SortingIcons from "../sortIcons";
 import dayjs from "dayjs";
+import Preloader from "../../common/preloader/preloader";
+// import preloaderSpinner1 from "../../../public/preloader/preloader1.gif"
 
 const DataTable = () => {
     const {t} = useTranslation();
     const navigate = useNavigate();
 
-
-    // const searchField:string = useSelector((state:RootState) => state.supplier.search);
-    // const searchComplited:SearchByComplitedType = useSelector((state:RootState) => state.supplier.searchByComplited);
-    // const searchRisk:RiskType = useSelector((state:RootState) => state.supplier.searchByRisk);
-    // const searchByDateStart: FilterDateType = useSelector((state: RootState) => state.supplier.searchByDateStart);
-    // const searchByDateEnd: FilterDateType = useSelector((state: RootState) => state.supplier.searchByDateEnd);
-    // const searchByPurchaseTicket:string = useSelector((state:RootState) => state.supplier.searchByPurchaseTicket) || "";
-    // const columnNameSorting:ColumnSortNameType = useSelector((state:RootState) => state.supplier.sortingOptions.columnNameSorting);
-    // const columnSortDirection:ColumnSortDirectionType = useSelector((state:RootState) => state.supplier.sortingOptions.columnSortDirection);
-    // const initCompaniesArray:Array<SupplerDataType> = useSelector((state:RootState) => state.supplier.suppliers);
-    // const searchOptions:AddSearchOptionsPropsType = {
-    //     initArray: initCompaniesArray,
-    //     searchField:searchField,
-    //     searchComplited:searchComplited,
-    //     searchRisk:searchRisk,
-    //     searchByDateStart: searchByDateStart,
-    //     searchByDateEnd:searchByDateEnd,
-    //     searchByPurchaseTicket:searchByPurchaseTicket,
-    //     columnNameSorting:columnNameSorting,
-    //     columnSortDirection:columnSortDirection,
-    // }
-
     const companies:SupplerDataType[] = AddSearchOptions();
     const userDateFormat:FormatDateType = useSelector((state: RootState) => state.supplier.settings.userDateFormat);
+    const isLoading:boolean = useSelector((state:RootState) => state.supplier.loadingVars.suppliersLoading);
 
     const onSupplierClickHandler = (supplierId: SupplierIdType) => {
         navigate(PATHS.supplierCard + "/" + String(supplierId));
@@ -53,7 +34,10 @@ const DataTable = () => {
     
     
     return <>
-            <table className={s.theTable}>
+            {
+                isLoading
+                    ? <Preloader />
+                    : <table className={s.theTable}>
                 <thead>
                     <tr>
                         <td>
@@ -86,7 +70,7 @@ const DataTable = () => {
                                     {/* {c.creationDate?.toLocaleDateString()} */}
                                 </td>
                                 <td>{
-                                        c.isComplite
+                                        c.filledDate
                                           ? <img src={yes} className={dashboardStyles.icon_yes_no}/>
                                           : <img src={no} className={dashboardStyles.icon_yes_no}/>
                                     }
@@ -99,6 +83,8 @@ const DataTable = () => {
                     }
                 </tbody>
             </table>
+            }
+            
         </>
 }
 

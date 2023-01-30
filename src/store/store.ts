@@ -4,13 +4,15 @@ import questionsSlice from "./features/questionsSlice";
 import authSlice from "./features/authSlice";
 import supplierSlice from "./features/supplierSlice";
 import complitedSlice from "./features/complitedSlice";
+import newSupplierSlice from "./features/newSupplierSlice";
 
 export const store = configureStore({
     reducer: {
         auth: authSlice,
         questions: questionsSlice,
         supplier: supplierSlice,
-        complited: complitedSlice
+        complited: complitedSlice,
+        newSupplier: newSupplierSlice,
     },
 });
 

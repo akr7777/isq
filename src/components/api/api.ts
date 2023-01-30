@@ -1,5 +1,6 @@
 import axios, {AxiosResponse} from "axios";
 import { loginThunkPropsType } from "../../store/features/authThunks";
+import { CreateNewSupplierThunkRequestType } from "../../store/features/newSupplierSlice";
 
 
 const instance = axios.create({
@@ -15,12 +16,18 @@ instance.interceptors.request.use((config)=> {
 
 export const authAPI = {
     login: (credentials: loginThunkPropsType):Promise<AxiosResponse> => {
-        return instance.post('login', credentials)
+        return instance.post('login', credentials);
+    },
+    getProfile: ():Promise<AxiosResponse> => {
+        return instance.get('profile');
     }
 }
 export const supplierAPI = {
     getCompanies: (pageNumber: number):Promise<AxiosResponse> => {
-        return instance.get('companies.json');
+        return instance.get('questionaries?page='+pageNumber);
         // return instance.get('test/getTest?contentId='+pageNumber);
+    },
+    createNewSupplier: (data: CreateNewSupplierThunkRequestType):Promise<AxiosResponse> => {
+        return instance.post('questionaries', data)
     }
 }
