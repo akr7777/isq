@@ -18,12 +18,12 @@ const ProfileHeadFieldName = () => {
     const [newName, setNewName] = useState<string>(myName);
     const [isChange, setIsChange] = useState<boolean>(false);
     const userSettings:ProfileUserSettingsType = useSelector((state:RootState) => state.auth.userSettings);
-    const username: string = useSelector((state:RootState) => state.auth.username);
+    // const username: string = useSelector((state:RootState) => state.auth.username);
     const dispatch = useAppDispatch();
 
     const onDoneIconClickHandler = () => {
         setIsChange(false);
-        dispatch(updateProfileThunk({name: newName, username: username, ...userSettings}));
+        dispatch(updateProfileThunk({name: newName, ...userSettings}));
     }
     const crossIconClickHandler = () => {
         setIsChange(false);

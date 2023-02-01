@@ -32,7 +32,7 @@ export const loginThunk = createAsyncThunk(
 );
 
 
-export type ProfileRequestResponseType = {
+export type ProfileResponseType = {
     "username": string,
     "name": string, 
     "theme": ThemesOptions, 
@@ -42,9 +42,10 @@ export type ProfileRequestResponseType = {
     "risk_format": RiskViewType, 
     "date_format": FormatDateType
 }
+export type ProfileRequestType = Omit<ProfileResponseType, 'username'>
 export const updateProfileThunk = createAsyncThunk(
     'auth/profileThunk',
-    async (profileVars:ProfileRequestResponseType, {rejectWithValue, dispatch}) => {
+    async (profileVars:ProfileRequestType, {rejectWithValue, dispatch}) => {
         const res = await authAPI.updateProfile(profileVars);
         if (res.data.status === 'success')
             return res.data.data

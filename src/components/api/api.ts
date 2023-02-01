@@ -1,5 +1,5 @@
 import axios, {AxiosResponse} from "axios";
-import { loginThunkPropsType, ProfileRequestResponseType } from "../../store/features/authThunks";
+import { loginThunkPropsType, ProfileRequestType } from "../../store/features/authThunks";
 import { CreateNewSupplierThunkRequestType } from "../../store/features/newSupplierSlice";
 
 
@@ -21,8 +21,8 @@ export const authAPI = {
     getProfile: ():Promise<AxiosResponse> => {
         return instance.get('profile');
     },
-    updateProfile: (profileData: ProfileRequestResponseType):Promise<AxiosResponse> => {
-        return instance.post('profile', profileData);
+    updateProfile: (profileData: ProfileRequestType):Promise<AxiosResponse> => {
+        return instance.put('profile', profileData);
     }
 }
 export const supplierAPI = {

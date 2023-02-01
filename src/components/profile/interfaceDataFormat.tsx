@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { RadioLabelOptionType, RadioLabels } from "../common/radioLabels/radioLabels";
 import s from './profile.module.css';
 import { DATE_EU, DATE_US, FormatDateType, ProfileUserSettingsType } from "../../store/features/authSlice";
-import { ProfileRequestResponseType, updateProfileThunk } from "../../store/features/authThunks";
+import { ProfileRequestType, updateProfileThunk } from "../../store/features/authThunks";
 
 const InterfaceDateFormat = () => {
     const myName:string = useSelector((state:RootState) => state.auth.name);
@@ -20,11 +20,10 @@ const InterfaceDateFormat = () => {
 
     const onViewChangeClickHandler = (newValue: string) => {
         if (newValue === DATE_EU || newValue === DATE_US) {
-            const dataForThunk:ProfileRequestResponseType = {
+            const dataForThunk:ProfileRequestType = {
                 ...userSettings,
                 date_format: newValue,
                 name: myName,
-                username: userName,
             }
             dispatch(updateProfileThunk(dataForThunk));
             // dispatch(userDateFormatChangeAC(val));

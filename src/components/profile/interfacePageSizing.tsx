@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { RadioLabelOptionType, RadioLabels } from "../common/radioLabels/radioLabels";
 import s from './profile.module.css';
 import { pageSizeOptions, ProfileUserSettingsType } from "../../store/features/authSlice";
-import { ProfileRequestResponseType, updateProfileThunk } from "../../store/features/authThunks";
+import { ProfileRequestType, updateProfileThunk } from "../../store/features/authThunks";
 
 const InterfacePageSizing = () => {
     const myName:string = useSelector((state:RootState) => state.auth.name);
@@ -22,11 +22,10 @@ const InterfacePageSizing = () => {
     const onViewChangeClickHandler = (newValue: string) => {
         const intVal = Number(newValue);
         if (pageSizeOptions.some( s => s === intVal)) {
-            const dataForThunk:ProfileRequestResponseType = {
+            const dataForThunk:ProfileRequestType = {
                 ...userSettings,
                 items_per_page: intVal,
                 name: myName,
-                username: userName,
             }
             dispatch(updateProfileThunk(dataForThunk));
             // dispatch(changePageSizingAC(intVal));

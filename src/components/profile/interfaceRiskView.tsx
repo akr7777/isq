@@ -4,11 +4,10 @@ import { useTranslation } from "react-i18next";
 import { RadioLabelOptionType, RadioLabels } from "../common/radioLabels/radioLabels";
 import s from './profile.module.css';
 import { ProfileUserSettingsType, RiskViewSTAR, RiskViewType, RiskViewWORD } from "../../store/features/authSlice";
-import { ProfileRequestResponseType, updateProfileThunk } from "../../store/features/authThunks";
+import { ProfileRequestType, updateProfileThunk } from "../../store/features/authThunks";
 
 const ProfileRiskViewChecker = () => {
     const myName:string = useSelector((state:RootState) => state.auth.name);
-    const userName:string = useSelector((state: RootState) => state.auth.username);
 
     const userSettings:ProfileUserSettingsType = useSelector((state:RootState) => state.auth.userSettings);
     const riskView:RiskViewType = userSettings.risk_format;
@@ -18,11 +17,10 @@ const ProfileRiskViewChecker = () => {
 
     const onViewChangeClickHandler = (newValue: string) => {
         if (newValue === RiskViewSTAR || newValue === RiskViewWORD) {
-            const dataForThunk:ProfileRequestResponseType = {
+            const dataForThunk:ProfileRequestType = {
                 ...userSettings,
                 risk_format: newValue,
                 name: myName,
-                username: userName,
             }
             dispatch(updateProfileThunk(dataForThunk));
             // dispatch(changeRiskInLineAC(val));

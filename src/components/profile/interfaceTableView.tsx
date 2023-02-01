@@ -4,11 +4,10 @@ import { t } from "i18next";
 import { RadioLabelOptionType, RadioLabels } from "../common/radioLabels/radioLabels";
 import s from './profile.module.css';
 import { BRICK_VIEW, ProfileUserSettingsType, TABLE_VIEW, LayoutOptionsType } from "../../store/features/authSlice";
-import { ProfileRequestResponseType, updateProfileThunk } from "../../store/features/authThunks";
+import { ProfileRequestType, updateProfileThunk } from "../../store/features/authThunks";
 
 const Checker = () => {
     const myName:string = useSelector((state:RootState) => state.auth.name);
-    const userName:string = useSelector((state: RootState) => state.auth.username);
 
     const userSettings:ProfileUserSettingsType = useSelector((state:RootState) => state.auth.userSettings);
     const currentLayout:LayoutOptionsType = userSettings.layout;
@@ -17,11 +16,10 @@ const Checker = () => {
 
     const onViewChangeClickHandler = (newValue: string) => {
         if (newValue===TABLE_VIEW || newValue===BRICK_VIEW) {
-            const dataForThunk:ProfileRequestResponseType = {
+            const dataForThunk:ProfileRequestType = {
                 ...userSettings,
                 layout: newValue,
                 name: myName,
-                username: userName,
             }
             dispatch(updateProfileThunk(dataForThunk));
             // dispatch(changeViewAC(newValue))

@@ -1,7 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 import type {PayloadAction} from '@reduxjs/toolkit';
 import { DARK, LIGHT } from '../../hooks/useTheme';
-import { AccessTokenPartType, getProfileThunk, loginThunk, ProfileRequestResponseType, updateProfileThunk } from './authThunks';
+import { AccessTokenPartType, getProfileThunk, loginThunk, ProfileResponseType, updateProfileThunk } from './authThunks';
 
 export const localStorageRiskViewVariable = 'riskViewInTable';
 export const RiskViewWORD = 'word';
@@ -185,7 +185,7 @@ export const authSlice = createSlice({
         builder.addCase(getProfileThunk.pending, (state: UserType) => {
             state.loadingStatus = {...state.loadingStatus, profileRequestLoadingStatus: true } 
         })
-        builder.addCase(getProfileThunk.fulfilled, (state: UserType, action: PayloadAction<ProfileRequestResponseType>) => {
+        builder.addCase(getProfileThunk.fulfilled, (state: UserType, action: PayloadAction<ProfileResponseType>) => {
             state.name = action.payload.name;
             state.username = action.payload.username;
             state.userSettings = {
@@ -202,17 +202,6 @@ export const authSlice = createSlice({
         builder.addCase(getProfileThunk.rejected, (state: UserType) => {
             state.loadingStatus = {...state.loadingStatus, profileRequestLoadingStatus: false } 
         })
-
-
-        // builder.addCase(updateProfileThunk.pending, (state: UserType) => {
-        //     state.loadingStatus = {...state.loadingStatus, profileRequestLoadingStatus: true } 
-        // })
-        // builder.addCase(updateProfileThunk.fulfilled, (state: UserType, action: PayloadAction) => {
-        //     state.loadingStatus = {...state.loadingStatus, profileRequestLoadingStatus: false } 
-        // })
-        // builder.addCase(updateProfileThunk.rejected, (state: UserType) => {
-        //     state.loadingStatus = {...state.loadingStatus, profileRequestLoadingStatus: false } 
-        // })
     }
 })
 export const {
