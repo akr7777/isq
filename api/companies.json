@@ -1,0 +1,45 @@
+{
+    "data": "[
+        {
+            supplierId: '00001',
+            supplierName: 'ПАО МТС',
+            risk: RISK_LOW,
+            creationDate: "2022-01-01",
+            isComplite: true,
+            data: 'ПАО МТС Информация',
+            purchaseTicket: '1234566789'
+        },
+        {
+            supplierId: '00002',
+            supplierName: 'ПАО Пятерочка',
+            risk: RISK_MEDIUM,
+            creationDate: "2022-03-01",
+            isComplite: true,
+            data: 'Пятерочка Информация',
+        },
+        {
+            supplierId: '00003',
+            supplierName: 'ООО Ромашка',
+            risk: RISK_HIGH,
+            creationDate: "2022-05-01",
+            isComplite: true,
+            data: 'Ромашка Информация',
+        },
+        {
+            supplierId: '00004',
+            supplierName: 'ООО Рога и копыта',
+            risk: undefined,
+            creationDate: "2022-07-01",
+            isComplite: false,
+            data: 'Рога и копыта INFO',
+        },
+        {
+            supplierId: '00005',
+            supplierName: 'ООО Simple company',
+            risk: undefined,
+            creationDate: "2022-09-01",
+            isComplite: false,
+            data: 'Simple company INFO',
+        }
+        ],"
+}
