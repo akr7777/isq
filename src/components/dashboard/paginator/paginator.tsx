@@ -4,8 +4,10 @@ import { RootState, useAppDispatch } from "../../../store/store";
 import s from './paginator.module.css';
 
 const Paginator = () => {
+    // const companiesCount:number = useSelector((state:RootState) => state.supplier.pageOptions.companiesCount);
+    // const pageSize:number = useSelector((state:RootState) => state.supplier.settings.pageSizing)
     const companiesCount:number = useSelector((state:RootState) => state.supplier.pageOptions.companiesCount);
-    const pageSize:number = useSelector((state:RootState) => state.supplier.settings.pageSizing)
+    const pageSize:number = useSelector((state:RootState) => state.auth.userSettings.items_per_page);
     const pageCount: number = Math.ceil( companiesCount / pageSize);
     const currentPage:number = useSelector((state:RootState) => state.supplier.pageOptions.currentPage);
 

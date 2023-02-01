@@ -16,7 +16,7 @@ const SearchByComplited = () => {
             e.currentTarget.value === SEARCH_COMPLETED_UNFINISHED
             ) {
                 dispatch(searchByComplitedChangeAC(e.currentTarget.value));
-                dispatch(searchByRiskAC(undefined))
+                dispatch(searchByRiskAC(null))
         }
     }
 

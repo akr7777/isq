@@ -1,34 +1,22 @@
 import {createSlice} from '@reduxjs/toolkit';
 import type {PayloadAction} from '@reduxjs/toolkit';
 import { getCompaniesThunk, getCompaniesThunkResponseType } from './supplierThunks';
+import { DATE_EU, FormatDateType, pageSizeOptions, RiskViewType, RiskViewWORD, TABLE_VIEW, LayoutOptionsType } from './authSlice';
 // import { suppliersInitContent12 } from './supplierInitData';
 
 
 
-export const TABLE_VIEW = 'TABLE';
-export const BRICK_VIEW = 'BRICK';
-export const localStorageSuppliersViewVariable = 'suppliersView';
+
 
 export const SEARCH_COMPLETED_ALL = "all";
 export const SEARCH_COMPLETED_FINISHED = "complited";
 export const SEARCH_COMPLETED_UNFINISHED = "unfinished";
 export type SearchByComplitedType = typeof SEARCH_COMPLETED_ALL | typeof SEARCH_COMPLETED_FINISHED | typeof SEARCH_COMPLETED_UNFINISHED;
 
-export const RISK_LOW = '1low';
-export const RISK_MEDIUM = '2medium';
-export const RISK_HIGH = '3high';
-export type RiskType = typeof RISK_LOW | typeof RISK_MEDIUM | typeof RISK_HIGH | undefined;
-
-export const localStorageRiskViewVariable = 'riskViewInTable';
-export const RiskViewWORD = 'WORD';
-export const RiskViewSTAR = 'STAR';
-export type RiskViewType = typeof RiskViewWORD | typeof RiskViewSTAR;
-
-export const localStorageUserDateFormat = 'dateFormat';
-export const DATE_EU = 'DD.MM.YYYY';
-export const DATE_US = 'MM/DD/YYYY';
-export type FormatDateType = typeof DATE_EU | typeof DATE_US;
-export const COMMON_DATE_FORMAT = "YYYY-MM-DD";
+export const RISK_LOW = 'low';
+export const RISK_MEDIUM = 'medium';
+export const RISK_HIGH = 'high';
+export type RiskType = typeof RISK_LOW | typeof RISK_MEDIUM | typeof RISK_HIGH | null;
 
 export const SORT_ACS = "acsending";
 export const SORT_DSC = "descending";
@@ -39,8 +27,7 @@ export const RISK_COLUMN_SORT = 'RISK_COLUMN_SORT';
 export type ColumnSortNameType = null | typeof NAME_COLUMN_SORT | typeof CREATION_DATE_COLUMN_SORT | typeof COMPLITED_COLUMN_SORT | typeof RISK_COLUMN_SORT;
 export type ColumnSortDirectionType = typeof SORT_ACS | typeof SORT_DSC;
 
-export const localStoragePageSizingVariable = 'page-size';
-export const pageSizeOptions = [20, 50, 100];
+
 
 export const SEARCH_TEXT_DELAY = 1000;
 
@@ -56,17 +43,17 @@ export type SupplerDataType = {
     // data?: string,
     purchaseTicket?: string
 }
-export type ViewOptionsType = typeof TABLE_VIEW | typeof BRICK_VIEW;
+
 
 type SupplierSliceType = {
     suppliers: Array<SupplerDataType>,
 
-    settings: {
-        view: ViewOptionsType,
-        riskView: RiskViewType,
-        pageSizing: number,
-        userDateFormat: FormatDateType,
-    }
+    // settings: {
+    //     view: ViewOptionsType,
+    //     riskView: RiskViewType,
+    //     pageSizing: number,
+    //     userDateFormat: FormatDateType,
+    // }
     sortingOptions: {
         columnNameSorting: ColumnSortNameType,
         columnSortDirection: ColumnSortDirectionType,
@@ -93,12 +80,12 @@ type SupplierSliceType = {
 const initContent:SupplierSliceType = {
     suppliers: [],
     
-    settings: {
-        view: TABLE_VIEW,
-        riskView: RiskViewWORD,
-        pageSizing: pageSizeOptions[0],
-        userDateFormat: DATE_EU,
-    },
+    // settings: {
+    //     view: TABLE_VIEW,
+    //     riskView: RiskViewWORD,
+    //     pageSizing: pageSizeOptions[0],
+    //     userDateFormat: DATE_EU,
+    // },
 
     sortingOptions: {
         columnNameSorting: null,
@@ -110,7 +97,7 @@ const initContent:SupplierSliceType = {
         searchByDateStart: '',
         searchByDateEnd: '',
         searchByComplited: SEARCH_COMPLETED_ALL,
-        searchByRisk: undefined,
+        searchByRisk: null,
         searchByPurchaseTicket: '',
     },
     
@@ -178,53 +165,49 @@ export const supplierSlice = createSlice({
         },
 
         // TABLE or BRICK
-        changeViewAC: (state:SupplierSliceType, action: PayloadAction<ViewOptionsType>):SupplierSliceType => {
-            // console.log('supplier / changeViewAC / action=', action.payload);
-            localStorage.setItem(localStorageSuppliersViewVariable, action.payload)
-            return {
-                ...state,
-                settings: {
-                    ...state.settings,
-                    view: action.payload
-                }
-            }
-        },
+        // changeViewAC: (state:SupplierSliceType, action: PayloadAction<ViewOptionsType>):SupplierSliceType => {
+        //     localStorage.setItem(localStorageSuppliersViewVariable, action.payload)
+        //     return {
+        //         ...state,
+        //         settings: {
+        //             ...state.settings,
+        //             view: action.payload
+        //         }
+        //     }
+        // },
         // WORD or STAR
-        changeRiskInLineAC: (state:SupplierSliceType, action: PayloadAction<RiskViewType>):SupplierSliceType => {
-            // console.log('supplier / changeRiskInLineAC / action=', action.payload);
-            localStorage.setItem(localStorageRiskViewVariable, action.payload)
-            return {
-                ...state, 
-                settings: {
-                    ...state.settings,
-                    riskView: action.payload
-                }
-            };
-        },
+        // changeRiskInLineAC: (state:SupplierSliceType, action: PayloadAction<RiskViewType>):SupplierSliceType => {
+        //     localStorage.setItem(localStorageRiskViewVariable, action.payload)
+        //     return {
+        //         ...state, 
+        //         settings: {
+        //             ...state.settings,
+        //             riskView: action.payload
+        //         }
+        //     };
+        // },
         // Page SIZE: 20, 50, 100
-        changePageSizingAC: (state:SupplierSliceType, action:PayloadAction<number>):SupplierSliceType => {
-            // console.log('supplier / changePageSizingAC / action=', action.payload);
-            localStorage.setItem(localStoragePageSizingVariable, String(action.payload));
-            return {
-                ...state,
-                settings: {
-                    ...state.settings,
-                    pageSizing: action.payload
-                }
-            }
-        },
+        // changePageSizingAC: (state:SupplierSliceType, action:PayloadAction<number>):SupplierSliceType => {
+        //     localStorage.setItem(localStoragePageSizingVariable, String(action.payload));
+        //     return {
+        //         ...state,
+        //         settings: {
+        //             ...state.settings,
+        //             pageSizing: action.payload
+        //         }
+        //     }
+        // },
         // DD.MM.YYYY or MM/DD/YYYY
-        userDateFormatChangeAC: (state:SupplierSliceType, action: PayloadAction<FormatDateType>):SupplierSliceType => {
-            // console.log('supplier / userDateFormatChangeAC / action=', action.payload);
-            localStorage.setItem(localStorageUserDateFormat, action.payload);
-            return {
-                ...state,
-                settings: {
-                    ...state.settings,
-                    userDateFormat: action.payload
-                }
-            }
-        },
+        // userDateFormatChangeAC: (state:SupplierSliceType, action: PayloadAction<FormatDateType>):SupplierSliceType => {
+        //     localStorage.setItem(localStorageUserDateFormat, action.payload);
+        //     return {
+        //         ...state,
+        //         settings: {
+        //             ...state.settings,
+        //             userDateFormat: action.payload
+        //         }
+        //     }
+        // },
         
         changeColumnNameSortingAC: (state: SupplierSliceType, action: PayloadAction<ColumnSortNameType>):SupplierSliceType => {
             return {...state, sortingOptions: {...state.sortingOptions, columnNameSorting: action.payload}}
@@ -250,18 +233,18 @@ export const supplierSlice = createSlice({
         builder.addCase(getCompaniesThunk.fulfilled, (state: SupplierSliceType, action: PayloadAction<Array<getCompaniesThunkResponseType>>) => {
             // console.log('getCompaniesThunk / fulfilled, action=', action.payload);
             state.suppliers = action.payload.map( (el:getCompaniesThunkResponseType) => {
-                const riskLevel:RiskType = el.risk_level === 'low'
-                                            ? RISK_LOW
-                                            : el.risk_level === 'medium'
-                                                ? RISK_MEDIUM
-                                                : el.risk_level === 'high'
-                                                    ? RISK_HIGH
-                                                    : undefined
+                // const riskLevel:RiskType = el.risk_level === 'low'
+                //                             ? RISK_LOW
+                //                             : el.risk_level === 'medium'
+                //                                 ? RISK_MEDIUM
+                //                                 : el.risk_level === 'high'
+                //                                     ? RISK_HIGH
+                //                                     : undefined
 
                 let response:SupplerDataType = {
                     supplierId: el.id,
                     supplierName: el.company,
-                    risk: riskLevel,
+                    risk: el.risk_level,
                     creationDate: el.created_at,
                     filledDate: el.filled_at,
                     purchaseTicket: el.ticket || undefined,
@@ -282,10 +265,8 @@ export const supplierSlice = createSlice({
     }
 })
 export const {
-    changeViewAC, searchFieldChangeAC, searchByComplitedChangeAC, searchByRiskAC, 
-    searchByDateFilterAC, changeRiskInLineAC, changePageSizingAC, userDateFormatChangeAC, 
-    changePurchaseTicketSearchAC, changeColumnNameSortingAC, changeColumnDirectionSortingAC,
-    changeCurrentPageAC
+    searchFieldChangeAC, searchByComplitedChangeAC, searchByRiskAC, searchByDateFilterAC, changePurchaseTicketSearchAC, 
+    changeColumnNameSortingAC, changeColumnDirectionSortingAC, changeCurrentPageAC
 } = supplierSlice.actions;
 
 export default supplierSlice.reducer;

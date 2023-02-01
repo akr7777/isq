@@ -5,6 +5,7 @@
     width: 80%;
     margin: 40px 10%;
     align-items: center;
+    /* background-color: blue; */
 }
 
 .avaImg {
@@ -14,12 +15,25 @@
     cursor: pointer;
 }
 
+.profile_head {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
 .line_div {
     display: flex;
     flex-direction: row;
     gap: 10px;
     justify-content: center;
     align-items: center;
+    /* background-color: red; */
+    /* margin-top: 10px; */
+    height: 50px;
+    width: 100%;
 }
 .line_div h2 {
     font-size: 25px;
@@ -61,4 +75,12 @@
     border: 2px var(--border_color) solid;
     border-radius: 15px;
     padding: 20px;
+}
+
+.small_icons {
+    width: 25px;
+    height: 25px;
+}
+.label_error {
+    color: red;
 }

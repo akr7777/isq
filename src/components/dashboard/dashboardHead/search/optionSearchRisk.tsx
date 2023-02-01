@@ -16,11 +16,11 @@ const SearchRisk = () => {
         {/* <label>{ t("search_risks") }</label> */}
 
         <div className={
-            searchRisk === undefined
+            searchRisk === undefined || searchRisk === null
                 ? s.riskOption + " " + s.riskUndefinedChecked
                 : s.riskOption + " " + s.riskUndefined
             }
-            onClick={() => onRiskChangeClickHandler(undefined)}
+            onClick={() => onRiskChangeClickHandler(null)}
         >
             All
         </div>

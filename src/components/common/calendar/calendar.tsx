@@ -8,7 +8,7 @@ import CalendarMonths from "./calendarMonths";
 import CalendarDays from "./calendarDays";
 import clearIcon from '../../../public/icons/var_no.png';
 import dayjs from 'dayjs';
-import { COMMON_DATE_FORMAT } from "../../../store/features/supplierSlice";
+import { COMMON_DATE_FORMAT } from "../../../store/features/authSlice";
 
 export type CalendarPropsType = {
     choosenDate?: string,

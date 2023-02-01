@@ -1,5 +1,7 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import { authAPI, supplierAPI } from "../../components/api/api";
+import { ThemesOptions } from "../../hooks/useTheme";
+import { FormatDateType, LayoutOptionsType, loginAC, RiskViewType, UserLangType } from "./authSlice";
 import { RiskType, SupplierIdType } from "./supplierSlice";
 
 export type loginThunkPropsType = {
@@ -17,9 +19,10 @@ export type AccessTokenPartType = {
 export const loginThunk = createAsyncThunk(
     'auth/loginThunk',
     async (credentials: loginThunkPropsType, {rejectWithValue, dispatch}) => {
+        
         const res = await authAPI.login(credentials);
-        // return res.data;
         if (typeof res.data.data === 'string') {
+            dispatch(loginAC(res.data.data));
             return res.data.data;
         } else {
             console.log('Login response error. The recived data is:', res.data);
@@ -29,13 +32,26 @@ export const loginThunk = createAsyncThunk(
 );
 
 
-export type ProfileThunkResponseType = {
+export type ProfileRequestResponseType = {
     "username": string,
     "name": string, 
-    "layout": string, 
-    "items_per_page": number
+    "theme": ThemesOptions, 
+    "language": UserLangType, 
+    "layout": LayoutOptionsType, 
+    "items_per_page": number, 
+    "risk_format": RiskViewType, 
+    "date_format": FormatDateType
 }
-export const profileThunk = createAsyncThunk(
+export const updateProfileThunk = createAsyncThunk(
+    'auth/profileThunk',
+    async (profileVars:ProfileRequestResponseType, {rejectWithValue, dispatch}) => {
+        const res = await authAPI.updateProfile(profileVars);
+        if (res.data.status === 'success')
+            return res.data.data
+        // return res.data.data;
+    }
+);
+export const getProfileThunk = createAsyncThunk(
     'auth/profileThunk',
     async (_, {rejectWithValue, dispatch}) => {
         const res = await authAPI.getProfile();

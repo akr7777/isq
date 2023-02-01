@@ -1,8 +1,7 @@
 // import { t } from "i18next";
 import { useSelector } from "react-redux";
 import { 
-    SearchByComplitedType, RiskType, SupplerDataType, SupplierIdType, RISK_LOW, RISK_MEDIUM, RiskViewType, 
-    RiskViewWORD, ColumnSortNameType, ColumnSortDirectionType, FormatDateType 
+    SupplerDataType, SupplierIdType
 } from "../../../store/features/supplierSlice";
 import { RootState, useAppDispatch } from "../../../store/store";
 import s from "./dataBricks.module.css";
@@ -19,6 +18,7 @@ import dayjs from "dayjs";
 import { useEffect } from "react";
 import { getCompaniesThunk } from "../../../store/features/supplierThunks";
 import Preloader from "../../common/preloader/preloader";
+import { FormatDateType } from "../../../store/features/authSlice";
 
 
 
@@ -32,7 +32,8 @@ const DataBricks = () => {
     // }, [])
 
     const companies:SupplerDataType[] = AddSearchOptions();
-    const userDateFormat:FormatDateType = useSelector((state: RootState) => state.supplier.settings.userDateFormat);
+    const userDateFormat:FormatDateType = useSelector((state: RootState) => state.auth.userSettings.date_format);
+    // const userDateFormat:FormatDateType = useSelector((state: RootState) => state.supplier.settings.userDateFormat);
     const isLoading:boolean = useSelector((state:RootState) => state.supplier.loadingVars.suppliersLoading);
     
     const onSupplierClickHandler = (supplierId: SupplierIdType) => {

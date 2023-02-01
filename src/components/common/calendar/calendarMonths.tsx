@@ -12,7 +12,7 @@ export type CalendarMonthsPropsType = {
 }
 const CalendarMonths = (props: CalendarMonthsPropsType) => {
 
-    const currentLang:UserLangType = useSelector((state:RootState) => state.auth.userSettings.lang);
+    const currentLang:UserLangType = useSelector((state:RootState) => state.auth.userSettings.language);
     const fullMonth = props.date.toLocaleString(currentLang, {month: 'long'});
 
     const onMonthMinusClickHandler = () => {

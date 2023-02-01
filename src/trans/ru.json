@@ -49,6 +49,7 @@
     "save": "Сохранить",
 
     "profile_name": "Имя",
+    "profile_username": "Пользователь",
     "profile_role": "Роль пользователя",
     "profile_view_legend": "Выберите удобный вид для просмотра анкет:",
     "profile_view_table": "Табличный вид",

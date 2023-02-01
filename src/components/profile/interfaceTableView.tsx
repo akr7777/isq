@@ -1,16 +1,30 @@
 import { useSelector } from "react-redux";
-import { BRICK_VIEW, changeViewAC, TABLE_VIEW, ViewOptionsType } from "../../store/features/supplierSlice";
 import { RootState, useAppDispatch } from "../../store/store";
 import { t } from "i18next";
 import { RadioLabelOptionType, RadioLabels } from "../common/radioLabels/radioLabels";
 import s from './profile.module.css';
+import { BRICK_VIEW, ProfileUserSettingsType, TABLE_VIEW, LayoutOptionsType } from "../../store/features/authSlice";
+import { ProfileRequestResponseType, updateProfileThunk } from "../../store/features/authThunks";
 
 const Checker = () => {
-    const currentView:ViewOptionsType = useSelector((state:RootState) => state.supplier.settings.view);
+    const myName:string = useSelector((state:RootState) => state.auth.name);
+    const userName:string = useSelector((state: RootState) => state.auth.username);
+
+    const userSettings:ProfileUserSettingsType = useSelector((state:RootState) => state.auth.userSettings);
+    const currentLayout:LayoutOptionsType = userSettings.layout;
+    // const currentView:ViewOptionsType = useSelector((state:RootState) => state.supplier.settings.view);
     const dispatch = useAppDispatch();
+
     const onViewChangeClickHandler = (newValue: string) => {
         if (newValue===TABLE_VIEW || newValue===BRICK_VIEW) {
-            dispatch(changeViewAC(newValue))
+            const dataForThunk:ProfileRequestResponseType = {
+                ...userSettings,
+                layout: newValue,
+                name: myName,
+                username: userName,
+            }
+            dispatch(updateProfileThunk(dataForThunk));
+            // dispatch(changeViewAC(newValue))
         }
     }
 
@@ -29,7 +43,7 @@ const Checker = () => {
         <h3>{ t("profile_view_legend") }</h3>
         <RadioLabels 
             options={options}
-            defaultOption={currentView}
+            defaultOption={currentLayout}
             onClickFunction={(newValue: string) => onViewChangeClickHandler(newValue)}
         />
     </div>

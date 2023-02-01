@@ -1,8 +1,6 @@
 import { useSelector } from "react-redux";
 import { 
-    SearchByComplitedType, RiskType, SupplerDataType, SupplierIdType, 
-    changeColumnNameSortingAC, changeColumnDirectionSortingAC, NAME_COLUMN_SORT, CREATION_DATE_COLUMN_SORT, 
-    COMPLITED_COLUMN_SORT, RISK_COLUMN_SORT, ColumnSortNameType, ColumnSortDirectionType, FormatDateType 
+    SupplerDataType, SupplierIdType, 
 } from "../../../store/features/supplierSlice";
 import { RootState } from "../../../store/store";
 import s from './dataTable.module.css';
@@ -18,6 +16,7 @@ import { useTranslation } from "react-i18next";
 import SortingIcons from "../sortIcons";
 import dayjs from "dayjs";
 import Preloader from "../../common/preloader/preloader";
+import { FormatDateType } from "../../../store/features/authSlice";
 // import preloaderSpinner1 from "../../../public/preloader/preloader1.gif"
 
 const DataTable = () => {
@@ -25,7 +24,8 @@ const DataTable = () => {
     const navigate = useNavigate();
 
     const companies:SupplerDataType[] = AddSearchOptions();
-    const userDateFormat:FormatDateType = useSelector((state: RootState) => state.supplier.settings.userDateFormat);
+    // const userDateFormat:FormatDateType = useSelector((state: RootState) => state.supplier.settings.userDateFormat);
+    const userDateFormat:FormatDateType = useSelector((state: RootState) => state.auth.userSettings.date_format);
     const isLoading:boolean = useSelector((state:RootState) => state.supplier.loadingVars.suppliersLoading);
 
     const onSupplierClickHandler = (supplierId: SupplierIdType) => {
@@ -42,19 +42,19 @@ const DataTable = () => {
                     <tr>
                         <td>
                             { t("table_name") }
-                            <SortingIcons columnName={NAME_COLUMN_SORT}/>
+                            {/* <SortingIcons columnName={NAME_COLUMN_SORT}/> */}
                         </td>
                         <td>
                             { t("table_creation_date") }
-                            <SortingIcons columnName={CREATION_DATE_COLUMN_SORT}/>
+                            {/* <SortingIcons columnName={CREATION_DATE_COLUMN_SORT}/> */}
                         </td>
                         <td>
                             { t("table_is_complite") }
-                            <SortingIcons columnName={COMPLITED_COLUMN_SORT}/>
+                            {/* <SortingIcons columnName={COMPLITED_COLUMN_SORT}/> */}
                         </td>
                         <td>
                             { t("table_risk") }
-                            <SortingIcons columnName={RISK_COLUMN_SORT}/>
+                            {/* <SortingIcons columnName={RISK_COLUMN_SORT}/> */}
                         </td>
                     </tr>
                 </thead>

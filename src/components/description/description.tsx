@@ -8,14 +8,12 @@ const Description = () => {
 
         { t("main_page_text_1")}
 
-        <Calendar onDateChange={()=> {}}/>
-       
-        <input type="date" name="bday" required pattern="\d{4}-\d{2}-\d{2}" />
-
         <ul>
             <li>EditSuppliers сделать</li>
             <li>Сделать кнопку удаления компании на странице companyCard</li>
             <li>Сделать прелоадеры для необходимыхз элементов, когда сервер будет готов</li>
+            <li>Навесить react.lazy() на все большие компоненты</li>
+            <li>ЗАвершить функцию редактирования имени и username в Profile</li>
         </ul>
     </div>
 }

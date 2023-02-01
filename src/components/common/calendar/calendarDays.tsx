@@ -41,7 +41,7 @@ const CalendarDays = (props: CalendarDaysPropsType) => {
             ?  true : false
     } 
 
-    const lang:UserLangType = useSelector((state: RootState) => state.auth.userSettings.lang);
+    const lang:UserLangType = useSelector((state: RootState) => state.auth.userSettings.language);
     
     const daysOfWeek = (lang === EN_LANG) 
                             ? weekEn 

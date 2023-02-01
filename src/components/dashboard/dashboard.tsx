@@ -4,19 +4,20 @@ import s from './dashboard.module.css';
 import DashboardHead from "./dashboardHead/dashboardHead";
 import DataTable from "./dataTable/dataTable";
 import DataBricks from "./dataBricks/dataBricks";
-import { BRICK_VIEW, TABLE_VIEW, ViewOptionsType } from "../../store/features/supplierSlice";
 import Paginator from "./paginator/paginator";
+import { BRICK_VIEW, TABLE_VIEW, LayoutOptionsType } from "../../store/features/authSlice";
 
 const Dashboard = () => {
-    const currentView:ViewOptionsType = useSelector((state: RootState) => state.supplier.settings.view);
+    // const currentView:ViewOptionsType = useSelector((state: RootState) => state.supplier.settings.view);
+    const currentLayoutView:LayoutOptionsType = useSelector((state: RootState) => state.auth.userSettings.layout);
 
     return <div className={s.profileDiv}>
 
         <DashboardHead />
 
-        { currentView === TABLE_VIEW &&  <DataTable />}
+        { currentLayoutView === TABLE_VIEW &&  <DataTable />}
         
-        { currentView === BRICK_VIEW && <DataBricks />}
+        { currentLayoutView === BRICK_VIEW && <DataBricks />}
 
         <Paginator />
         

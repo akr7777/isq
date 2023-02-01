@@ -53,7 +53,7 @@ const Login = () => {
     const onPasswordChange = (newValue: string) => {
         dispatch(onPasswordInputAC(newValue));
     }
-        
+
     return <>
         <div className={s.fields}>
             <div className={s.inputs_divs}>

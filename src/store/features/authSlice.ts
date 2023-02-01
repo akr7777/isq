@@ -1,8 +1,18 @@
 import {createSlice} from '@reduxjs/toolkit';
 import type {PayloadAction} from '@reduxjs/toolkit';
 import { DARK, LIGHT } from '../../hooks/useTheme';
-import { AccessTokenPartType, loginThunk, profileThunk, ProfileThunkResponseType } from './authThunks';
-import { useAppDispatch } from '../store';
+import { AccessTokenPartType, getProfileThunk, loginThunk, ProfileRequestResponseType, updateProfileThunk } from './authThunks';
+
+export const localStorageRiskViewVariable = 'riskViewInTable';
+export const RiskViewWORD = 'word';
+export const RiskViewSTAR = 'star';
+export type RiskViewType = typeof RiskViewWORD | typeof RiskViewSTAR;
+
+export const localStorageUserDateFormat = 'dateFormat';
+export const DATE_EU = 'DD.MM.YYYY';
+export const DATE_US = 'MM/DD/YYYY';
+export type FormatDateType = typeof DATE_EU | typeof DATE_US;
+export const COMMON_DATE_FORMAT = "YYYY-MM-DD";
 
 export const localStorageAppThemeVariable = 'app-theme';
 export const localStorageLanguageVariable = 'language';
@@ -21,16 +31,29 @@ export const RU_LANG = 'ru';
 export const EN_LANG = 'en';
 export type UserLangType = typeof RU_LANG | typeof EN_LANG;
 
-export type UserSettingsType = {
-    lang: UserLangType,
+export const localStoragePageSizingVariable = 'page-size';
+export const pageSizeOptions = [20, 50, 100];
+// export const itemsPerPageType = typeof 20 | typeof 50 | typeof 100;
+
+export const TABLE_VIEW = 'table';
+export const BRICK_VIEW = 'bricks';
+export type LayoutOptionsType = typeof TABLE_VIEW | typeof BRICK_VIEW;
+export const localStorageSuppliersViewVariable = 'suppliersView';
+
+export type ProfileUserSettingsType = {
+    language: UserLangType,
     theme: UserThemeType,
+    layout: LayoutOptionsType, 
+    items_per_page: number, 
+    risk_format: RiskViewType, 
+    date_format: FormatDateType
 }
 export type UserType = {
     userId: UserIdType,
     username: string,
     name: string,
     role: RoleType,
-    userSettings: UserSettingsType,
+    userSettings: ProfileUserSettingsType,
     vars: {
         loginInput: string,
         passwordInput: string,
@@ -49,11 +72,15 @@ export type UserType = {
 const initContent: UserType = {
     userId: '',
     username: '',
-    name: '1111',
+    name: '',
     role: undefined,
     userSettings: {
-        lang: EN_LANG,
-        theme: LIGHT
+        language: EN_LANG,
+        theme: LIGHT,
+        layout: BRICK_VIEW, 
+        items_per_page: 20, 
+        risk_format: RiskViewWORD, 
+        date_format: DATE_EU
     },
     vars: {
         loginInput: '',
@@ -100,8 +127,6 @@ export const authSlice = createSlice({
             const decodedTokenPart:AccessTokenPartType = JSON.parse(atob(action.payload.split('.')[1]));
             const {id, username} = decodedTokenPart;
             localStorage.setItem(localStorageAccessTokenVariable, action.payload);
-            // state.name = username;
-            // state.userId = id;
             return {
                 ...state,
                 name: username,
@@ -139,7 +164,7 @@ export const authSlice = createSlice({
                 ...state,
                 userSettings: {
                     ...state.userSettings,
-                    lang: action.payload
+                    language: action.payload
                 }
             }
         }
@@ -151,36 +176,47 @@ export const authSlice = createSlice({
             state.loadingStatus = {...state.loadingStatus, loginRequestLoadingStatus: true } 
         })
         builder.addCase(loginThunk.fulfilled, (state: UserType, action: PayloadAction<string>) => {
-            // const decodedTokenPart:AccessTokenPartType = JSON.parse(new Buffer(action.payload.split('.')[1], 'base64').toString('ascii'));
-            
-            // const decodedTokenPart:AccessTokenPartType = JSON.parse(atob(action.payload.split('.')[1]));
-            // const {id, username} = decodedTokenPart;
-            // localStorage.setItem(localStorageAccessTokenVariable, action.payload);
-            // state.name = username;
-            // state.userId = id;
-            
-            const dispatch = useAppDispatch();
-            dispatch(loginAC(action.payload));
             state.loadingStatus = {...state.loadingStatus, loginRequestLoadingStatus: false } 
         })
         builder.addCase(loginThunk.rejected, (state: UserType) => {
             state.loadingStatus = {...state.loadingStatus, loginRequestLoadingStatus: false } 
         })
 
-        builder.addCase(profileThunk.pending, (state: UserType) => {
+        builder.addCase(getProfileThunk.pending, (state: UserType) => {
             state.loadingStatus = {...state.loadingStatus, profileRequestLoadingStatus: true } 
         })
-        builder.addCase(profileThunk.fulfilled, (state: UserType, action: PayloadAction<ProfileThunkResponseType>) => {
+        builder.addCase(getProfileThunk.fulfilled, (state: UserType, action: PayloadAction<ProfileRequestResponseType>) => {
             state.name = action.payload.name;
             state.username = action.payload.username;
-            //...
+            state.userSettings = {
+                ...state.userSettings,
+                date_format: action.payload.date_format,
+                items_per_page: action.payload.items_per_page,
+                language: action.payload.language,
+                layout: action.payload.layout,
+                risk_format: action.payload.risk_format,
+                theme: action.payload.theme,
+            }
             state.loadingStatus = {...state.loadingStatus, profileRequestLoadingStatus: false } 
         })
-        builder.addCase(profileThunk.rejected, (state: UserType) => {
+        builder.addCase(getProfileThunk.rejected, (state: UserType) => {
             state.loadingStatus = {...state.loadingStatus, profileRequestLoadingStatus: false } 
         })
+
+
+        // builder.addCase(updateProfileThunk.pending, (state: UserType) => {
+        //     state.loadingStatus = {...state.loadingStatus, profileRequestLoadingStatus: true } 
+        // })
+        // builder.addCase(updateProfileThunk.fulfilled, (state: UserType, action: PayloadAction) => {
+        //     state.loadingStatus = {...state.loadingStatus, profileRequestLoadingStatus: false } 
+        // })
+        // builder.addCase(updateProfileThunk.rejected, (state: UserType) => {
+        //     state.loadingStatus = {...state.loadingStatus, profileRequestLoadingStatus: false } 
+        // })
     }
 })
-export const {loginAC, onLoginInputAC, onPasswordInputAC, changeThemeAC, changeLanguageAC} = authSlice.actions;
+export const {
+    loginAC, onLoginInputAC, onPasswordInputAC, changeThemeAC, changeLanguageAC,
+} = authSlice.actions;
 
 export default authSlice.reducer;

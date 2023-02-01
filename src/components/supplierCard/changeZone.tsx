@@ -25,7 +25,7 @@ const ChangeZone = () => {
             setNewRisk(value);
             setError('');
         } else {
-            setNewRisk(undefined);
+            setNewRisk(null);
             const errorText: string =  t("required_field");
             setError(errorText)
         }
@@ -59,7 +59,7 @@ const ChangeZone = () => {
                     {text: "Medium", value: RISK_MEDIUM},
                     {text: "High", value: RISK_HIGH}
                 ]}
-                defaultOption={currentRisk}
+                defaultOption={currentRisk || undefined}
                 onChangeEvent={ (value) => onNewRiskChanged(value) }
                 error={error.length > 0}
             />

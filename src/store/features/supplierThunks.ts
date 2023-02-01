@@ -1,6 +1,6 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import { supplierAPI } from "../../components/api/api";
-import { RiskType, SupplierIdType } from "./supplierSlice";
+import { RiskType } from "./supplierSlice";
 
 export type getCompaniesThunkResponseType = {
     // supplierId: SupplierIdType,
@@ -15,7 +15,7 @@ export type getCompaniesThunkResponseType = {
     "ticket": string, 
     "created_at": string,//"YYYY-MM-DDTHH:MM:SS.XXXXXXZ",
     "filled_at": string | undefined, 
-    "risk_level": string | null
+    "risk_level": RiskType
 }
 export const getCompaniesThunk = createAsyncThunk(
     'supplier/getCompaniesThunk',

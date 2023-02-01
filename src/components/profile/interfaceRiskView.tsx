@@ -1,20 +1,31 @@
 import { useSelector } from "react-redux";
-import { changeRiskInLineAC, RiskViewSTAR, RiskViewType, RiskViewWORD } from "../../store/features/supplierSlice";
 import { RootState, useAppDispatch } from "../../store/store";
 import { useTranslation } from "react-i18next";
 import { RadioLabelOptionType, RadioLabels } from "../common/radioLabels/radioLabels";
 import s from './profile.module.css';
+import { ProfileUserSettingsType, RiskViewSTAR, RiskViewType, RiskViewWORD } from "../../store/features/authSlice";
+import { ProfileRequestResponseType, updateProfileThunk } from "../../store/features/authThunks";
 
 const ProfileRiskViewChecker = () => {
+    const myName:string = useSelector((state:RootState) => state.auth.name);
+    const userName:string = useSelector((state: RootState) => state.auth.username);
 
-    const riskView:RiskViewType = useSelector((state:RootState) => state.supplier.settings.riskView);
+    const userSettings:ProfileUserSettingsType = useSelector((state:RootState) => state.auth.userSettings);
+    const riskView:RiskViewType = userSettings.risk_format;
     
     const {t} = useTranslation();
     const dispatch = useAppDispatch();
 
-    const onViewChangeClickHandler = (val: string) => {
-        if (val === RiskViewSTAR || val === RiskViewWORD) {
-            dispatch(changeRiskInLineAC(val));
+    const onViewChangeClickHandler = (newValue: string) => {
+        if (newValue === RiskViewSTAR || newValue === RiskViewWORD) {
+            const dataForThunk:ProfileRequestResponseType = {
+                ...userSettings,
+                risk_format: newValue,
+                name: myName,
+                username: userName,
+            }
+            dispatch(updateProfileThunk(dataForThunk));
+            // dispatch(changeRiskInLineAC(val));
         }
     }
 
