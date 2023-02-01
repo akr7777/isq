@@ -1,5 +1,4 @@
 import { useSelector } from "react-redux";
-// import { DATE_EU, DATE_US, FormatDateType, userDateFormatChangeAC } from "../../store/features/supplierSlice";
 import { RootState, useAppDispatch } from "../../store/store";
 import { useTranslation } from "react-i18next";
 import { RadioLabelOptionType, RadioLabels } from "../common/radioLabels/radioLabels";
@@ -11,7 +10,6 @@ const InterfaceDateFormat = () => {
     const myName:string = useSelector((state:RootState) => state.auth.name);
     const userName:string = useSelector((state: RootState) => state.auth.username);
 
-    // const dateFormat:FormatDateType = useSelector((state:RootState) => state.supplier.settings.userDateFormat);
     const userSettings:ProfileUserSettingsType = useSelector((state:RootState) => state.auth.userSettings);
     const dateFormat:FormatDateType = userSettings.date_format;
 
@@ -26,7 +24,6 @@ const InterfaceDateFormat = () => {
                 name: myName,
             }
             dispatch(updateProfileThunk(dataForThunk));
-            // dispatch(userDateFormatChangeAC(val));
         }
     }
 

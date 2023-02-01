@@ -10,7 +10,7 @@ import { BRICK_VIEW, TABLE_VIEW, LayoutOptionsType } from "../../store/features/
 const Dashboard = () => {
     // const currentView:ViewOptionsType = useSelector((state: RootState) => state.supplier.settings.view);
     const currentLayoutView:LayoutOptionsType = useSelector((state: RootState) => state.auth.userSettings.layout);
-
+    
     return <div className={s.profileDiv}>
 
         <DashboardHead />

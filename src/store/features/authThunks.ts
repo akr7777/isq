@@ -40,23 +40,23 @@ export type ProfileResponseType = {
     "layout": LayoutOptionsType, 
     "items_per_page": number, 
     "risk_format": RiskViewType, 
-    "date_format": FormatDateType
+    "date_format": FormatDateType,
 }
 export type ProfileRequestType = Omit<ProfileResponseType, 'username'>
-export const updateProfileThunk = createAsyncThunk(
-    'auth/profileThunk',
-    async (profileVars:ProfileRequestType, {rejectWithValue, dispatch}) => {
-        const res = await authAPI.updateProfile(profileVars);
-        if (res.data.status === 'success')
-            return res.data.data
-        // return res.data.data;
-    }
-);
+
 export const getProfileThunk = createAsyncThunk(
     'auth/profileThunk',
     async (_, {rejectWithValue, dispatch}) => {
         const res = await authAPI.getProfile();
-        // console.log('profileThunk=', res.data);
+        if (res.data.status === 'success')
+            return res.data.data
+    }
+);
+
+export const updateProfileThunk = createAsyncThunk(
+    'auth/profileThunk',
+    async (profileVars:ProfileRequestType, {rejectWithValue, dispatch}) => {
+        const res = await authAPI.updateProfile(profileVars);
         if (res.data.status === 'success')
             return res.data.data
     }

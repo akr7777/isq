@@ -80,7 +80,6 @@
 .small_icons {
     width: 25px;
     height: 25px;
+    cursor: pointer;
 }
-.label_error {
-    color: red;
-}
+

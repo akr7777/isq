@@ -77,7 +77,7 @@ const initContent: UserType = {
     userSettings: {
         language: EN_LANG,
         theme: LIGHT,
-        layout: BRICK_VIEW, 
+        layout: TABLE_VIEW, 
         items_per_page: 20, 
         risk_format: RiskViewWORD, 
         date_format: DATE_EU
@@ -205,7 +205,9 @@ export const authSlice = createSlice({
     }
 })
 export const {
-    loginAC, onLoginInputAC, onPasswordInputAC, changeThemeAC, changeLanguageAC,
+    loginAC, onLoginInputAC, onPasswordInputAC, 
+    changeThemeAC, 
+    // changeLanguageAC,
 } = authSlice.actions;
 
 export default authSlice.reducer;

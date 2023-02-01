@@ -1,16 +1,25 @@
+import { lazy } from 'react';
 import { Navigate, Route, Routes } from "react-router-dom"
 import { RequireAuth } from "../../hooks/RequireAuth";
-import Login from "../login/login";
-import Dashboard from "../dashboard/dashboard";
-import Description from './../../components/description/description';
 import Questions from './../../components/questions/question';
 import ErrorPage from '../NotFoundPage/error404';
-import SupplierCard from "../supplierCard/supplierCard";
-import Profile from "../profile/profile";
-import s from "./outlet.module.css";
-import NewSupplier from "../newSupplier/newSupplier";
 import { ADMIN_USER_ROLE, MANAGER_USER_ROLE } from "../../store/features/authSlice";
-import EditSuppliers from "../editSuppliers/edit-suppliers";
+
+import s from "./outlet.module.css";
+// import Login from "../login/login";
+const Login = lazy( () => import("../login/login"));
+// import Dashboard from "../dashboard/dashboard";
+const Dashboard = lazy(() => import("../dashboard/dashboard"));
+// import Description from './../../components/description/description';
+const Description = lazy(() => import('./../../components/description/description'));
+// import SupplierCard from "../supplierCard/supplierCard";
+const SupplierCard = lazy(() => import("../supplierCard/supplierCard"));
+// import Profile from "../profile/profile";
+const Profile = lazy(() => import("../profile/profile"));
+// import NewSupplier from "../newSupplier/newSupplier";
+const NewSupplier = lazy(() => import("../newSupplier/newSupplier"));
+// import EditSuppliers from "../editSuppliers/edit-suppliers";
+const EditSuppliers = lazy(() => import("../editSuppliers/edit-suppliers"));
 
 export const PATHS = {
     mainPage: '/',

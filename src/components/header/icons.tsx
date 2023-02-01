@@ -8,7 +8,7 @@ import i18n from './../../i18n';
 
 import flagRu from './../../public/icons/flag_ru.png';
 import flagEn from './../../public/icons/flag_en.png';
-import { changeLanguageAC, changeThemeAC, EN_LANG, localStorageLanguageVariable, RU_LANG, UserIdType } from '../../store/features/authSlice';
+import {  EN_LANG, localStorageLanguageVariable, ProfileUserSettingsType, RU_LANG, UserIdType } from '../../store/features/authSlice';
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../store/store';
 
@@ -21,6 +21,7 @@ import ava from './../../public/images/ava.jpg';
 
 import { useNavigate } from 'react-router-dom';
 import { PATHS } from '../outlet/outlet';
+import { ProfileRequestType, updateProfileThunk } from '../../store/features/authThunks';
 
 type IconsPropsType = {
     langText?: string,
@@ -37,32 +38,45 @@ export const Icons = (props: IconsPropsType) => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const [language, setLanguage] = useLocalStorage(localStorageLanguageVariable, 'ru');
+    const name: string = useSelector((state:RootState) => state.auth.name);
+    const userSettings:ProfileUserSettingsType = useSelector((state:RootState) => state.auth.userSettings);
+    const {theme, setTheme } = useTheme();
+
 
     const handleLenguageChange = () => {
 
         if (language === EN_LANG) {
             i18n.changeLanguage(RU_LANG);
             setLanguage(RU_LANG);
-            dispatch(changeLanguageAC(RU_LANG))
+            const dataForThunk:ProfileRequestType = {
+                ...userSettings,
+                language: RU_LANG,
+                name: name,
+            }
+            dispatch(updateProfileThunk(dataForThunk));
         } else if (language === RU_LANG) {
             i18n.changeLanguage(EN_LANG);
             setLanguage(EN_LANG);
-            dispatch(changeLanguageAC(EN_LANG))
+            const dataForThunk:ProfileRequestType = {
+                ...userSettings,
+                language: EN_LANG,
+                name: name,
+            }
+            dispatch(updateProfileThunk(dataForThunk));
         }
     };
 
     
 
-    const {theme, setTheme } = useTheme();
     const handleLightThemeClick = () => {
         setTheme(LIGHT);
-        dispatch(changeThemeAC(LIGHT));
-        // closeMobileMenu();
+        const updateThunkInfo:ProfileRequestType = {name: name, ...userSettings, theme: LIGHT}
+        dispatch(updateProfileThunk(updateThunkInfo));
     }
     const handleDarkThemeClick = () => {
         setTheme(DARK);
-        dispatch(changeThemeAC(DARK));
-        // closeMobileMenu();
+        const updateThunkInfo:ProfileRequestType = {name: name, ...userSettings, theme: DARK}
+        dispatch(updateProfileThunk(updateThunkInfo));
     }
     const onProfileClickHandler = () => {
         navigate(PATHS.profile);

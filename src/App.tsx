@@ -3,26 +3,31 @@ import Footer from './components/footer/footer';
 import Outlet from './components/outlet/outlet';
 import { RootState, useAppDispatch } from './store/store';
 import { DARK, LIGHT, ThemesOptions } from './hooks/useTheme';
-import { changeThemeAC, localStorageAccessTokenVariable, localStorageAppThemeVariable, localStorageLanguageVariable, loginAC, RU_LANG } from './store/features/authSlice';
+import {  localStorageAccessTokenVariable, localStorageAppThemeVariable, localStorageLanguageVariable, loginAC, RU_LANG } from './store/features/authSlice';
 import indexCss from './App.module.css';
-import { useSelector } from 'react-redux';
-function App() {
+import { getProfileThunk } from './store/features/authThunks';
+import { Suspense } from 'react';
+import Preloader from './components/common/preloader/preloader';
+import preloaderStyles from './components/common/preloader/preloader.module.css';
 
+function App() {
   const dispatch = useAppDispatch();
+
   // Intializing App ->
 
   // if user logged in
   const accessToken = localStorage.getItem(localStorageAccessTokenVariable);
   if (accessToken && accessToken.length > 0) {
     dispatch(loginAC(accessToken));
+    dispatch(getProfileThunk());
   }
 
   // App theme init
-  const theme = localStorage.getItem(localStorageAppThemeVariable);
+  // const theme = localStorage.getItem(localStorageAppThemeVariable);
   // const theme:ThemesOptions = useSelector((state:RootState) => state.auth.userSettings.theme);
-  if (theme === DARK || theme === LIGHT) {
-    dispatch(changeThemeAC(theme));
-  }
+  // if (theme === DARK || theme === LIGHT) {
+    // dispatch(changeThemeAC(theme));
+  // }
 
   // language representation
   // const localStorageLang = localStorage.getItem(localStorageLanguageVariable);
@@ -62,11 +67,17 @@ function App() {
   // <- Intializing App
 
   return (
-    <div className={indexCss.wrap}>
-      <Header />
-      <Outlet />
-      <Footer />
-    </div>
+    <Suspense fallback={
+      <div className={preloaderStyles.initPreloaderDiv}>
+        <Preloader/>
+      </div>
+    }>
+      <div className={indexCss.wrap}>
+        <Header />
+        <Outlet />
+        <Footer />
+      </div>
+    </Suspense>
   );
 }
 

@@ -11,13 +11,11 @@ const InterfacePageSizing = () => {
     const myName:string = useSelector((state:RootState) => state.auth.name);
     const userName:string = useSelector((state: RootState) => state.auth.username);
 
-    // const riskView:number = useSelector((state:RootState) => state.supplier.settings.pageSizing);
     const {t} = useTranslation();
     const dispatch = useAppDispatch();
 
     const userSettings:ProfileUserSettingsType = useSelector((state:RootState) => state.auth.userSettings);
     const currentPageSize:number = userSettings.items_per_page;
-    // const defaultOption:string = String(useSelector((state:RootState) => state.supplier.settings.pageSizing));
 
     const onViewChangeClickHandler = (newValue: string) => {
         const intVal = Number(newValue);
@@ -26,9 +24,9 @@ const InterfacePageSizing = () => {
                 ...userSettings,
                 items_per_page: intVal,
                 name: myName,
+
             }
             dispatch(updateProfileThunk(dataForThunk));
-            // dispatch(changePageSizingAC(intVal));
           }
     }
 

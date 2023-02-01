@@ -23,7 +23,6 @@ const ProfileRiskViewChecker = () => {
                 name: myName,
             }
             dispatch(updateProfileThunk(dataForThunk));
-            // dispatch(changeRiskInLineAC(val));
         }
     }
 
