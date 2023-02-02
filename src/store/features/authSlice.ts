@@ -45,6 +45,7 @@ export type LoadingStatusType = {
     loginRequestLoadingStatus: boolean,
     profileRequestLoadingStatus: boolean,
 
+    nameChangeLoadingStatus: boolean,
     layoutLoadingStatus: boolean,
     riskFormatLoadingStatus: boolean,
     dateFormatLoadingStatus: boolean,
@@ -54,6 +55,7 @@ const loadingStatusInitValue:LoadingStatusType = {
     loginRequestLoadingStatus: false,
     profileRequestLoadingStatus: false,
 
+    nameChangeLoadingStatus: false,
     layoutLoadingStatus: false,
     riskFormatLoadingStatus: false,
     dateFormatLoadingStatus: false,
@@ -190,13 +192,16 @@ export const authSlice = createSlice({
 
     extraReducers: (builder) => {
         builder.addCase(loginThunk.pending, (state: UserType) => {
-            state.loadingStatus = {...state.loadingStatus, loginRequestLoadingStatus: true } 
+            // state.loadingStatus = {...state.loadingStatus, loginRequestLoadingStatus: true } 
+            state.loadingStatus.loginRequestLoadingStatus = true;
         })
         builder.addCase(loginThunk.fulfilled, (state: UserType, action: PayloadAction<string>) => {
-            state.loadingStatus = {...state.loadingStatus, loginRequestLoadingStatus: false } 
+            // state.loadingStatus = {...state.loadingStatus, loginRequestLoadingStatus: false } 
+            state.loadingStatus.loginRequestLoadingStatus = false;
         })
         builder.addCase(loginThunk.rejected, (state: UserType) => {
-            state.loadingStatus = {...state.loadingStatus, loginRequestLoadingStatus: false } 
+            // state.loadingStatus = {...state.loadingStatus, loginRequestLoadingStatus: false } 
+            state.loadingStatus.loginRequestLoadingStatus = false;
         })
 
         builder.addCase(getProfileThunk.pending, (state: UserType) => {
@@ -204,6 +209,9 @@ export const authSlice = createSlice({
             // state.loadingStatus.profileLayoutLoadingStatus = true;
         })
         builder.addCase(getProfileThunk.fulfilled, (state: UserType, action: PayloadAction<ProfileResponseType>) => {
+            if (action.payload.username)
+                state.username = action.payload.username;
+                
             if (state.name !== action.payload.name)
                 state.name = action.payload.name;
             if (state.userSettings.date_format !== action.payload.date_format)

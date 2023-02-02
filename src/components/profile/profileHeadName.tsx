@@ -7,8 +7,9 @@ import { useState } from 'react';
 import { LineTextField } from '../common/labelTextField/labelLineText';
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../store/store';
-import { ProfileUserSettingsType } from '../../store/features/authSlice';
+import { changeLoadingStatus, ProfileUserSettingsType } from '../../store/features/authSlice';
 import { updateProfileThunk } from '../../store/features/authThunks';
+import Preloader from '../common/preloader/preloader';
 
 const ProfileHeadFieldName = () => {
     const {t} = useTranslation();
@@ -20,9 +21,11 @@ const ProfileHeadFieldName = () => {
     // const userSettings:ProfileUserSettingsType = useSelector((state:RootState) => state.auth.userSettings);
     // const username: string = useSelector((state:RootState) => state.auth.username);
     const dispatch = useAppDispatch();
+    const isLoading: boolean = useSelector((state:RootState) => state.auth.loadingStatus.nameChangeLoadingStatus);
 
     const onDoneIconClickHandler = () => {
         setIsChange(false);
+        dispatch(changeLoadingStatus({field: "nameChangeLoadingStatus", newValue: true}))
         dispatch(updateProfileThunk({name: newName}));
     }
     const crossIconClickHandler = () => {
@@ -36,7 +39,7 @@ const ProfileHeadFieldName = () => {
 
         {
             !isChange
-                ? <h2>{myName}</h2>
+                ? isLoading ? <Preloader /> : <h2>{myName}</h2>
                 : <LineTextField 
                     type='text'
                     text={newName}
