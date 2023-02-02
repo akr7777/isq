@@ -10,7 +10,7 @@ export type CreateNewSupplierThunkResponseType = {
     result: {
         "id": string, 
         "company": string,
-        "ticket": string | null, 
+        "ticket": string, 
         "created_at": string, 
         "filled_at": string | null, 
         "risk_level": string | null
@@ -29,10 +29,16 @@ export type NewSupplierType = {
     link: string,
     id: string,
     company: string,
-    ticket: string | null,
+    ticket: string,
     isLoading: boolean,
 }
-const newSupplierInitData:NewSupplierType = {
+export type NewSupplierChangeInfoACType = {
+    link?: string,
+    id?: string,
+    company?: string,
+    ticket?: string,
+}
+export const newSupplierInitData:NewSupplierType = {
     link: '', id: '', company: '', ticket: '', isLoading: false
 }
 
@@ -40,10 +46,8 @@ export const newSupplierSlice = createSlice({
     name: 'newSupplier',
     initialState: newSupplierInitData,
     reducers: {
-        newSupplierChangeInfo: (state: NewSupplierType, action: PayloadAction<Omit<NewSupplierType, "isLoading">>) => {
-            state.id = action.payload.id;
-            state.company = action.payload.company;
-            state.ticket = action.payload.ticket;
+        newSupplierChangeInfoAC: (state: NewSupplierType, action: PayloadAction<NewSupplierChangeInfoACType>) => {
+            return {...state, ...action.payload};
         }
     },
     extraReducers: (builder) => {
@@ -63,6 +67,6 @@ export const newSupplierSlice = createSlice({
     }
 })
 
-export const {newSupplierChangeInfo} = newSupplierSlice.actions;
+export const {newSupplierChangeInfoAC} = newSupplierSlice.actions;
 
 export default newSupplierSlice.reducer;

@@ -70,7 +70,7 @@ export type SupplierSliceType = {
     pageOptions: {
         totalPages: number,
         currentPage: number,
-        newPageNumber: number,
+        // newPageNumber: number,
     }
     loadingVars: {
         suppliersLoading: boolean,
@@ -105,8 +105,8 @@ const initContent:SupplierSliceType = {
     
     pageOptions: {
         totalPages: 0,
-        currentPage: 0,
-        newPageNumber: 0,
+        currentPage: 1,
+        // newPageNumber: 0,
     },
     loadingVars: {
         suppliersLoading: false,

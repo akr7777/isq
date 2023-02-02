@@ -15,14 +15,6 @@ type IsOpenIconPropsType = {
 
 const IsOpenIcon = ({isCircled, isOpen, setIsOpen}: IsOpenIconPropsType) => {
     const theme: typeof DARK | typeof LIGHT = useSelector((state:RootState) => state.auth.userSettings.theme);
-
-    // const searchByComplited: SearchByComplitedType = useSelector((state:RootState) => state.supplier.searchByComplited);
-    // const searchByRisk: RiskType = useSelector((state:RootState) => state.supplier.searchByRisk);
-    // const searchByDateStart: FilterDateType = useSelector((state:RootState) => state.supplier.searchByDateStart);
-    // const searchByDateEnd: FilterDateType = useSelector((state:RootState) => state.supplier.searchByDateEnd);
-    // const isCircled: boolean = searchByComplited !== SEARCH_COMPLETED_ALL || (searchByRisk !== undefined) ||
-    //                     (searchByDateStart !== undefined) || (searchByDateEnd !== undefined)
-
     return <>
         { 
             !isOpen && theme === LIGHT && <img 

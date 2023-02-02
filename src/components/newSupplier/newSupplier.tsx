@@ -6,7 +6,7 @@ import iconTicket from "../../public/icons/purchase_ticket.png";
 import iconCompany from "../../public/icons/icon_company.png";
 import { RootState, useAppDispatch } from '../../store/store';
 import { useSelector } from 'react-redux';
-import { createNewSupplierThunk } from '../../store/features/newSupplierSlice';
+import { createNewSupplierThunk, newSupplierChangeInfoAC, NewSupplierType } from '../../store/features/newSupplierSlice';
 import Preloader from '../common/preloader/preloader';
 import { NewSupplierSecondButtons, NewSupplierFirstButtons } from './newSupplierButtons';
 import NewSuplierLinkCreated from './newSupplierLinkCreated';
@@ -14,24 +14,29 @@ import NewSuplierLinkCreated from './newSupplierLinkCreated';
 
 const NewSupplier = () => {
     const { t } = useTranslation();
-    const [supplierName, setSupplierName] = useState<string>('');
-    const [purchaseTicket, setPurchaseTicket] = useState<string>('');
-    const [error, setError] = useState<string>('');
     const dispatch = useAppDispatch();
 
+    const company: string = useSelector((state: RootState) => state.newSupplier.company)
+    const ticket: string = useSelector((state: RootState) => state.newSupplier.ticket)
     const newSupplierLink: string = useSelector((state:RootState) => state.newSupplier.link);
     const isLoading: boolean = useSelector((state:RootState) => state.newSupplier.isLoading);
+    const [error, setError] = useState<string>('');
 
-    const createdSupplierName:string = useSelector((state:RootState) => state.newSupplier.company);
-    const createdSupplierTicket: string | null = useSelector((state:RootState) => state.newSupplier.ticket);
+    // const createdSupplierName:string = useSelector((state:RootState) => state.newSupplier.company);
+    // const createdSupplierTicket: string | null = useSelector((state:RootState) => state.newSupplier.ticket);
 
     const onNewSupplierNameChangeHandler = (newText: string) => {
-        setSupplierName(newText);
+        dispatch(newSupplierChangeInfoAC( {company: newText} ));
         setError('');
     }
+    const onSupplierTicketChangeHandler = (newText: string) => {
+        dispatch(newSupplierChangeInfoAC( {ticket: newText} ));
+        setError('');
+    }
+
     const onNewSupplierCreateClickHandler = () => {
-        if (supplierName.length > 0) {
-            dispatch(createNewSupplierThunk({company: supplierName, ticket: purchaseTicket}));
+        if (company.length > 0) {
+            dispatch(createNewSupplierThunk({company: company, ticket: ticket}));
         } else {
             const errorMessage:string = t("required_field");
             setError(errorMessage);
@@ -52,7 +57,7 @@ const NewSupplier = () => {
 
                             <LineTextField 
                                 type='text'
-                                text={supplierName}
+                                text={company}
                                 placeholder={ t("newSupplier_name_placeholder") }
                                 error={error.length > 0}
                                 onChangeFunction={ (newText:string) => onNewSupplierNameChangeHandler(newText) }
@@ -71,9 +76,9 @@ const NewSupplier = () => {
 
                             <LineTextField 
                                 type='text'
-                                text={purchaseTicket}
+                                text={ticket}
                                 placeholder={ t("newSupplier_ticketLink_placeholder") }
-                                onChangeFunction={ (newText:string) => setPurchaseTicket(newText) }
+                                onChangeFunction={ (newText:string) => onSupplierTicketChangeHandler(newText) }
                                 className={s.labelText}
                                 icon={iconTicket}
                             />
@@ -96,12 +101,12 @@ const NewSupplier = () => {
 
                             <h3>
                                 { t("newSupplier_company_name") } 
-                                { createdSupplierName }
+                                { company }
                             </h3>
                             {
-                                createdSupplierTicket && <h3>
+                                ticket && <h3>
                                     { t("newSupplier_ticket") }
-                                    { createdSupplierTicket }
+                                    { ticket }
                                 </h3>
                             }
                             

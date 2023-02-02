@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { newSupplierChangeInfo } from "../../store/features/newSupplierSlice";
+import { newSupplierChangeInfoAC, newSupplierInitData } from "../../store/features/newSupplierSlice";
 import { useAppDispatch } from "../../store/store";
 import { ButtonCancel, ButtonOK } from "../common/buttons/buttons";
 import { PATHS } from "../outlet/outlet";
@@ -30,14 +30,18 @@ export const NewSupplierSecondButtons = () => {
     const dispatch = useAppDispatch();
 
     const onNewCompanyClickHandler = () => {
-        const info = { id: '', company: '', ticket: '', link: '' }
-        dispatch(newSupplierChangeInfo(info))
+        dispatch(newSupplierChangeInfoAC(newSupplierInitData))
     }
+    const mainPageClickHandler = () => {
+        dispatch(newSupplierChangeInfoAC(newSupplierInitData))
+        navigate(PATHS.dashboard)
+    }
+
 
     return <div className={s.newSupplierButtons}>
         <ButtonOK
             text={ t("newSupplier_goToMainPage")}
-            onClickFunction={() => navigate(PATHS.dashboard)}
+            onClickFunction={mainPageClickHandler}
         />
         <ButtonOK 
             text={ t("newCompany") }

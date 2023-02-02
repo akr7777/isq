@@ -33,13 +33,15 @@ const SearchByCompanyField = (props: SearchByCompanyFieldPropsType) => {
                         (searchByDateStart.length > 0) || (searchByDateEnd.length > 0) ||
                         searchByPurchaseTicket.length > 0;
 
-
+    const currentStatePageNumber: number = useSelector((state: RootState) => state.supplier.pageOptions.currentPage);
+    const searchPageNumber:number = currentStatePageNumber > 1 ? 1 : currentStatePageNumber;
     useEffect(() => {
         dispatch(searchFieldChangeAC(searchInput));
         dispatch(getCompaniesThunk({
-            page: 1,
+            page: searchPageNumber,
             fieldForSearch: 'search',
             valueForSearch: searchInput,
+            where: 'SearchByCompanyField / useEffect'
         }))
     }, [debouncedValue])
 

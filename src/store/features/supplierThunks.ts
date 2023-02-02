@@ -18,9 +18,10 @@ export type GetCompaniesThunkResponseType = {
 }
 
 export type getCompaniesThunkVarType = {
-    page: number,
+    page?: number,
     fieldForSearch?: string,
-    valueForSearch?: string
+    valueForSearch?: string,
+    where: string
 }
 
 export const getCompaniesThunk = createAsyncThunk(
@@ -33,13 +34,22 @@ export const getCompaniesThunk = createAsyncThunk(
                     ? {...supplierState.searchingOptions, [data.fieldForSearch]: data.valueForSearch }
                     : {...supplierState.searchingOptions}
 
-        let paramsLink = '?page=1';
+        const pageNumber: number = data.page ? data.page : supplierState.pageOptions.currentPage;
+
+        console.log('getCompaniesThunk / where=', data.where, 'data.page=', data.page, 'state.curPage=', supplierState.pageOptions.currentPage, 'pageNumber=', pageNumber);
+        
+
+        // let paramsLink = '?page=' + String(data.page);
+        let paramsLink = '?page=' + String(pageNumber);
+
         if (searchingOptions.search.length > 0) paramsLink = paramsLink + "&company=" + searchingOptions.search
         // if (searchingOptions.searchByComplited.length > 0) paramsLink = paramsLink + "company=" + searchingOptions.search
         // if (searchingOptions.searchByDateStart.length > 0) paramsLink = paramsLink + "company=" + searchingOptions.search
         // if (searchingOptions.searchByDateEnd.length > 0) paramsLink = paramsLink + "company=" + searchingOptions.search
         // if (searchingOptions.searchByRisk && searchingOptions.searchByRisk.length > 0) paramsLink = paramsLink + "company=" + searchingOptions.search
         if (searchingOptions.searchByPurchaseTicket.length > 0) paramsLink = paramsLink + "&ticket=" + searchingOptions.searchByPurchaseTicket
+
+        // paramsLink = paramsLink + "&where=" + data.where
 
         const res = await supplierAPI.getCompanies(paramsLink);
         return res.data.data;

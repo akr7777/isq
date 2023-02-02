@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { changeCurrentPageAC } from "../../../store/features/supplierSlice";
+import { getCompaniesThunk } from "../../../store/features/supplierThunks";
 import { RootState, useAppDispatch } from "../../../store/store";
 import s from './paginator.module.css';
 
@@ -22,8 +23,13 @@ const Paginator = () => {
         pagesArr.push(i);
 
     const dispatch = useAppDispatch();
+
     const pageCountClickHandler = (num: number) => {
         dispatch(changeCurrentPageAC(num));
+        dispatch(getCompaniesThunk({
+            //page: 1,
+            where: 'Paginator / pageCountClickHandler'
+        }))
     }
 
     return <div className={s.paginatorDiv}>
