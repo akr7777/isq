@@ -36,10 +36,6 @@ export const getCompaniesThunk = createAsyncThunk(
 
         const pageNumber: number = data.page ? data.page : supplierState.pageOptions.currentPage;
 
-        console.log('getCompaniesThunk / where=', data.where, 'data.page=', data.page, 'state.curPage=', supplierState.pageOptions.currentPage, 'pageNumber=', pageNumber);
-        
-
-        // let paramsLink = '?page=' + String(data.page);
         let paramsLink = '?page=' + String(pageNumber);
 
         if (searchingOptions.search.length > 0) paramsLink = paramsLink + "&company=" + searchingOptions.search

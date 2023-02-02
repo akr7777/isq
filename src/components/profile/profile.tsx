@@ -40,6 +40,9 @@ const Profile = () => {
                         <ProfileRiskViewChecker />
                         <InterfaceDateFormat />
                         <InterfacePageSizing />
+                        {/* <div className={s.user_interface_settings_one_block}>
+                            <Preloader/>
+                        </div> */}
                     </div>
                     
             </div>

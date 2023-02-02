@@ -42,7 +42,15 @@ export type ProfileResponseType = {
     "risk_format": RiskViewType, 
     "date_format": FormatDateType,
 }
-export type ProfileRequestType = Omit<ProfileResponseType, 'username'>
+export type ProfileRequestType = {
+    "name"?: string, 
+    "theme"?: ThemesOptions, 
+    "language"?: UserLangType, 
+    "layout"?: LayoutOptionsType, 
+    "items_per_page"?: number, 
+    "risk_format"?: RiskViewType, 
+    "date_format"?: FormatDateType,
+}
 
 export const getProfileThunk = createAsyncThunk(
     'auth/profileThunk',

@@ -38,8 +38,8 @@ export const Icons = (props: IconsPropsType) => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const [language, setLanguage] = useLocalStorage(localStorageLanguageVariable, 'ru');
-    const name: string = useSelector((state:RootState) => state.auth.name);
-    const userSettings:ProfileUserSettingsType = useSelector((state:RootState) => state.auth.userSettings);
+    // const name: string = useSelector((state:RootState) => state.auth.name);
+    // const userSettings:ProfileUserSettingsType = useSelector((state:RootState) => state.auth.userSettings);
     const {theme, setTheme } = useTheme();
 
 
@@ -49,18 +49,18 @@ export const Icons = (props: IconsPropsType) => {
             i18n.changeLanguage(RU_LANG);
             setLanguage(RU_LANG);
             const dataForThunk:ProfileRequestType = {
-                ...userSettings,
+                // ...userSettings,
                 language: RU_LANG,
-                name: name,
+                // name: name,
             }
             dispatch(updateProfileThunk(dataForThunk));
         } else if (language === RU_LANG) {
             i18n.changeLanguage(EN_LANG);
             setLanguage(EN_LANG);
             const dataForThunk:ProfileRequestType = {
-                ...userSettings,
+                // ...userSettings,
                 language: EN_LANG,
-                name: name,
+                // name: name,
             }
             dispatch(updateProfileThunk(dataForThunk));
         }
@@ -70,13 +70,13 @@ export const Icons = (props: IconsPropsType) => {
 
     const handleLightThemeClick = () => {
         setTheme(LIGHT);
-        const updateThunkInfo:ProfileRequestType = {name: name, ...userSettings, theme: LIGHT}
-        dispatch(updateProfileThunk(updateThunkInfo));
+        // const updateThunkInfo:ProfileRequestType = {name: name, ...userSettings, theme: LIGHT}
+        dispatch(updateProfileThunk({theme: LIGHT}));
     }
     const handleDarkThemeClick = () => {
         setTheme(DARK);
-        const updateThunkInfo:ProfileRequestType = {name: name, ...userSettings, theme: DARK}
-        dispatch(updateProfileThunk(updateThunkInfo));
+        // const updateThunkInfo:ProfileRequestType = {name: name, ...userSettings, theme: DARK}
+        dispatch(updateProfileThunk({theme: DARK}));
     }
     const onProfileClickHandler = () => {
         navigate(PATHS.profile);

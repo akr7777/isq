@@ -76,6 +76,10 @@
     border-radius: 15px;
     padding: 20px;
 }
+.user_interface_settings_one_block_loading {
+    justify-content: center;
+    align-items: center;
+}
 
 .small_icons {
     width: 25px;

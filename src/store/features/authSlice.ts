@@ -40,6 +40,27 @@ export const BRICK_VIEW = 'bricks';
 export type LayoutOptionsType = typeof TABLE_VIEW | typeof BRICK_VIEW;
 export const localStorageSuppliersViewVariable = 'suppliersView';
 
+
+export type LoadingStatusType = {
+    loginRequestLoadingStatus: boolean,
+    profileRequestLoadingStatus: boolean,
+
+    layoutLoadingStatus: boolean,
+    riskFormatLoadingStatus: boolean,
+    dateFormatLoadingStatus: boolean,
+    itemsPerPageLoadingStatus: boolean,
+}
+const loadingStatusInitValue:LoadingStatusType = {
+    loginRequestLoadingStatus: false,
+    profileRequestLoadingStatus: false,
+
+    layoutLoadingStatus: false,
+    riskFormatLoadingStatus: false,
+    dateFormatLoadingStatus: false,
+    itemsPerPageLoadingStatus: false,
+}
+
+
 export type ProfileUserSettingsType = {
     language: UserLangType,
     theme: UserThemeType,
@@ -61,11 +82,7 @@ export type UserType = {
         emptyLogin: boolean,
         emptyPassword: boolean,
     }
-    loadingStatus: {
-        loginRequestLoadingStatus: boolean,
-        profileRequestLoadingStatus: boolean,
-    }
-    
+    loadingStatus: LoadingStatusType
 }
 
 
@@ -89,11 +106,7 @@ const initContent: UserType = {
         emptyLogin: false,
         emptyPassword: false,
     },
-    loadingStatus: {
-        loginRequestLoadingStatus: false,
-        profileRequestLoadingStatus: false,
-    }
-    
+    loadingStatus: loadingStatusInitValue,
 }
 
 export const authSlice = createSlice({
@@ -167,6 +180,10 @@ export const authSlice = createSlice({
                     language: action.payload
                 }
             }
+        },
+        changeLoadingStatus: (state: UserType, action: PayloadAction<{field: string, newValue: boolean}>) => {
+            // state.loadingStatus[action.payload.field] = action.payload.newValue;
+            state.loadingStatus = {...state.loadingStatus, [action.payload.field]: action.payload.newValue}
         }
     },
 
@@ -183,30 +200,47 @@ export const authSlice = createSlice({
         })
 
         builder.addCase(getProfileThunk.pending, (state: UserType) => {
-            state.loadingStatus = {...state.loadingStatus, profileRequestLoadingStatus: true } 
+            //state.loadingStatus.profileRequestLoadingStatus = true;
+            // state.loadingStatus.profileLayoutLoadingStatus = true;
         })
         builder.addCase(getProfileThunk.fulfilled, (state: UserType, action: PayloadAction<ProfileResponseType>) => {
-            state.name = action.payload.name;
-            state.username = action.payload.username;
-            state.userSettings = {
-                ...state.userSettings,
-                date_format: action.payload.date_format,
-                items_per_page: action.payload.items_per_page,
-                language: action.payload.language,
-                layout: action.payload.layout,
-                risk_format: action.payload.risk_format,
-                theme: action.payload.theme,
-            }
-            state.loadingStatus = {...state.loadingStatus, profileRequestLoadingStatus: false } 
+            if (state.name !== action.payload.name)
+                state.name = action.payload.name;
+            if (state.userSettings.date_format !== action.payload.date_format)
+                state.userSettings.date_format = action.payload.date_format;
+            if (state.userSettings.items_per_page !== action.payload.items_per_page)
+                state.userSettings.items_per_page = action.payload.items_per_page;
+            if (state.userSettings.language !== action.payload.language)
+                state.userSettings.language = action.payload.language;
+            if (state.userSettings.layout !== action.payload.layout)
+                state.userSettings.layout = action.payload.layout;
+            if (state.userSettings.risk_format !== action.payload.risk_format)
+                state.userSettings.risk_format = action.payload.risk_format;
+            if (state.userSettings.theme !== action.payload.theme)
+                state.userSettings.theme = action.payload.theme;
+            // state.userSettings = {
+            //     ...state.userSettings,
+                // date_format: action.payload.date_format,
+                // items_per_page: action.payload.items_per_page,
+                // language: action.payload.language,
+                // layout: action.payload.layout,
+                // risk_format: action.payload.risk_format,
+            //     theme: action.payload.theme,
+            // }
+            state.loadingStatus = loadingStatusInitValue;
+            // state.loadingStatus.profileLayoutLoadingStatus = false;
+            // state.loadingStatus.profileRequestLoadingStatus = false;
         })
         builder.addCase(getProfileThunk.rejected, (state: UserType) => {
-            state.loadingStatus = {...state.loadingStatus, profileRequestLoadingStatus: false } 
+            state.loadingStatus = loadingStatusInitValue
+            // state.loadingStatus.profileLayoutLoadingStatus = false;
+            // state.loadingStatus.profileRequestLoadingStatus = false;
         })
     }
 })
 export const {
     loginAC, onLoginInputAC, onPasswordInputAC, 
-    changeThemeAC, 
+    changeThemeAC, changeLoadingStatus
     // changeLanguageAC,
 } = authSlice.actions;
 
