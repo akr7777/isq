@@ -30,7 +30,7 @@ export const NewSupplierSecondButtons = () => {
     const dispatch = useAppDispatch();
 
     const onNewCompanyClickHandler = () => {
-        const info = { id: '', company: '', ticket: '' }
+        const info = { id: '', company: '', ticket: '', link: '' }
         dispatch(newSupplierChangeInfo(info))
     }
 

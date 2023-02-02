@@ -1,6 +1,6 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import { supplierAPI } from "../../components/api/api";
-import { AppDispatchType, RootState } from "../store";
+import { RootState } from "../store";
 import { RiskType, SearchingOptionsType, SupplierSliceType } from "./supplierSlice";
 
 export type GetCompaniesResultType = {

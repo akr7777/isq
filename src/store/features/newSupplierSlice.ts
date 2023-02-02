@@ -1,20 +1,20 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { supplierAPI } from "../../components/api/api";
-import { useAppDispatch } from "../store";
-
-
 
 export type CreateNewSupplierThunkRequestType = {
     company: string,
     ticket?: string
 }
 export type CreateNewSupplierThunkResponseType = {
-    "id": string, 
-    "company": string,
-    "ticket": string | null, 
-    "created_at": string, 
-    "filled_at": string | null, 
-    "risk_level": string | null
+    "link": string,
+    result: {
+        "id": string, 
+        "company": string,
+        "ticket": string | null, 
+        "created_at": string, 
+        "filled_at": string | null, 
+        "risk_level": string | null
+    }
 }
 export const createNewSupplierThunk = createAsyncThunk(
     'newSupplier/CreateNewSupplierThunk',
@@ -26,27 +26,15 @@ export const createNewSupplierThunk = createAsyncThunk(
 
 
 export type NewSupplierType = {
+    link: string,
     id: string,
     company: string,
     ticket: string | null,
-    isLoading: boolean
+    isLoading: boolean,
 }
 const newSupplierInitData:NewSupplierType = {
-    id: '', company: '', ticket: '', isLoading: false
+    link: '', id: '', company: '', ticket: '', isLoading: false
 }
-
-
-// const copyToBuffer = async () => {
-//     navigator.clipboard.writeText(newSupplierLink)
-//     .then(async () => {
-//         setCopyLinkSuccess(true);
-//         await delay(3);
-//         setCopyLinkSuccess(false);
-//     })
-//     .catch(err => {
-//         console.log('Something went wrong', err);
-//     });
-// }
 
 export const newSupplierSlice = createSlice({
     name: 'newSupplier',
@@ -63,15 +51,10 @@ export const newSupplierSlice = createSlice({
             state.isLoading = true;
         })
         builder.addCase(createNewSupplierThunk.fulfilled, (state: NewSupplierType, action: PayloadAction<CreateNewSupplierThunkResponseType>) => {
-            // const dispatch = useAppDispatch();
-            // const info:Omit<NewSupplierType, "isLoading"> = {
-            //     id: action.payload.id,
-            //     company: action.payload.company,
-            // }
-            // dispatch(newSupplierChangeInfo(info));
-            state.id = action.payload.id;
-            state.company = action.payload.company;
-            state.ticket = action.payload.ticket;
+            state.id = action.payload.result.id;
+            state.company = action.payload.result.company;
+            state.ticket = action.payload.result.ticket;
+            state.link = action.payload.link;
             state.isLoading = false;
         })
         builder.addCase(createNewSupplierThunk.rejected, (state: NewSupplierType) => {

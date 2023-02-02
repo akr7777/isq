@@ -1,12 +1,7 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { ButtonCancel, ButtonOK } from '../common/buttons/buttons';
 import { LineTextField } from '../common/labelTextField/labelLineText';
-import { PATHS } from '../outlet/outlet';
 import s from './newSupplier.module.css';
 import { useTranslation } from 'react-i18next';
-// import iconCopyGreen from '../../public/icons/icon_copy_green.png';
-// import iconCopyBlue from '../../public/icons/icon_copy_blue.png';
 import iconTicket from "../../public/icons/purchase_ticket.png";
 import iconCompany from "../../public/icons/icon_company.png";
 import { RootState, useAppDispatch } from '../../store/store';
@@ -19,23 +14,17 @@ import NewSuplierLinkCreated from './newSupplierLinkCreated';
 
 const NewSupplier = () => {
     const { t } = useTranslation();
-    const navigate = useNavigate();
     const [supplierName, setSupplierName] = useState<string>('');
     const [purchaseTicket, setPurchaseTicket] = useState<string>('');
     const [error, setError] = useState<string>('');
     const dispatch = useAppDispatch();
 
-    const newSupplierId: string = useSelector((state:RootState) => state.newSupplier.id);
-    const newSupplierLink = "https://example.com/" + newSupplierId;
+    const newSupplierLink: string = useSelector((state:RootState) => state.newSupplier.link);
     const isLoading: boolean = useSelector((state:RootState) => state.newSupplier.isLoading);
 
     const createdSupplierName:string = useSelector((state:RootState) => state.newSupplier.company);
     const createdSupplierTicket: string | null = useSelector((state:RootState) => state.newSupplier.ticket);
 
-    // const delay = (seconds: number) => new Promise(resolve => setTimeout(resolve,seconds*1000)) 
-
-    // console.log('NewSupplier / newSupplierId=', newSupplierId);
-    
     const onNewSupplierNameChangeHandler = (newText: string) => {
         setSupplierName(newText);
         setError('');
@@ -48,20 +37,6 @@ const NewSupplier = () => {
             setError(errorMessage);
         }
     }
-    const onNewSupplierCancelClickHandler = () => {
-        navigate(PATHS.dashboard);
-    }
-    // const copyToBuffer = async () => {
-    //     navigator.clipboard.writeText(newSupplierLink)
-    //     .then(async () => {
-    //         setCopyLinkSuccess(true);
-    //         await delay(3);
-    //         setCopyLinkSuccess(false);
-    //     })
-    //     .catch(err => {
-    //         console.log('Something went wrong', err);
-    //     });
-    // }
 
     return <div className={s.newWrapper}>
         <div>
@@ -69,7 +44,7 @@ const NewSupplier = () => {
         </div>
 
         {
-            newSupplierId.length === 0 && <>
+            newSupplierLink.length === 0 && <>
             
                     <div className={s.fields}>
                         <div className={s.oneField + " " + s.fields_width}>
@@ -108,27 +83,15 @@ const NewSupplier = () => {
 
                     <NewSupplierFirstButtons onClick={onNewSupplierCreateClickHandler} />
 
-                    {/* <div className={s.buttonsDiv + " " + s.btn_width}>
-                        <ButtonOK 
-                            text={ t("newSupplier_create_new") }
-                            onClickFunction={onNewSupplierCreateClickHandler}
-                        />
-                        <ButtonCancel 
-                            text={ t("newSupplier_cancel_new") }
-                            onClickFunction={onNewSupplierCancelClickHandler}
-                        />
-                    </div> */}
                 </>
         }
 
-        
-        
         {
             isLoading 
                 ? <Preloader />
                 : <>
                     {
-                        newSupplierId.length > 0 && <div className={s.newSupplier_link_div}>
+                        newSupplierLink.length > 0 && <div className={s.newSupplier_link_div}>
                             <h3>{ t("newSupplier_link_send_it_1") }</h3>
 
                             <h3>
