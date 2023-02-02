@@ -26,8 +26,8 @@ export const authAPI = {
     }
 }
 export const supplierAPI = {
-    getCompanies: (pageNumber: number):Promise<AxiosResponse> => {
-        return instance.get('questionaries?page='+pageNumber);
+    getCompanies: (searchParamsLink: string):Promise<AxiosResponse> => {
+        return instance.get('questionaries' + searchParamsLink);
         // return instance.get('test/getTest?contentId='+pageNumber);
     },
     createNewSupplier: (data: CreateNewSupplierThunkRequestType):Promise<AxiosResponse> => {

@@ -11,29 +11,33 @@ import SearchByComplited from "./optionSearchComplited";
 import SearchByDate from "./optionSearchDate";
 import SearchRisk from "./optionSearchRisk";
 import { useTranslation } from "react-i18next";
-import { IsSomeSearchOptionFilled } from "./functions-for-search";
+import { IsSomeSearchOptionFilled, SearchOptionsToServer } from "./functions-for-search";
 import SearchByPurchaseTicket from "./optionPurchaseTicket";
 import useDebounce from "../../../../hooks/debounced-hook";
+import { getCompaniesThunk } from "../../../../store/features/supplierThunks";
 
 
 
 const SearchField = () => {
     const {t} = useTranslation();
-    const searchField:string = useSelector((state:RootState) => state.supplier.searchingOptions.search);
-    // const [text, setText] = useState<string>('');
+    const [searchInput, setSearchInput] = useState<string>('');
+    // const searchField:string = useSelector((state:RootState) => state.supplier.searchingOptions.search);
     const dispatch = useAppDispatch();
 
-    const debouncedValue = useDebounce<string>(searchField, SEARCH_TEXT_DELAY);
+    const debouncedValue = useDebounce<string>(searchInput, SEARCH_TEXT_DELAY);
 
     useEffect(() => {
-        if (searchField.length > 0) {
-            console.log('!!!searchField=',searchField);
-        }
+        dispatch(searchFieldChangeAC(searchInput));
+        dispatch(getCompaniesThunk({
+            page: 1,
+            fieldForSearch: 'search',
+            valueForSearch: searchInput,
+        }))
     }, [debouncedValue])
 
-    const onSearchChangeHandler = (searchText: string) => {
-        dispatch(searchFieldChangeAC(searchText))
-    }
+    // const onSearchChangeHandler = (searchText: string) => {
+    //     dispatch(searchFieldChangeAC(searchText))
+    // }
 
     
     const isCircled: boolean = IsSomeSearchOptionFilled();
@@ -45,9 +49,9 @@ const SearchField = () => {
                 <LineTextField 
                     type="text"
                     // text={text}
-                    text={searchField}
+                    text={searchInput}
                     placeholder={t('search_field_placeholder')}
-                    onChangeFunction={onSearchChangeHandler}
+                    onChangeFunction={(newInput: string) => setSearchInput(newInput)}
                     icon={isCircled ? circleIcon : searchIcon}
                     className={s.searchFieldWidth}
                     autofocus={true}

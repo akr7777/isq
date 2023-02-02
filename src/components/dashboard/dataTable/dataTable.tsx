@@ -2,13 +2,12 @@ import { useSelector } from "react-redux";
 import { 
     SupplerDataType, SupplierIdType, 
 } from "../../../store/features/supplierSlice";
-import { RootState } from "../../../store/store";
+import { RootState, useAppDispatch } from "../../../store/store";
 import s from './dataTable.module.css';
 import dashboardStyles from "./../dashboard.module.css";
 
 import yes from './../../../public/icons/var_yes.png';
 import no from './../../../public/icons/var_no.png';
-import { AddSearchOptions, AddSearchOptionsPropsType } from "../dashboardHead/search/functions-for-search";
 import { useNavigate } from "react-router-dom";
 import { PATHS } from "../../outlet/outlet";
 import RiskInLine from "../riskInLine";
@@ -17,13 +16,22 @@ import SortingIcons from "../sortIcons";
 import dayjs from "dayjs";
 import Preloader from "../../common/preloader/preloader";
 import { FormatDateType } from "../../../store/features/authSlice";
+import { useEffect } from "react";
+import { getCompaniesThunk, getCompaniesThunkVarType } from "../../../store/features/supplierThunks";
 // import preloaderSpinner1 from "../../../public/preloader/preloader1.gif"
 
 const DataTable = () => {
     const {t} = useTranslation();
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
 
-    const companies:SupplerDataType[] = AddSearchOptions();
+    useEffect(() => {
+        // dispatch(getCompaniesThunk({data: 'adb'}));
+        dispatch(getCompaniesThunk({page: 1}));
+    }, [])
+
+    // const companies:SupplerDataType[] = AddSearchOptions();
+    const companies:SupplerDataType[] = useSelector((state:RootState) => state.supplier.suppliers);
     // const userDateFormat:FormatDateType = useSelector((state: RootState) => state.supplier.settings.userDateFormat);
     const userDateFormat:FormatDateType = useSelector((state: RootState) => state.auth.userSettings.date_format);
     const isLoading:boolean = useSelector((state:RootState) => state.supplier.loadingVars.suppliersLoading);
@@ -31,6 +39,8 @@ const DataTable = () => {
     const onSupplierClickHandler = (supplierId: SupplierIdType) => {
         navigate(PATHS.supplierCard + "/" + String(supplierId));
     }
+
+    
     
     
     return <>

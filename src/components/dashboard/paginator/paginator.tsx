@@ -6,17 +6,17 @@ import s from './paginator.module.css';
 const Paginator = () => {
     // const companiesCount:number = useSelector((state:RootState) => state.supplier.pageOptions.companiesCount);
     // const pageSize:number = useSelector((state:RootState) => state.supplier.settings.pageSizing)
-    const companiesCount:number = useSelector((state:RootState) => state.supplier.pageOptions.companiesCount);
+    const totalPages:number = useSelector((state:RootState) => state.supplier.pageOptions.totalPages);
     const pageSize:number = useSelector((state:RootState) => state.auth.userSettings.items_per_page);
-    const pageCount: number = Math.ceil( companiesCount / pageSize);
+    // const pageCount: number = Math.ceil( companiesCount / pageSize);
     const currentPage:number = useSelector((state:RootState) => state.supplier.pageOptions.currentPage);
 
     const startPageNumber:number = currentPage > 6
                                         ? currentPage - 5
                                         : 1
-    const endPageNumber:number = pageCount - currentPage > 6 
+    const endPageNumber:number = totalPages - currentPage > 6 
                                         ? currentPage + 5
-                                        : pageCount
+                                        : totalPages
     let pagesArr:Array<number> = [];
     for (let i=startPageNumber; i<= endPageNumber; i++)
         pagesArr.push(i);
@@ -55,14 +55,14 @@ const Paginator = () => {
             })
         }
 
-        { endPageNumber < pageCount - 2 && <div>...</div> }
+        { endPageNumber < totalPages - 2 && <div>...</div> }
 
         { 
-            endPageNumber < pageCount - 2 && <div 
+            endPageNumber < totalPages - 2 && <div 
                     className={s.pageDiv}
-                    onClick={() => pageCountClickHandler(pageCount)}
+                    onClick={() => pageCountClickHandler(totalPages)}
                 >
-                    {pageCount}
+                    {totalPages}
                 </div>
         }
 

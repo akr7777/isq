@@ -77,7 +77,7 @@ export type AddSearchOptionsPropsType = {
     columnSortDirection: ColumnSortDirectionType
 }
 
-export function AddSearchOptions() {
+export function AddSearchOptions123() {
     const searchField:string = useSelector((state:RootState) => state.supplier.searchingOptions.search);
     const searchComplited:SearchByComplitedType = useSelector((state:RootState) => state.supplier.searchingOptions.searchByComplited);
     const searchRisk:RiskType = useSelector((state:RootState) => state.supplier.searchingOptions.searchByRisk);
@@ -88,41 +88,50 @@ export function AddSearchOptions() {
     const dispatch = useAppDispatch();
 
     const companies:Array<SupplerDataType> = useSelector((state:RootState) => state.supplier.suppliers);
-    useEffect( () => {
-        dispatch(getCompaniesThunk(1));
-    }, [])
 
-    let newArr:Array<SupplerDataType> = companies.filter( el => el.supplierName.toLowerCase().includes(searchField.toLowerCase()));
+    // let params:getCompaniesRequestThunk = { pageNumber: 1 }
+    // if (searchField.length > 0) 
+    //     params = {...params, company: searchField}
 
-    if (searchComplited === SEARCH_COMPLETED_FINISHED)
-        newArr = newArr.filter( el => el.filledDate );
-    if (searchComplited === SEARCH_COMPLETED_UNFINISHED)
-        newArr = newArr.filter( el => el.filledDate );
+    // if (searchByPurchaseTicket.length > 0)
+    //     params = {...params, ticket: searchByPurchaseTicket}
 
-    if (searchRisk === RISK_LOW)
-        newArr = newArr.filter( el => el.risk === RISK_LOW);
-    if (searchRisk === RISK_MEDIUM)
-        newArr = newArr.filter( el => el.risk === RISK_MEDIUM);
-    if (searchRisk === RISK_HIGH)
-        newArr = newArr.filter( el => el.risk === RISK_HIGH);
+    // useEffect( () => {
+    //     dispatch(getCompaniesThunk(''));
+    // }, [])
 
-    if (searchByPurchaseTicket.length > 0)
-        newArr = newArr.filter( el => el.purchaseTicket?.includes(searchByPurchaseTicket))
+    // let newArr:Array<SupplerDataType> = companies.filter( el => el.supplierName.toLowerCase().includes(searchField.toLowerCase()));
+
+    // if (searchComplited === SEARCH_COMPLETED_FINISHED)
+    //     newArr = newArr.filter( el => el.filledDate );
+    // if (searchComplited === SEARCH_COMPLETED_UNFINISHED)
+    //     newArr = newArr.filter( el => el.filledDate );
+
+    // if (searchRisk === RISK_LOW)
+    //     newArr = newArr.filter( el => el.risk === RISK_LOW);
+    // if (searchRisk === RISK_MEDIUM)
+    //     newArr = newArr.filter( el => el.risk === RISK_MEDIUM);
+    // if (searchRisk === RISK_HIGH)
+    //     newArr = newArr.filter( el => el.risk === RISK_HIGH);
+
+    // if (searchByPurchaseTicket.length > 0)
+    //     newArr = newArr.filter( el => el.purchaseTicket?.includes(searchByPurchaseTicket))
     
-    if (searchByDateStart) {
-        newArr = newArr.filter( el => (el.creationDate && searchByDateStart) 
-            ? el.creationDate > dayjs(searchByDateStart).format(COMMON_DATE_FORMAT) : el);
-    }
-    if (searchByDateEnd) {
-        newArr = newArr.filter( el => (el.creationDate && searchByDateEnd) 
-            ? el.creationDate < dayjs(searchByDateEnd).format(COMMON_DATE_FORMAT) : el);
-    }
+    // if (searchByDateStart) {
+    //     newArr = newArr.filter( el => (el.creationDate && searchByDateStart) 
+    //         ? el.creationDate > dayjs(searchByDateStart).format(COMMON_DATE_FORMAT) : el);
+    // }
+    // if (searchByDateEnd) {
+    //     newArr = newArr.filter( el => (el.creationDate && searchByDateEnd) 
+    //         ? el.creationDate < dayjs(searchByDateEnd).format(COMMON_DATE_FORMAT) : el);
+    // }
     
 
     // SORTING
-    newArr = SortArray({arr: newArr});
+    // newArr = SortArray({arr: newArr});
 
-    return newArr;
+    // return newArr;
+    return companies;
 }
 
 export function IsSomeSearchOptionFilled():boolean {
@@ -139,4 +148,32 @@ export function IsSomeSearchOptionFilled():boolean {
                         searchByPurchaseTicket.length > 0;
 
     return isCircled;
+}
+
+export function SearchOptionsToServer() {
+    // const pageNumber:number = useSelector((state: RootState) => state.supplier.pageOptions.newPageNumber);
+
+    const searchField:string = '';//useSelector((state:RootState) => state.supplier.searchingOptions.search);
+    // const searchComplited:SearchByComplitedType = useSelector((state:RootState) => state.supplier.searchingOptions.searchByComplited);
+    // const searchRisk:RiskType = useSelector((state:RootState) => state.supplier.searchingOptions.searchByRisk);
+    // const searchByDateStart: string = useSelector((state: RootState) => state.supplier.searchingOptions.searchByDateStart);
+    // const searchByDateEnd: string = useSelector((state: RootState) => state.supplier.searchingOptions.searchByDateEnd);
+    // const searchByPurchaseTicket:string = useSelector((state:RootState) => state.supplier.searchingOptions.searchByPurchaseTicket) || "";
+    
+    // const dispatch = useAppDispatch();
+
+    // let paramsLink:string = '?page=' + String(pageNumber);
+
+    let paramsLink = '?';
+    if (searchField.length > 0)
+        paramsLink += "&company=" + searchField;
+    
+    // if (searchByPurchaseTicket.length > 0)
+    //     paramsLink += "&ticket=" + searchByPurchaseTicket;
+    
+    // useEffect( () => {
+    //     dispatch(getCompaniesThunk(paramsLink));
+    // }, [])
+
+    return paramsLink;
 }

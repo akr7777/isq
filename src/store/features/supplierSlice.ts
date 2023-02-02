@@ -1,6 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
 import type {PayloadAction} from '@reduxjs/toolkit';
-import { getCompaniesThunk, getCompaniesThunkResponseType } from './supplierThunks';
+import { GetCompaniesResultType, getCompaniesThunk, GetCompaniesThunkResponseType } from './supplierThunks';
 import { DATE_EU, FormatDateType, pageSizeOptions, RiskViewType, RiskViewWORD, TABLE_VIEW, LayoutOptionsType } from './authSlice';
 // import { suppliersInitContent12 } from './supplierInitData';
 
@@ -43,9 +43,17 @@ export type SupplerDataType = {
     // data?: string,
     purchaseTicket?: string
 }
+export type SearchingOptionsType = {
+    search: string,
+    searchByComplited: SearchByComplitedType,
+    searchByRisk: RiskType,
+    searchByDateStart: string,//FilterDateType,
+    searchByDateEnd: string,//FilterDateType,
+    searchByPurchaseTicket: string,
+}
 
 
-type SupplierSliceType = {
+export type SupplierSliceType = {
     suppliers: Array<SupplerDataType>,
 
     // settings: {
@@ -58,17 +66,11 @@ type SupplierSliceType = {
         columnNameSorting: ColumnSortNameType,
         columnSortDirection: ColumnSortDirectionType,
     }
-    searchingOptions: {
-        search: string,
-        searchByComplited: SearchByComplitedType,
-        searchByRisk: RiskType,
-        searchByDateStart: string,//FilterDateType,
-        searchByDateEnd: string,//FilterDateType,
-        searchByPurchaseTicket: string,
-    }
+    searchingOptions: SearchingOptionsType,
     pageOptions: {
-        companiesCount: number,
+        totalPages: number,
         currentPage: number,
+        newPageNumber: number,
     }
     loadingVars: {
         suppliersLoading: boolean,
@@ -102,8 +104,9 @@ const initContent:SupplierSliceType = {
     },
     
     pageOptions: {
-        companiesCount: 30653,
-        currentPage: 1,
+        totalPages: 0,
+        currentPage: 0,
+        newPageNumber: 0,
     },
     loadingVars: {
         suppliersLoading: false,
@@ -230,17 +233,10 @@ export const supplierSlice = createSlice({
             // state.isLoading = true;
             state.loadingVars.suppliersLoading = true;
         })
-        builder.addCase(getCompaniesThunk.fulfilled, (state: SupplierSliceType, action: PayloadAction<Array<getCompaniesThunkResponseType>>) => {
-            // console.log('getCompaniesThunk / fulfilled, action=', action.payload);
-            state.suppliers = action.payload.map( (el:getCompaniesThunkResponseType) => {
-                // const riskLevel:RiskType = el.risk_level === 'low'
-                //                             ? RISK_LOW
-                //                             : el.risk_level === 'medium'
-                //                                 ? RISK_MEDIUM
-                //                                 : el.risk_level === 'high'
-                //                                     ? RISK_HIGH
-                //                                     : undefined
-
+        builder.addCase(getCompaniesThunk.fulfilled, (state: SupplierSliceType, action: PayloadAction<GetCompaniesThunkResponseType>) => {
+            state.pageOptions.currentPage = action.payload.page;
+            state.pageOptions.totalPages = action.payload.total_pages;
+            state.suppliers = action.payload.results.map( (el:GetCompaniesResultType) => {
                 let response:SupplerDataType = {
                     supplierId: el.id,
                     supplierName: el.company,
@@ -248,15 +244,9 @@ export const supplierSlice = createSlice({
                     creationDate: el.created_at,
                     filledDate: el.filled_at,
                     purchaseTicket: el.ticket || undefined,
-                    // data: string,
                 }
-                if (el.ticket) {
-                    return {...response, purchaseTicket: el.ticket}
-                } else {
-                    return response
-                }
+                return response
             });
-            //state.suppliers = action.payload;
             state.loadingVars.suppliersLoading = false;
         })
         builder.addCase(getCompaniesThunk.rejected, (state: SupplierSliceType) => {

@@ -9,7 +9,6 @@ import dbStyles from "./../dashboard.module.css";
 
 import yes from './../../../public/icons/var_yes.png';
 import no from './../../../public/icons/var_no.png';
-import { AddSearchOptions, AddSearchOptionsPropsType } from "../dashboardHead/search/functions-for-search";
 import { PATHS } from "../../outlet/outlet";
 import { useNavigate } from "react-router-dom";
 import RiskInLine from "../riskInLine";
@@ -24,14 +23,15 @@ import { FormatDateType } from "../../../store/features/authSlice";
 
 const DataBricks = () => {
     const navigate = useNavigate();
-    // const dispatch = useAppDispatch();
+    const dispatch = useAppDispatch();
     const {t} = useTranslation();
 
-    // useEffect(() => {
-    //     dispatch(getCompaniesThunk(1));
-    // }, [])
+    useEffect(() => {
+        dispatch(getCompaniesThunk({page: 1}));
+    }, [])
 
-    const companies:SupplerDataType[] = AddSearchOptions();
+    // const companies:SupplerDataType[] = AddSearchOptions();
+    const companies:SupplerDataType[] = useSelector((state:RootState) => state.supplier.suppliers);
     const userDateFormat:FormatDateType = useSelector((state: RootState) => state.auth.userSettings.date_format);
     // const userDateFormat:FormatDateType = useSelector((state: RootState) => state.supplier.settings.userDateFormat);
     const isLoading:boolean = useSelector((state:RootState) => state.supplier.loadingVars.suppliersLoading);
