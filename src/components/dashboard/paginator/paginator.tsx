@@ -26,10 +26,7 @@ const Paginator = () => {
 
     const pageCountClickHandler = (num: number) => {
         dispatch(changeCurrentPageAC(num));
-        dispatch(getCompaniesThunk({
-            //page: 1,
-            where: 'Paginator / pageCountClickHandler'
-        }))
+        dispatch(getCompaniesThunk({}))
     }
 
     return <div className={s.paginatorDiv}>

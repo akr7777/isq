@@ -41,7 +41,6 @@ const SearchByCompanyField = (props: SearchByCompanyFieldPropsType) => {
             page: searchPageNumber,
             fieldForSearch: 'search',
             valueForSearch: searchInput,
-            where: 'SearchByCompanyField / useEffect'
         }))
     }, [debouncedValue])
 

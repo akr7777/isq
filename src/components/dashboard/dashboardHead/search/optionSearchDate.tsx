@@ -17,7 +17,6 @@ const SearchByCreationDate = () => {
             page: 1,
             fieldForSearch: 'searchByDateStart',
             valueForSearch: newDate,
-            where: 'SearchByDate'
         }));
         dispatch(searchByDateFilterAC({dateStart: newDate, dateEnd: dateCreatedEnd}));
     }
@@ -26,7 +25,6 @@ const SearchByCreationDate = () => {
             page: 1,
             fieldForSearch: 'searchByDateEnd',
             valueForSearch: newDate,
-            where: 'SearchByDate'
         }));
         dispatch(searchByDateFilterAC({dateStart: dateCreatedStart, dateEnd: newDate}));
     }

@@ -21,7 +21,6 @@ export type getCompaniesThunkVarType = {
     page?: number,
     fieldForSearch?: string,
     valueForSearch?: string,
-    where?: string
 }
 
 export const getCompaniesThunk = createAsyncThunk(
@@ -52,9 +51,6 @@ export const getCompaniesThunk = createAsyncThunk(
             paramsLink = paramsLink + "&is_filled=" + searchingOptions.searchByComplited
         if (searchingOptions.searchByPurchaseTicket.length > 0) 
             paramsLink = paramsLink + "&ticket=" + searchingOptions.searchByPurchaseTicket;
-
-            
-        // paramsLink = paramsLink + "&where=" + data.where
 
         const res = await supplierAPI.getCompanies(paramsLink);
         return res.data.data;
