@@ -1,7 +1,7 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import { supplierAPI } from "../../components/api/api";
 import { RootState } from "../store";
-import { RiskType, searchByDateFilterAC, SearchingOptionsType, SupplierSliceType } from "./supplierSlice";
+import { RiskType, searchByDateFilterAC, SearchingOptionsType, SEARCH_COMPLETED_ALL, SupplierSliceType } from "./supplierSlice";
 
 export type GetCompaniesResultType = {
     "id": string, 
@@ -47,7 +47,8 @@ export const getCompaniesThunk = createAsyncThunk(
             paramsLink = paramsLink + "&created_before=" + searchingOptions.searchByDateEnd;
         if (searchingOptions.searchByRisk && searchingOptions.searchByRisk.length > 0) 
             paramsLink = paramsLink + "&risk_level=" + searchingOptions.searchByRisk;
-        if (searchingOptions.searchByComplited && searchingOptions.searchByComplited.length > 0)
+        if (searchingOptions.searchByComplited && searchingOptions.searchByComplited.length > 0 && 
+                searchingOptions.searchByComplited !== SEARCH_COMPLETED_ALL)
             paramsLink = paramsLink + "&is_filled=" + searchingOptions.searchByComplited
         if (searchingOptions.searchByPurchaseTicket.length > 0) 
             paramsLink = paramsLink + "&ticket=" + searchingOptions.searchByPurchaseTicket;
