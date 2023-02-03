@@ -20,13 +20,12 @@ const SearchByPurchaseTicket = () => {
     const currentStatePageNumber: number = useSelector((state: RootState) => state.supplier.pageOptions.currentPage);
     const searchPageNumber:number = currentStatePageNumber > 1 ? 1 : currentStatePageNumber
     useEffect(() => {
-        dispatch(changePurchaseTicketSearchAC(ticket));
         dispatch(getCompaniesThunk({
             page: searchPageNumber,
             fieldForSearch: 'searchByPurchaseTicket',
             valueForSearch: ticket,
-            where: 'SearchByPurchaseTicket / useEffect'
-        }))
+        }));
+        dispatch(changePurchaseTicketSearchAC(ticket));
     }, [debouncedValue])
 
 

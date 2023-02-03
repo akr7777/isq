@@ -17,11 +17,6 @@ import { getCompaniesThunk } from "../../../store/features/supplierThunks";
 const DataTable = () => {
     const {t} = useTranslation();
     const navigate = useNavigate();
-    const dispatch = useAppDispatch();
-
-    // useEffect(() => {
-    //     // dispatch(getCompaniesThunk({}));
-    // }, [])
 
     const companies:SupplerDataType[] = useSelector((state:RootState) => state.supplier.suppliers);
     const userDateFormat:FormatDateType = useSelector((state: RootState) => state.auth.userSettings.date_format);
@@ -54,13 +49,13 @@ const DataTable = () => {
             </thead>
             <tbody>
                 {
-                    companies.map( (c:SupplerDataType, ind: number) => 
-                        <tr className={s.theTableTr} key={c.supplierId} onClick={() => onSupplierClickHandler(c.supplierId)}>
+                    companies.map( (c:SupplerDataType, ind: number) => {
+                        return <tr className={s.theTableTr} key={c.supplierId} onClick={() => onSupplierClickHandler(c.supplierId)}>
                             <td>
                             Номер строки {ind+1}, компания: {c.supplierName}
                             </td>
                             <td>
-                                {c.creationDate && dayjs(c.creationDate).format(userDateFormat)}
+                                {c.creationDate && dayjs(c.creationDate.slice(0,10)).format(userDateFormat)}
                             </td>
                             <td>{
                                     c.filledDate
@@ -72,6 +67,7 @@ const DataTable = () => {
                                 <RiskInLine risk={c.risk}/>
                             </td>
                         </tr>
+                    }
                     )
                 }
             </tbody>

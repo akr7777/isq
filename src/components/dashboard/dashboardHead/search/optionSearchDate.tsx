@@ -1,23 +1,34 @@
-import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { searchByDateFilterAC } from '../../../../store/features/supplierSlice';
-import { useAppDispatch } from '../../../../store/store';
+import { getCompaniesThunk } from '../../../../store/features/supplierThunks';
+import { RootState, useAppDispatch } from '../../../../store/store';
 import Calendar from '../../../common/calendar/calendar';
 import s from './search.module.css';
 
-const SearchByDate = () => {
+const SearchByCreationDate = () => {
 
-    const [dateStart, setDateStart] = useState<string>('');
-    const [dateEnd, setDateEnd] = useState<string>('');
+    const dateCreatedStart: string = useSelector((state:RootState) => state.supplier.searchingOptions.searchByDateStart);
+    const dateCreatedEnd: string = useSelector((state:RootState) => state.supplier.searchingOptions.searchByDateEnd);
 
     const dispatch = useAppDispatch();
-    
+
     const onStartDateFieldChangeHandler = (newDate: string) => {
-        setDateStart(newDate);
-        dispatch(searchByDateFilterAC({dateStart: newDate, dateEnd: dateEnd}));
+        dispatch(getCompaniesThunk({
+            page: 1,
+            fieldForSearch: 'searchByDateStart',
+            valueForSearch: newDate,
+            where: 'SearchByDate'
+        }));
+        dispatch(searchByDateFilterAC({dateStart: newDate, dateEnd: dateCreatedEnd}));
     }
     const onEndDateFieldChangeHandler = (newDate: string) => {
-        setDateEnd(newDate);
-        dispatch(searchByDateFilterAC({dateStart: dateStart, dateEnd: newDate}));
+        dispatch(getCompaniesThunk({
+            page: 1,
+            fieldForSearch: 'searchByDateEnd',
+            valueForSearch: newDate,
+            where: 'SearchByDate'
+        }));
+        dispatch(searchByDateFilterAC({dateStart: dateCreatedStart, dateEnd: newDate}));
     }
 
     return <>
@@ -34,4 +45,4 @@ const SearchByDate = () => {
         </div>
     </>
 }
-export default SearchByDate;
+export default SearchByCreationDate;

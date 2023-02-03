@@ -19,16 +19,7 @@ import { FormatDateType } from "../../../store/features/authSlice";
 
 const DataBricks = () => {
     const navigate = useNavigate();
-    const dispatch = useAppDispatch();
     const {t} = useTranslation();
-    // const pageNumber:number = useSelector((state:RootState) => state.supplier.pageOptions.currentPage);
-    
-    // // console.log('DataBricks pageNamber=', pageNumber);
-    
-
-    // useEffect(() => {
-    //     // dispatch(getCompaniesThunk({}));
-    // }, [pageNumber])
 
     const companies:SupplerDataType[] = useSelector((state:RootState) => state.supplier.suppliers);
     const userDateFormat:FormatDateType = useSelector((state: RootState) => state.auth.userSettings.date_format);
@@ -65,7 +56,7 @@ const DataBricks = () => {
                         Номер строки {ind+1}, компания: {c.supplierName}
                     </div>
                     <div className={s.oneBrickPiece}>
-                        {c.creationDate && dayjs(c.creationDate).format(userDateFormat)}
+                        {c.creationDate && dayjs(c.creationDate.slice(0,10)).format(userDateFormat)}
                     </div>
                     <div className={s.oneBrickPiece}>
                         {

@@ -2,6 +2,7 @@ import { t } from "i18next";
 import { ChangeEvent } from "react";
 import { useSelector } from "react-redux";
 import { SEARCH_COMPLETED_ALL,SEARCH_COMPLETED_UNFINISHED,SEARCH_COMPLETED_FINISHED, searchByComplitedChangeAC, SearchByComplitedType, searchByRiskAC } from "../../../../store/features/supplierSlice";
+import { getCompaniesThunk } from "../../../../store/features/supplierThunks";
 import { RootState, useAppDispatch } from "../../../../store/store";
 import s from "./search.module.css";
 
@@ -16,7 +17,12 @@ const SearchByComplited = () => {
             e.currentTarget.value === SEARCH_COMPLETED_UNFINISHED
             ) {
                 dispatch(searchByComplitedChangeAC(e.currentTarget.value));
-                dispatch(searchByRiskAC(null))
+                // dispatch(searchByRiskAC(null))
+                dispatch(getCompaniesThunk({
+                    page: 1,
+                    fieldForSearch: 'searchByComplited',
+                    valueForSearch: e.currentTarget.value === SEARCH_COMPLETED_ALL ? "" : e.currentTarget.value,
+                }));
         }
     }
 

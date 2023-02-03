@@ -1,16 +1,11 @@
 import {createSlice} from '@reduxjs/toolkit';
 import type {PayloadAction} from '@reduxjs/toolkit';
 import { GetCompaniesResultType, getCompaniesThunk, GetCompaniesThunkResponseType } from './supplierThunks';
-import { DATE_EU, FormatDateType, pageSizeOptions, RiskViewType, RiskViewWORD, TABLE_VIEW, LayoutOptionsType } from './authSlice';
-// import { suppliersInitContent12 } from './supplierInitData';
-
-
-
 
 
 export const SEARCH_COMPLETED_ALL = "all";
-export const SEARCH_COMPLETED_FINISHED = "complited";
-export const SEARCH_COMPLETED_UNFINISHED = "unfinished";
+export const SEARCH_COMPLETED_FINISHED = "yes";
+export const SEARCH_COMPLETED_UNFINISHED = "no";
 export type SearchByComplitedType = typeof SEARCH_COMPLETED_ALL | typeof SEARCH_COMPLETED_FINISHED | typeof SEARCH_COMPLETED_UNFINISHED;
 
 export const RISK_LOW = 'low';

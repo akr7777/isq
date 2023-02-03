@@ -1,6 +1,6 @@
-import { t } from "i18next";
 import { useSelector } from "react-redux";
 import { searchByRiskAC, RiskType, RISK_HIGH, RISK_LOW, RISK_MEDIUM } from "../../../../store/features/supplierSlice";
+import { getCompaniesThunk } from "../../../../store/features/supplierThunks";
 import { RootState, useAppDispatch } from "../../../../store/store";
 import s from "./search.module.css";
 
@@ -9,6 +9,11 @@ const SearchRisk = () => {
     const dispatch = useAppDispatch();
     
     const onRiskChangeClickHandler = (newRisk:RiskType) => {
+        dispatch(getCompaniesThunk({
+            page: 1,
+            fieldForSearch: 'searchByRisk',
+            valueForSearch: newRisk || "",
+        }));
         dispatch(searchByRiskAC(newRisk))
     }
     return <div className={s.riskMainDiv}>
