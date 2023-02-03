@@ -5,7 +5,7 @@ import { CreateNewSupplierThunkRequestType } from "../../store/features/newSuppl
 
 const instance = axios.create({
     withCredentials: true,
-    baseURL: 'http://toogle.io:5000/api/',
+    baseURL: 'https://toogle.io:5000/api/',
 });
 
 instance.interceptors.request.use((config)=> {

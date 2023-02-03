@@ -22,8 +22,6 @@ export const RISK_COLUMN_SORT = 'RISK_COLUMN_SORT';
 export type ColumnSortNameType = null | typeof NAME_COLUMN_SORT | typeof CREATION_DATE_COLUMN_SORT | typeof COMPLITED_COLUMN_SORT | typeof RISK_COLUMN_SORT;
 export type ColumnSortDirectionType = typeof SORT_ACS | typeof SORT_DSC;
 
-
-
 export const SEARCH_TEXT_DELAY = 1000;
 
 export type SupplierIdType = string;
