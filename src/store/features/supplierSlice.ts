@@ -68,6 +68,7 @@ export type SupplierSliceType = {
     loadingVars: {
         suppliersLoading: boolean,
         newSupplierCreationLoading: boolean,
+        supplierCardLoading: boolean,
     }
     
 }
@@ -104,6 +105,7 @@ const initContent:SupplierSliceType = {
     loadingVars: {
         suppliersLoading: false,
         newSupplierCreationLoading: false,
+        supplierCardLoading: false,
     }
 }
 

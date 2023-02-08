@@ -85,6 +85,7 @@
 
     "yyyymmdd": "YYYY-mm-DD",
 
-    "edit_suppliers_list": "Edit suppliers list"
+    "edit_suppliers_list": "Edit suppliers list",
 
+    "supplierCard_delete_this_questionare": "Delete this questionarie"
 }

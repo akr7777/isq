@@ -95,5 +95,7 @@
     "MONTHS_12": "Декабрь",
     "yyyymmdd": "ГГГГ-ММ-ДД",
 
-    "edit_suppliers_list": "Редактировать список поставщиков"
+    "edit_suppliers_list": "Редактировать список поставщиков",
+
+    "supplierCard_delete_this_questionare": "Удалить данную анкету"
 }

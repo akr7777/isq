@@ -57,3 +57,12 @@ export const getCompaniesThunk = createAsyncThunk(
     }
 );
 
+export const deleteCompanyThunk = createAsyncThunk(
+    'supplier/deleteCompanyThunk',
+    async (companyId: string, {dispatch}) => {
+        const resp = await supplierAPI.deleteCompany(companyId);
+        console.log('deleteCompanyThunk / resp=', resp);
+        
+    }
+);
+

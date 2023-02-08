@@ -32,5 +32,8 @@ export const supplierAPI = {
     },
     createNewSupplier: (data: CreateNewSupplierThunkRequestType):Promise<AxiosResponse> => {
         return instance.post('questionaries', data)
+    },
+    deleteCompany: (companyId: string): Promise<AxiosResponse> => {
+        return instance.delete('questionaries/' + companyId);
     }
 }
