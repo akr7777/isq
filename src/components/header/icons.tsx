@@ -38,9 +38,10 @@ export const Icons = (props: IconsPropsType) => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const [language, setLanguage] = useLocalStorage(localStorageLanguageVariable, 'ru');
-    // const name: string = useSelector((state:RootState) => state.auth.name);
-    // const userSettings:ProfileUserSettingsType = useSelector((state:RootState) => state.auth.userSettings);
-    const {theme, setTheme } = useTheme();
+    
+    // const {theme, setTheme } = useTheme();
+    const { setTheme } = useTheme();
+    const theme = useSelector((state:RootState) => state.auth.userSettings.theme);
 
 
     const handleLenguageChange = () => {

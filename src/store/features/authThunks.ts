@@ -1,8 +1,7 @@
-import {createAsyncThunk} from "@reduxjs/toolkit";
-import { authAPI, supplierAPI } from "../../components/api/api";
-import { ThemesOptions } from "../../hooks/useTheme";
-import { FormatDateType, LayoutOptionsType, loginAC, RiskViewType, UserLangType } from "./authSlice";
-import { RiskType, SupplierIdType } from "./supplierSlice";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { authAPI } from "../../components/api/api";
+import { DARK, LIGHT, ThemesOptions, useTheme } from "../../hooks/useTheme";
+import { EN_LANG, FormatDateType, LayoutOptionsType, loginAC, RiskViewType, RU_LANG, UserLangType } from "./authSlice";
 
 export type loginThunkPropsType = {
     username: string,
@@ -56,8 +55,9 @@ export const getProfileThunk = createAsyncThunk(
     'auth/profileThunk',
     async (_, {rejectWithValue, dispatch}) => {
         const res = await authAPI.getProfile();
-        if (res.data.status === 'success')
+        if (res.data.status === 'success') {
             return res.data.data
+        }
     }
 );
 

@@ -2,6 +2,7 @@ import {createSlice} from '@reduxjs/toolkit';
 import type {PayloadAction} from '@reduxjs/toolkit';
 import { DARK, LIGHT } from '../../hooks/useTheme';
 import { AccessTokenPartType, getProfileThunk, loginThunk, ProfileResponseType, updateProfileThunk } from './authThunks';
+import i18n from './../../i18n';
 
 export const localStorageRiskViewVariable = 'riskViewInTable';
 export const RiskViewWORD = 'word';
@@ -218,23 +219,23 @@ export const authSlice = createSlice({
                 state.userSettings.date_format = action.payload.date_format;
             if (state.userSettings.items_per_page !== action.payload.items_per_page)
                 state.userSettings.items_per_page = action.payload.items_per_page;
-            if (state.userSettings.language !== action.payload.language)
-                state.userSettings.language = action.payload.language;
             if (state.userSettings.layout !== action.payload.layout)
                 state.userSettings.layout = action.payload.layout;
             if (state.userSettings.risk_format !== action.payload.risk_format)
                 state.userSettings.risk_format = action.payload.risk_format;
-            if (state.userSettings.theme !== action.payload.theme)
-                state.userSettings.theme = action.payload.theme;
-            // state.userSettings = {
-            //     ...state.userSettings,
-                // date_format: action.payload.date_format,
-                // items_per_page: action.payload.items_per_page,
-                // language: action.payload.language,
-                // layout: action.payload.layout,
-                // risk_format: action.payload.risk_format,
-            //     theme: action.payload.theme,
-            // }
+
+            const theme = action.payload.theme;
+            if (theme === DARK || theme === LIGHT) {
+                document.documentElement.setAttribute('data-theme', theme)
+                state.userSettings.theme = theme;
+            }
+                
+            const language = action.payload.language;
+            if (language === EN_LANG || language === RU_LANG) {
+                i18n.changeLanguage(language);
+                state.userSettings.language = action.payload.language;
+            }
+                
             state.loadingStatus = loadingStatusInitValue;
             // state.loadingStatus.profileLayoutLoadingStatus = false;
             // state.loadingStatus.profileRequestLoadingStatus = false;
