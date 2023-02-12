@@ -30,7 +30,7 @@ export const PATHS = {
     supplierCard: '/supplierCard',
     profile: '/profile',
     newSupplier: '/new',
-    editSuppliers: '/editSuppliers'
+    editSuppliers: '/editSuppliers',
 }
 
 const Outlet = () => {
@@ -50,11 +50,15 @@ const Outlet = () => {
                 </RequireAuth>
             } />
 
-            <Route path={PATHS.questions} element={
-                <RequireAuth>
-                    <Questions />
-                </RequireAuth>
-            } />
+            <Route path={PATHS.questions}>
+                <Route path=":questionarieId" element={
+                    <RequireAuth>
+                        <Questions />
+                    </RequireAuth>
+                } />
+                <Route path=":questionarieId/parts/:partNumber" element={<div>sdgffg</div>}/>
+            </Route>
+            
 
             <Route path={PATHS.profile} element={
                 <RequireAuth>
@@ -86,6 +90,12 @@ const Outlet = () => {
                     </RequireAuth>
                 } />
             </Route>
+
+            {/* <Route>
+                <Route>
+                    <div>supplier questions</div>
+                </Route>
+            </Route> */}
 
             <Route path={PATHS.login} element={<Login />} />
 

@@ -37,3 +37,8 @@ export const supplierAPI = {
         return instance.delete('questionaries/' + companyId);
     }
 }
+export const complitedAPI = {
+    getInfoCompany: (questionaryId: string):Promise<AxiosResponse> => {
+        return instance.get('questionaries/' + questionaryId)
+    }
+}

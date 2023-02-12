@@ -13,8 +13,9 @@ const ChangeZone = () => {
     const dispatch = useAppDispatch();
     const {t} = useTranslation();
 
-    const currentRisk:RiskType = useSelector((state:RootState) => state.complited.risk);
-    const comment:string = useSelector((state:RootState) => state.complited.comment);
+    const currentRisk:RiskType = useSelector((state:RootState) => state.complited.riskLevel);
+    // const comment:string = useSelector((state:RootState) => state.complited.comment);
+    const comment = '321 _comment_';
 
     const [error, setError] = useState<string>('');
     const [newRisk, setNewRisk] = useState<RiskType>(currentRisk);

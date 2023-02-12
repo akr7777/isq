@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { getComplitedInfoCompany } from "../../store/features/complitedThunks";
 import { RootState, useAppDispatch } from "../../store/store";
 import Preloader from "../common/preloader/preloader";
 import cardStyles from "./card.module.css";
@@ -14,9 +15,15 @@ const SupplierCard = () => {
     const { supplierId } = useParams();
     // const dispatch = useAppDispatch();
     // const [l, setL] = useState(true);
-    const isLoading: boolean = useSelector((state:RootState) => state.supplier.loadingVars.supplierCardLoading);
+    const dispatch = useAppDispatch();
 
-    const checkedDate: string = useSelector((state:RootState) => state.complited.checkedDate);
+    useEffect(() => {
+        dispatch(getComplitedInfoCompany(supplierId || ""));
+    }, [])
+
+    const isLoading: boolean = useSelector((state:RootState) => state.complited.isLoading);
+
+    // const checkedDate: string = useSelector((state:RootState) => state.complited.checkedDate);
 
     return <div className={cardStyles.cardWrapper}>
 
@@ -26,7 +33,7 @@ const SupplierCard = () => {
                 ? <Preloader />
                 : <>
                     <SupplierHead />
-                    { checkedDate.length > 0 && <SupplierExistedRisk/> }
+                    {/* { checkedDate.length > 0 && <SupplierExistedRisk/> } */} <SupplierExistedRisk/>
                     <QA />
                     <ChangeZone />
                     <DeleteCompany />

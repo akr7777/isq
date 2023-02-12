@@ -8,11 +8,12 @@
     width: 90%;
     margin: var(--margin_top_for_chapter) 5%;
 }
-@media screen and (min-width: 700px) {
+/* @media screen and (min-width: 700px) {
     .qaDiv {
-        display: grid;
-        grid-template-columns: 2fr 3fr;
+        display: flex;
+        flex-direction: column;
         gap: 20px;
+        background-color: red;
     }
 }
 @media screen and (max-width: 700px) {
@@ -21,14 +22,74 @@
         flex-direction: column;
         gap: 20px;
     }
+} */
+.qaDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    /* background-color: red; */
+    align-items: center;
+    justify-content: center;
 }
+.qaDivOne { 
+    width: 100%; 
+    text-align: center; 
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+@media screen and (min-width: 700px) {
+    .one_QA_part {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: 100%;
+    }
+}
+@media screen and (max-width: 699px) {
+    .one_QA_part {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+}
+
+.QA_question {
+    /* margin-bottom: 15px; */
+    display: flex;
+    flex-direction: column;
+    /* background-color: blueviolet; */
+    justify-content: center;
+    align-items: center;
+}
+.QA_answers {
+    /* margin-bottom: 15px; */
+    display: flex;
+    flex-direction: column;
+    /* background-color: green; */
+}
+
+.QA_answers_button_div {
+    margin: 5px 5px;
+    min-width: 100px;
+    min-height: 40px;
+    background-color: grey;
+    border-radius: 10px;
+    border: 2px var(--border_color) solid;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.QA_answers_button_div_checked { background-color: goldenrod;}
+
 
 .appearance {
     border: 2px var(--border_color) solid;
     border-radius: 10px;
     width: 70%;
     padding: 20px 0px;
-    gap: 5px;
 }
 
 .supplierArea {

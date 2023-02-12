@@ -1,5 +1,6 @@
 
 import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import { addOptionToAnswerAC, removeOptionToAnswerAC, InitQuestionType, OptionType } from "../../store/features/questionsSlice";
 import { RootState, useAppDispatch } from "../../store/store";
 import s from "./questions.module.css";
@@ -9,6 +10,7 @@ const Questions = () => {
     const dispatch = useAppDispatch();
     const questions:Array<InitQuestionType> = useSelector( (state: RootState) => state.questions);
     
+    const {questionarieId} = useParams();
     // useEffect(() => {
     //     const questions:Array<InitQuestionType> = useSelector( (state: RootState) => state.questions);
     // }, []);
@@ -22,6 +24,7 @@ const Questions = () => {
 
 
     return <div className={s.questions}>
+        questionarieId: {questionarieId}
         Questions:
 
         {

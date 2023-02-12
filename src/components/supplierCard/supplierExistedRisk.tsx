@@ -7,8 +7,8 @@ import cardStyle from "./card.module.css";
 const SupplierExistedRisk = () => {
     const {t} = useTranslation();
 
-    const currentRisk:RiskType = useSelector((state:RootState) => state.complited.risk);
-    const currentComment:string = useSelector((state:RootState) => state.complited.comment);
+    const currentRisk:RiskType = useSelector((state:RootState) => state.complited.riskLevel);
+    // const currentComment:string = useSelector((state:RootState) => state.complited.comment);
 
     return <div className={cardStyle.existedRisk + " " + cardStyle.appearance}>
         <div className={cardStyle.risks}>
@@ -30,7 +30,8 @@ const SupplierExistedRisk = () => {
                 { t("supplierCard_comment") }
             </label>
             <p>
-                {currentComment}
+                Комментарий
+                {/* {currentComment} */}
             </p>
         </div>
     </div>
