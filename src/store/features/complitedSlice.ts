@@ -7,10 +7,10 @@ export type OnRiskAndCommentChangeType = {
     risk: RiskType,
     comment: string
 }
-
+export type QuestionsTypeRadioMultiTextCheckbox = 'checkbox' | 'radiobutton' | 'text' | 'multiline'
 export type QuestionsComplitedSliceType = {
         "seq_no": number,
-        "type": 'checkbox' | 'radiobutton' | 'text' | 'multiline',
+        "type": QuestionsTypeRadioMultiTextCheckbox,
         "is_required": boolean,
         "question": string,
         "options": Array<string>,
@@ -76,7 +76,42 @@ export const complitedSlice = createSlice({
 
             // console.log('getComplitedInfoCompany.fulfilled / state.parts=', state.parts, 'action.payload.parts=', action.payload.parts);
 
-            state.parts = action.payload.parts;
+            const additionalPart:Array<QuestionsComplitedSliceType> = [
+                {
+                    "seq_no": 1,
+                    "type": 'radiobutton',
+                    "is_required": true,
+                    "question": 'radiobutton question',
+                    "options": ['ans1', 'ans2', 'ans3'],
+                    "answer": 'ans2',
+                    "answers": ['ans3'],
+                    "created_at": null,
+                    "risks": []
+                },
+                {
+                    "seq_no": 2,
+                    "type": 'text',
+                    "is_required": true,
+                    "question": 'text question',
+                    "options": [],
+                    "answer": 'text answer',
+                    "answers": [],
+                    "created_at": null,
+                    "risks": []
+                },
+                {
+                    "seq_no": 3,
+                    "type": 'multiline',
+                    "is_required": true,
+                    "question": 'multiline question',
+                    "options": [],
+                    "answer": 'multiline answer multiline answer multiline answer multiline answer multiline answer multiline answer multiline answer multiline answer multiline answer multiline answer multiline answer',
+                    "answers": [],
+                    "created_at": null,
+                    "risks": []
+                }
+            ]
+            state.parts = {...action.payload.parts, 6: additionalPart};
 
             // console.log('getComplitedInfoCompany.fulfilled / state.parts=', state.parts, 'action.payload.parts=', action.payload.parts);
             

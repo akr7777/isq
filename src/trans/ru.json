@@ -97,5 +97,17 @@
 
     "edit_suppliers_list": "Редактировать список поставщиков",
 
-    "supplierCard_delete_this_questionare": "Удалить данную анкету"
+    "supplierCard_delete_this_questionare": "Удалить данную анкету",
+
+    "questionsToSupplier_nextButton": "Далее",
+    "questionsToSupplier_prevButton": "Назад",
+    "questionsToSupplier_complite": "Завершить",
+    "partN_1": "Первая",
+    "partN_2": "Вторая",
+    "partN_3": "Третья",
+    "partN_4": "Четвертая",
+    "partN_5": "Пятая",
+    "partN_6": "Шестая",
+    "questionarie_successful_filled": "благодарность за заполнение формы",
+    "questions_required_question": "Обязательный вопрос"
 }

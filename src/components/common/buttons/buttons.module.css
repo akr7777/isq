@@ -22,7 +22,7 @@
     color:black
 }
 .buttonOk:focus {
-    background-color: rgb(110, 135, 110);
+    background-color: rgb(61, 149, 61);
     box-shadow: none;
 }
 

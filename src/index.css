@@ -69,6 +69,8 @@ html[data-theme='light'] {
 
   --calendar_bgColor: rgb(173, 171, 171);
 
+  --progressBar_active: rgb(27, 130, 27);
+  --progressBar_inactive: rgb(173, 170, 170);
 }
 
 /* dark theme */
@@ -99,6 +101,9 @@ html[data-theme='dark'] {
     --search_circle_open_icon: yellow;
 
     --calendar_bgColor: rgb(97, 97, 97);
+
+    --progressBar_active: rgb(27, 130, 27);
+    --progressBar_inactive: rgb(91, 90, 90);
 }
 
 

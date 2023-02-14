@@ -27,7 +27,7 @@ const QA = () => {
                     {
                         parts[keyPart].map( (el:QuestionsComplitedSliceType, ind2: number) => {
 
-                            return <div key={'Second_'+String(ind1)} className={cardStyle.one_QA_part}>
+                            return <div key={'Second_'+String(ind2)} className={cardStyle.one_QA_part}>
                                 <div className={cardStyle.QA_question}>
                                     <label>{el.question}</label>
                                     { el.is_required ? <label>Обязателен</label> : <label>Не Обязателен</label> }
@@ -35,7 +35,7 @@ const QA = () => {
                                     <label>{ dayjs(el.created_at).format(dateFormat) }</label>
                                 </div>
                                 <div className={cardStyle.QA_answers}>
-                                    <QAAnswers options={el.options} answer={el.answer} answers={el.answers}/>
+                                    <QAAnswers options={el.options} answer={el.answer} answers={el.answers} type={el.type}/>
                                     {/* <label>{el.risks}</label>
                                     <label>{el.answer}</label> */}
                                     {/* <label>{el.answers}</label>

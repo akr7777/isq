@@ -24,13 +24,14 @@ const EditSuppliers = lazy(() => import("../editSuppliers/edit-suppliers"));
 export const PATHS = {
     mainPage: '/',
     dashboard: "/dashboard",
-    questions: "/questions",
+    questions: "/q",
     login: "/login",
     notFoundPage: "/404",
     supplierCard: '/supplierCard',
     profile: '/profile',
     newSupplier: '/new',
     editSuppliers: '/editSuppliers',
+    // questionaryForSupplier: '/q'
 }
 
 const Outlet = () => {
@@ -51,12 +52,14 @@ const Outlet = () => {
             } />
 
             <Route path={PATHS.questions}>
-                <Route path=":questionarieId" element={
+                <Route path=":questionarieId/:partNumber" element={
                     <RequireAuth>
                         <Questions />
                     </RequireAuth>
                 } />
-                <Route path=":questionarieId/parts/:partNumber" element={<div>sdgffg</div>}/>
+                {/* <Route path=":questionarieId">
+                    <Route path="/:partNumber" element={<Questions />}/>
+                </Route> */}
             </Route>
             
 
@@ -78,11 +81,6 @@ const Outlet = () => {
                 </RequireAuth>
             } />
 
-            {/* <Route path={PATHS.supplierCard} element={
-                <RequireAuth>
-                    <SupplierCard />
-                </RequireAuth>
-            }> */}
             <Route path={PATHS.supplierCard}>
                 <Route path=":supplierId" element={
                     <RequireAuth>
@@ -90,12 +88,6 @@ const Outlet = () => {
                     </RequireAuth>
                 } />
             </Route>
-
-            {/* <Route>
-                <Route>
-                    <div>supplier questions</div>
-                </Route>
-            </Route> */}
 
             <Route path={PATHS.login} element={<Login />} />
 
