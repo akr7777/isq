@@ -5,8 +5,9 @@
     justify-content: flex-start;
     align-items: center;
 
-    width: 90%;
-    margin: var(--margin_top_for_chapter) 5%;
+    /* width: 95%; */
+    margin: var(--margin_top_for_chapter) 0;
+    /* background-color: green; */
 }
 /* @media screen and (min-width: 700px) {
     .qaDiv {
@@ -43,7 +44,7 @@
 @media screen and (min-width: 700px) {
     .one_QA_part {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1.5fr;
         width: 100%;
     }
 }
@@ -93,7 +94,7 @@
 .appearance {
     border: 2px var(--border_color) solid;
     border-radius: 10px;
-    width: 70%;
+    width: 95%;
     padding: 20px 0px;
 }
 

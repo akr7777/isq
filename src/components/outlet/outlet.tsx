@@ -52,10 +52,8 @@ const Outlet = () => {
             } />
 
             <Route path={PATHS.questions}>
-                <Route path=":questionarieId/:partNumber" element={
-                    <RequireAuth>
-                        <Questions />
-                    </RequireAuth>
+                <Route path=":questionarieId/" element={
+                    <Questions />
                 } />
                 {/* <Route path=":questionarieId">
                     <Route path="/:partNumber" element={<Questions />}/>

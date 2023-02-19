@@ -71,6 +71,8 @@ html[data-theme='light'] {
 
   --progressBar_active: rgb(27, 130, 27);
   --progressBar_inactive: rgb(173, 170, 170);
+
+  --questions_bgColor_options: rgb(190, 201, 224);
 }
 
 /* dark theme */
@@ -104,6 +106,8 @@ html[data-theme='dark'] {
 
     --progressBar_active: rgb(27, 130, 27);
     --progressBar_inactive: rgb(91, 90, 90);
+
+    --questions_bgColor_options: grey;
 }
 
 
@@ -124,6 +128,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
+  min-width: 100%;
 }
 
 code {

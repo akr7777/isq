@@ -49,10 +49,14 @@
     /* background: #ccc; */
     background: var(--progressBar_inactive);
     margin-bottom: 6px;
+    /* border: 3px var(--progressBar_active) solid; */
   }
   
-  .stepper_item.active {
+  .stepper_item .active {
+    background-color: red;
     font-weight: bold;
+    /* font-size: 30px; */
+    /* border: 3px var(--progressBar_active) solid; */
   }
   
   .stepper_item.completed .step_counter {
@@ -88,6 +92,9 @@
     content: none;
   }
 
-.current_item_border {
+/* .current_item_border {
   border: 3px var(--progressBar_active) solid;
-}
+
+import s1 from './progress1.module.css';
+
+} */

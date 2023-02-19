@@ -16,30 +16,19 @@ export type CalendarPropsType = {
 }
 
 const Calendar = (props: CalendarPropsType) => {
-    // const {t} = useTranslation();
-
-    
     const [show, setShow] = useState<boolean>(false);
     const [date, setDate] = useState<Date>();
     if (props.choosenDate && props.choosenDate.length > 0) {
         const choosenDate:Date = new Date(dayjs(props.choosenDate).year(), dayjs(props.choosenDate).month(), dayjs(props.choosenDate).date())
         setDate(choosenDate)
     }
-    
         
     const [newDate, setNewDate] = useState<Date>(date || new Date());
     const [newDateText, setNewDateText] = useState<string>(date?.toLocaleDateString() || '');
-    // const [error, setError] = useState<boolean>(false);
 
     const showCalendarClickHandler = () => {
-        // debugger
-        // if (!date) {
-        //     setDate( new Date() )
-        // }
         setShow(!show);
     }
-
-    
     const onNewDateHandler = (newDatefromDays: Date) => {
         setDate(newDatefromDays);
         setNewDate(newDatefromDays);
@@ -47,7 +36,6 @@ const Calendar = (props: CalendarPropsType) => {
 
         setNewDateText(newTextDate);
         
-        // props.onDateChange(newDatefromDays);
         props.onDateChange(dayjs(newDatefromDays).format(COMMON_DATE_FORMAT));
         setShow(false);
     }
@@ -57,7 +45,6 @@ const Calendar = (props: CalendarPropsType) => {
         props.onDateChange('');
 
     }
-
     const onTextInputChangeHandler = (newText: string) => {
         setNewDateText(newText)
         if (Number(newText.slice(0,4)) > 2000) {
@@ -66,21 +53,15 @@ const Calendar = (props: CalendarPropsType) => {
         }
     }
 
-
     return <div className={s.calendar}>
         <div className={s.textDiv} >
             <LineTextField 
                 type="date"
-                // text={ newDate.toLocaleDateString() }
                 text={newDateText}
-                
-                // text={ (date && date !== undefined) ? date.toLocaleDateString() : "" }
                 onChangeFunction={(text: string) => onTextInputChangeHandler(text)}
                 className={s.textWidth}
                 icon={iconCalendar}
                 onIconClickFunction={() => setShow(!show)}
-                // placeholder={ t("yyyymmdd") }
-                // error={error}
             />
             {
             date !== undefined && <img src={clearIcon} className={s.clearIcon} onClick={onDateClearClickHandler}/>

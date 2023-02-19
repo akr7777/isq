@@ -20,7 +20,7 @@ const QA = () => {
             keysArr.map( (keyPart:string, ind1: number) => {
                 return <div key={'first_'+String(ind1)} className={cardStyle.qaDivOne}>
 
-                    Часть {keyPart}
+                    <h3>Часть {keyPart}</h3>
 
                     {/* <div key={ind1} className={cardStyle.one_QA_part}> */}
                     

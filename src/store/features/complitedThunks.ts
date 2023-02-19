@@ -20,6 +20,7 @@ export type GetComplitedInfoCompanyResponseType = {
         company: string,
         created_at: string,
         filled_at: string | null,
+        checked_at: string | null,
         risk_level: RiskType,
         ticket: string,
     },

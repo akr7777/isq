@@ -13,8 +13,6 @@ import SupplierHead from "./supplierHead";
 
 const SupplierCard = () => {
     const { supplierId } = useParams();
-    // const dispatch = useAppDispatch();
-    // const [l, setL] = useState(true);
     const dispatch = useAppDispatch();
 
     useEffect(() => {
@@ -22,8 +20,6 @@ const SupplierCard = () => {
     }, [])
 
     const isLoading: boolean = useSelector((state:RootState) => state.complited.isLoading);
-
-    // const checkedDate: string = useSelector((state:RootState) => state.complited.checkedDate);
 
     return <div className={cardStyles.cardWrapper}>
 

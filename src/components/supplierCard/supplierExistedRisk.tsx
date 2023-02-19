@@ -30,7 +30,7 @@ const SupplierExistedRisk = () => {
                 { t("supplierCard_comment") }
             </label>
             <p>
-                Комментарий
+                -----Тут должен быть текст комментария. Что отобразить, если комментария нет?-----
                 {/* {currentComment} */}
             </p>
         </div>

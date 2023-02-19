@@ -1,6 +1,5 @@
 import { useTranslation } from 'react-i18next';
 import s from './progress.module.css';
-import s1 from './progress1.module.css';
 
 type QuestionsProgressBarPropsType = {
     totalPages: number,
@@ -21,7 +20,7 @@ const QuestionsProgressBar = (props: QuestionsProgressBarPropsType) => {
             arr.map( el => {
                 const currentClass: string = el < props.currentPage
                                         ? el === props.currentPage
-                                            ? s.stepper_item + " " + s.active + " " + s.current_item_border
+                                            ? s.stepper_item + " " + s.active 
                                             : s.stepper_item + " " + s.completed
                                         : s.stepper_item
 

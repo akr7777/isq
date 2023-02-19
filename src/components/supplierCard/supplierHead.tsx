@@ -11,8 +11,8 @@ const SupplierHead = () => {
     const supplierName: string = useSelector((state:RootState) => state.complited.company);
     const dateFormat:FormatDateType = useSelector((state:RootState) => state.auth.userSettings.date_format);
     const creationDate: string = dayjs(useSelector((state: RootState) => state.complited.createdAt)).format(dateFormat);
-    const complitedDate: string = useSelector((state: RootState) => state.complited.filledAt) || "-";
-    // const checkedDate: string = useSelector((state: RootState) => state.complited.checkedDate) || "-";
+    const complitedDate: string = useSelector((state: RootState) => state.complited.filledAt) || "------";
+    const checkedDate: string = useSelector((state: RootState) => state.complited.checkedAt) || "------";
 
     return <div className={cardStyles.supplierArea + " " + cardStyles.appearance}>
         <label className={cardStyles.label_title_1}>
@@ -21,7 +21,7 @@ const SupplierHead = () => {
         <div className={cardStyles.supplierHeadDates}>
             <label>{ t("supplierCard_creation_date") } {creationDate}</label>
             <label>{ t("supplierCard_complited_date") } {complitedDate}</label>
-            {/* <label>{ t("supplierCard_checked_date") } {checkedDate}</label> */}
+            <label>{ t("supplierCard_checked_date") } {checkedDate}</label>
         </div>
     </div>
 }

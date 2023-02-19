@@ -109,5 +109,6 @@
     "partN_5": "Пятая",
     "partN_6": "Шестая",
     "questionarie_successful_filled": "благодарность за заполнение формы",
-    "questions_required_question": "Обязательный вопрос"
+    "questions_required_question": "Обязательный вопрос",
+    "questions_no_questions_received": "Нет вопросов"
 }

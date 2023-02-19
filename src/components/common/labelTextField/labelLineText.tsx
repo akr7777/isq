@@ -28,7 +28,7 @@ export const LineTextField = (props: LineTextFieldPropsType) => {
         }
     }
 
-    return <div className={s.lineTextDiv}>
+    return <div className={s.lineTextDiv + " " + props.className}>
             <input 
                 type={props.type} 
                 value={props.text}

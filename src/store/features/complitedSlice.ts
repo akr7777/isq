@@ -24,6 +24,7 @@ export type ComplitedSliceType = {
     company: string,
     createdAt: string,
     filledAt: string | null,
+    checkedAt: string | null,
     riskLevel: RiskType,
     ticket: string,
 
@@ -35,6 +36,7 @@ const initData:ComplitedSliceType = {
     company: '',
     createdAt: '',
     filledAt: null,
+    checkedAt: null,
     riskLevel: null,
     ticket: '',
     parts: { 1: [{
@@ -70,51 +72,13 @@ export const complitedSlice = createSlice({
             state.companyId = action.payload.questionary.id;
             state.company = action.payload.questionary.company;
             state.createdAt = action.payload.questionary.created_at;
+            state.checkedAt = action.payload.questionary.checked_at;
             state.filledAt = action.payload.questionary.filled_at;
             state.riskLevel = action.payload.questionary.risk_level;
             state.ticket = action.payload.questionary.ticket;
 
-            // console.log('getComplitedInfoCompany.fulfilled / state.parts=', state.parts, 'action.payload.parts=', action.payload.parts);
+            state.parts = {...action.payload.parts};
 
-            const additionalPart:Array<QuestionsComplitedSliceType> = [
-                {
-                    "seq_no": 1,
-                    "type": 'radiobutton',
-                    "is_required": true,
-                    "question": 'radiobutton question',
-                    "options": ['ans1', 'ans2', 'ans3'],
-                    "answer": 'ans2',
-                    "answers": ['ans3'],
-                    "created_at": null,
-                    "risks": []
-                },
-                {
-                    "seq_no": 2,
-                    "type": 'text',
-                    "is_required": true,
-                    "question": 'text question',
-                    "options": [],
-                    "answer": 'text answer',
-                    "answers": [],
-                    "created_at": null,
-                    "risks": []
-                },
-                {
-                    "seq_no": 3,
-                    "type": 'multiline',
-                    "is_required": true,
-                    "question": 'multiline question',
-                    "options": [],
-                    "answer": 'multiline answer multiline answer multiline answer multiline answer multiline answer multiline answer multiline answer multiline answer multiline answer multiline answer multiline answer',
-                    "answers": [],
-                    "created_at": null,
-                    "risks": []
-                }
-            ]
-            state.parts = {...action.payload.parts, 6: additionalPart};
-
-            // console.log('getComplitedInfoCompany.fulfilled / state.parts=', state.parts, 'action.payload.parts=', action.payload.parts);
-            
             state.isLoading = false;
         })
         builder.addCase(getComplitedInfoCompany.rejected, (state:ComplitedSliceType) => { state.isLoading = false })

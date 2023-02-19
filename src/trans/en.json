@@ -99,6 +99,7 @@
     "partN_5": "Fifth",
     "partN_6": "Sixth",
     "questionarie_successful_filled": "Thank for filling the questionarie",
-    "questions_required_question": "Required question"
+    "questions_required_question": "Required question",
+    "questions_no_questions_received": "Нет вопросов"
 
 }

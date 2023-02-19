@@ -2,15 +2,22 @@
     width: 100%;
     /* background-color: yellow; */
     border-radius: 10px;
-    border: 1px black solid;
+    border: 2px var(--border_color) solid;
+    border-collapse: collapse;
 }
 .theTable thead {
     background-color: grey;
+    /* border-radius: 10px; */
+    border: 2px var(--border_color) solid;
+    border-collapse: collapse;
 }
 .theTable td {
     /* background-color: red; */
     padding: 10px;
+    /* border-radius: 10px; */
     text-align: center;
+    border: 2px var(--border_color) solid;
+    border-collapse: collapse;
 }
 .theTableTr {
     /* background-color: rgb(133, 125, 125); */

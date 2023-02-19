@@ -3,7 +3,6 @@ import { loginThunkPropsType, ProfileRequestType } from "../../store/features/au
 import { CreateNewSupplierThunkRequestType } from "../../store/features/newSupplierSlice";
 import { SendQuestionsPartType } from "../../store/features/questionsSlice";
 
-
 const instance = axios.create({
     withCredentials: true,
     baseURL: 'https://toogle.io:5000/api/',
@@ -29,7 +28,6 @@ export const authAPI = {
 export const supplierAPI = {
     getCompanies: (searchParamsLink: string):Promise<AxiosResponse> => {
         return instance.get('questionaries' + searchParamsLink);
-        // return instance.get('test/getTest?contentId='+pageNumber);
     },
     createNewSupplier: (data: CreateNewSupplierThunkRequestType):Promise<AxiosResponse> => {
         return instance.post('questionaries', data);
@@ -44,7 +42,7 @@ export const complitedAPI = {
     }
 }
 export const questionsAPI = {
-    getQuestionsPart: (questionarieId: string, partNumber: string):Promise<AxiosResponse> => {
+    getQuestionsPart: (questionarieId: string, partNumber: number):Promise<AxiosResponse> => {
         return instance.get('questionaries/' + questionarieId + '/parts/' + partNumber);
     },
     sendQuestionsPart: (data: SendQuestionsPartType):Promise<AxiosResponse> => {

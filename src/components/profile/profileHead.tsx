@@ -11,6 +11,7 @@ const ProfileHead = () => {
 
     return <div className={s.profile_head}>
         <img src={ava} className={s.avaImg} alt="Заменить аватар" />
+        Будем-ли давать возможность менять аватар?
 
         <ProfileHeadFieldName />
 
