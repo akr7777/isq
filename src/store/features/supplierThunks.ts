@@ -1,6 +1,9 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
+import { useNavigate } from "react-router-dom";
 import { supplierAPI } from "../../components/api/api";
+import { PATHS } from "../../components/outlet/outlet";
 import { RootState } from "../store";
+import { deleteErrorOccured } from "./complitedSlice";
 import { RiskType, searchByDateFilterAC, SearchingOptionsType, SEARCH_COMPLETED_ALL, SupplierSliceType } from "./supplierSlice";
 
 export type GetCompaniesResultType = {
@@ -57,12 +60,20 @@ export const getCompaniesThunk = createAsyncThunk(
     }
 );
 
+export type DeleteCompanyThunkPropsType = {
+    companyId: string,
+    navigate: any,
+}
 export const deleteCompanyThunk = createAsyncThunk(
     'supplier/deleteCompanyThunk',
-    async (companyId: string, {dispatch}) => {
-        const resp = await supplierAPI.deleteCompany(companyId);
-        console.log('deleteCompanyThunk / resp=', resp);
-        
+    async (dataForDelete:DeleteCompanyThunkPropsType, {dispatch}) => {
+        const resp = await supplierAPI.deleteCompany(dataForDelete.companyId);
+        if (resp.data.status === 'success') {
+            dispatch(deleteErrorOccured(''))
+            dataForDelete.navigate(PATHS.dashboard);
+        } else {
+            dispatch(deleteErrorOccured(resp.data.message))
+        }
     }
 );
 

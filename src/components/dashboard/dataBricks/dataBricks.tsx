@@ -11,8 +11,6 @@ import { useNavigate } from "react-router-dom";
 import RiskInLine from "../riskInLine";
 import { useTranslation } from "react-i18next";
 import dayjs from "dayjs";
-import { useEffect } from "react";
-import { getCompaniesThunk } from "../../../store/features/supplierThunks";
 import { FormatDateType } from "../../../store/features/authSlice";
 
 
@@ -52,8 +50,9 @@ const DataBricks = () => {
                             key={c.supplierId}
                             onClick={() => onSupplierClickHandler(c.supplierId)}
                         >
+
                     <div className={s.oneBrickPiece}>
-                        Номер строки {ind+1}, компания: {c.supplierName}
+                        {c.supplierName}
                     </div>
                     <div className={s.oneBrickPiece}>
                         {c.creationDate && dayjs(c.creationDate.slice(0,10)).format(userDateFormat)}
@@ -68,6 +67,7 @@ const DataBricks = () => {
                     <div className={s.oneBrickPiece}>
                         <RiskInLine risk={c.risk}/>
                     </div>
+                    
                 </div>
             })
         }

@@ -5,7 +5,7 @@ import { RiskType, RISK_LOW, SupplierIdType } from "./supplierSlice";
 
 export type OnRiskAndCommentChangeType = {
     risk: RiskType,
-    comment: string
+    comment: string,
 }
 export type QuestionsTypeRadioMultiTextCheckbox = 'checkbox' | 'radiobutton' | 'text' | 'multiline'
 export type QuestionsComplitedSliceType = {
@@ -26,10 +26,14 @@ export type ComplitedSliceType = {
     filledAt: string | null,
     checkedAt: string | null,
     riskLevel: RiskType,
+    comment: string,
     ticket: string,
 
     parts: { [part: number]: Array<QuestionsComplitedSliceType> }
-    isLoading: boolean
+    isLoading: boolean,
+    errors: {
+        deleteError: string
+    }
 }
 const initData:ComplitedSliceType = {
     companyId: '',
@@ -38,6 +42,7 @@ const initData:ComplitedSliceType = {
     filledAt: null,
     checkedAt: null,
     riskLevel: null,
+    comment: '',
     ticket: '',
     parts: { 1: [{
         "seq_no": 1,
@@ -52,17 +57,29 @@ const initData:ComplitedSliceType = {
     }] },
 
     isLoading: false,
+    errors: {
+        deleteError: ''
+    }
 }
 
 export const complitedSlice = createSlice({
     name: 'complited',
     initialState: initData,
     reducers: {
-        onRiskAndCommentChange: (state:ComplitedSliceType, action:PayloadAction<OnRiskAndCommentChangeType>) => {
+        onRiskAndCommentChange: (state:ComplitedSliceType, action:PayloadAction<OnRiskAndCommentChangeType>):ComplitedSliceType => {
             return {
                 ...state,
-                risk: action.payload.risk,
+                riskLevel: action.payload.risk,
                 comment: action.payload.comment,
+            }
+        },
+        deleteErrorOccured: (state:ComplitedSliceType, action:PayloadAction<string>):ComplitedSliceType => {
+            return {
+                ...state,
+                errors: {
+                    ...state.errors,
+                    deleteError: action.payload
+                }
             }
         }
     },
@@ -85,6 +102,6 @@ export const complitedSlice = createSlice({
     }
 })
 
-export const {onRiskAndCommentChange} = complitedSlice.actions;
+export const {onRiskAndCommentChange, deleteErrorOccured} = complitedSlice.actions;
 
 export default complitedSlice.reducer;

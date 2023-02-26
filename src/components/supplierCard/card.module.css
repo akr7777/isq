@@ -221,3 +221,10 @@
     margin-top: 15px;
     padding-right: 20px;
 }
+
+.delete_questionarie_error {
+    color: red;
+    padding: 15px;
+    border: 2px red solid;
+    border-radius: 20px;
+}

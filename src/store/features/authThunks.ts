@@ -1,11 +1,13 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { useTranslation } from "react-i18next";
 import { authAPI } from "../../components/api/api";
 import { DARK, LIGHT, ThemesOptions, useTheme } from "../../hooks/useTheme";
-import { EN_LANG, FormatDateType, LayoutOptionsType, loginAC, RiskViewType, RU_LANG, UserLangType } from "./authSlice";
+import { EN_LANG, FormatDateType, LayoutOptionsType, loginAC, loginErrorAC, RiskViewType, RU_LANG, UserLangType } from "./authSlice";
 
 export type loginThunkPropsType = {
     username: string,
-    password: string
+    password: string,
+    t: any
 }
 
 export type loginThunkresponseType = string;
@@ -14,19 +16,41 @@ export type AccessTokenPartType = {
     id: string,
     username: string
 }
-
 export const loginThunk = createAsyncThunk(
     'auth/loginThunk',
     async (credentials: loginThunkPropsType, {rejectWithValue, dispatch}) => {
         
-        const res = await authAPI.login(credentials);
-        if (typeof res.data.data === 'string') {
+        try {
+            const res = await authAPI.login(credentials);
             dispatch(loginAC(res.data.data));
             return res.data.data;
-        } else {
-            console.log('Login response error. The recived data is:', res.data);
-            return "loginThunk / Login response error"
+
+            // if (res.data.status !== 'error') {
+            //     dispatch(loginAC(res.data.data));
+            //     return res.data.data;
+            // } else {
+            //     //Invalid username or password
+            //     console.log('Login response error. The recived data is:', res.data);
+            //     return "loginThunk / Login response error"
+            // }
+        } catch (err:any) {
+            // console.log('errrrrr=', err);
+            // const {t} = useTranslation();
+            // console.log('222');
+            
+            if (err.response.data.message === "Invalid username or password") {
+                dispatch(loginErrorAC( credentials.t("invalid_username_or_password") ));
+                // dispatch(loginErrorAC("invalid_username_or_password"));
+            }
+            // return rejectWithValue(err.response.data)
+            // if (!err.response) {
+            //     throw err
+            //   }
+        
+            //   return rejectWithValue(err.response.data)
         }
+        
+        
     }
 );
 

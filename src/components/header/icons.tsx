@@ -70,13 +70,11 @@ export const Icons = (props: IconsPropsType) => {
     
 
     const handleLightThemeClick = () => {
-        setTheme(LIGHT);
-        // const updateThunkInfo:ProfileRequestType = {name: name, ...userSettings, theme: LIGHT}
+        // setTheme(LIGHT);
         dispatch(updateProfileThunk({theme: LIGHT}));
     }
     const handleDarkThemeClick = () => {
-        setTheme(DARK);
-        // const updateThunkInfo:ProfileRequestType = {name: name, ...userSettings, theme: DARK}
+        // setTheme(DARK);
         dispatch(updateProfileThunk({theme: DARK}));
     }
     const onProfileClickHandler = () => {
@@ -132,25 +130,29 @@ export const Icons = (props: IconsPropsType) => {
 
     {  
         theme === DARK && <div className={s.oneIconOptionDiv} onClick={handleLightThemeClick}>
-                <label onClick={handleLightThemeClick}>
+                <label 
+                    // onClick={handleLightThemeClick}
+                >
                     {props.themeText}
                 </label>
                 <img 
                     src={sunIcon} 
                     className={s.iconsImg} 
-                    onClick={handleLightThemeClick}              
+                    // onClick={handleLightThemeClick}              
                 />
             </div>
     }
     {  
         theme === LIGHT && <div className={s.oneIconOptionDiv} onClick={handleDarkThemeClick}>
-                <label onClick={handleDarkThemeClick}>
+                <label 
+                    // onClick={handleDarkThemeClick}
+                >
                     {props.themeText}
                 </label>
                 <img 
                     src={moonIcon} 
                     className={s.iconsImg} 
-                    onClick={handleDarkThemeClick}              
+                    // onClick={handleDarkThemeClick}              
                 />
             </div>
     }

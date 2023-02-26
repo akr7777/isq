@@ -22,6 +22,8 @@
     "login_login_placeholder": "Enter your login",
     "login_password_placeholder": "Enter your password",
     "required_field": "Required",
+    "invalid_username_or_password": "Incorrect username or password",
+
 
     "search": "Search",
     "search_field_placeholder": "Input something to filter",

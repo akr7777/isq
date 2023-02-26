@@ -149,7 +149,33 @@ export const authSlice = createSlice({
                 userId: id
             }
         },
-        
+        loginErrorAC: (state: UserType, action: PayloadAction<string>):UserType => {
+            return {
+                ...state,
+                vars: {
+                    ...state.vars,
+                    loginError: action.payload
+                }
+            }
+        },
+        emptyLoginChangeAC: (state: UserType, action: PayloadAction<boolean>):UserType => {
+            return {
+                ...state,
+                vars: {
+                    ...state.vars,
+                    emptyLogin: action.payload
+                }
+            }
+        },
+        emptyPasswordChangeAC: (state: UserType, action: PayloadAction<boolean>):UserType => {
+            return {
+                ...state,
+                vars: {
+                    ...state.vars,
+                    emptyPassword: action.payload
+                }
+            }
+        },
         // logoutAC: (state: UserType):UserType => {
         //     return {
         //         ...state,
@@ -249,7 +275,7 @@ export const authSlice = createSlice({
 })
 export const {
     loginAC, onLoginInputAC, onPasswordInputAC, 
-    changeThemeAC, changeLoadingStatus
+    changeThemeAC, changeLoadingStatus, loginErrorAC, emptyLoginChangeAC, emptyPasswordChangeAC
     // changeLanguageAC,
 } = authSlice.actions;
 

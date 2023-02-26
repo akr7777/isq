@@ -2,7 +2,7 @@ import s from "./login.module.css";
 import { ButtonOK } from '../common/buttons/buttons';
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store/store";
-import { onLoginInputAC, onPasswordInputAC, UserIdType } from "../../store/features/authSlice";
+import { emptyLoginChangeAC, emptyPasswordChangeAC, onLoginInputAC, onPasswordInputAC, UserIdType } from "../../store/features/authSlice";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -29,8 +29,6 @@ const Login = () => {
         
     },[isAuth]);
 
-
-    //console.log('Login / Error=', error);
     const loginInput: string = useSelector((state: RootState) => state.auth.vars.loginInput);
     const passwordInput: string = useSelector((state: RootState) => state.auth.vars.passwordInput);
     
@@ -41,11 +39,20 @@ const Login = () => {
     const [showPassword, setShowPassword] = useState<boolean>(false);
 
     const onLoginClickHandler = () => {
-        const credentials:loginThunkPropsType = {
-            username: loginInput,
-            password: passwordInput
+        if (loginInput.length > 0 && passwordInput.length > 0) {
+            const credentials:loginThunkPropsType = {
+                username: loginInput,
+                password: passwordInput,
+                t: t
+            }
+            dispatch(loginThunk(credentials));
         }
-        dispatch(loginThunk(credentials));
+        if (loginInput.length === 0) {
+            dispatch(emptyLoginChangeAC(true));
+        }
+        if (passwordInput.length === 0) {
+            dispatch(emptyPasswordChangeAC(true));
+        }
     }
     const onLoginChange = (newValue: string) => {
         dispatch(onLoginInputAC(newValue));
@@ -63,7 +70,7 @@ const Login = () => {
                     text={loginInput}
                     placeholder={ t("login_login_placeholder") }
                     onChangeFunction={onLoginChange}
-                    error={loginError.length > 0 || loginRequired}
+                    error={loginRequired}
                     icon={iconUserName}
                     autofocus={true}
                 />
@@ -77,7 +84,7 @@ const Login = () => {
                     text={passwordInput}
                     placeholder={ t("login_password_placeholder") }
                     onChangeFunction={onPasswordChange}
-                    error={loginError.length > 0 || passwordRequired}
+                    error={passwordRequired}
                     icon={
                         passwordInput.length > 0 
                             ? showPassword
